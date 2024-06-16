@@ -8,7 +8,7 @@ import conexionBase.conexionBD;
 
 public class prueba {
 
-	/*public static void main(String[] args) {
+	public static void main(String[] args) {
 		String query1= "SELECT * FROM productos";
 		conexionBD conec= new conexionBD();
 		Connection conn= conec.conexion();
@@ -25,6 +25,6 @@ public class prueba {
 			System.out.println("wa \n"+ e);
 		}
 
-	}*/
+	}
 
 }

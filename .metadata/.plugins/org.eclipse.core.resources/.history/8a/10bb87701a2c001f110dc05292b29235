@@ -37,12 +37,12 @@ public class login extends JFrame {
 		contentPane.setLayout(null);
 		
 		JLabel lblNewLabel = new JLabel("");
-		lblNewLabel.setIcon(new ImageIcon("D:\\3er semestre\\Progra II own\\proyecto\\Birbumaxi\\imag\\BIRBUMAXI.png"));
+		lblNewLabel.setIcon(new ImageIcon("D:\\3er semestre\\Progra II own\\proyecto\\imag\\BIRBUMAXI.png"));
 		lblNewLabel.setBounds(7, 47, 390, 187);
 		contentPane.add(lblNewLabel);
 		
 		JLabel lblNewLabel_1 = new JLabel("");
-		lblNewLabel_1.setIcon(new ImageIcon("D:\\3er semestre\\Progra II own\\proyecto\\Birbumaxi\\imag\\Colorxd.png"));
+		lblNewLabel_1.setIcon(new ImageIcon("D:\\3er semestre\\Progra II own\\proyecto\\imag\\Colorxd.png"));
 		lblNewLabel_1.setBounds(1, -33, 396, 614);
 		contentPane.add(lblNewLabel_1);
 		

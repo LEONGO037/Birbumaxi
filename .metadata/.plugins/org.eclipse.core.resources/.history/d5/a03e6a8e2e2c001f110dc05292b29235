@@ -88,8 +88,6 @@ public class login extends JFrame {
 				String contrasena= new String(contrasena2.getPassword());
 				if(ver1.verificador(correo.getText(), contrasena)) {
 					JOptionPane.showMessageDialog(null, "ingreso permitido");
-					correo.setText("");
-					contrasena2.setText("");
 				}else {
 					JOptionPane.showMessageDialog(null, "ingreso denegado");
 				}

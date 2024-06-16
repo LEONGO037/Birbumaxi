@@ -24,11 +24,11 @@ public class verificacionCorreo {
 			rs=ps.executeQuery();
 			if(rs.next()) {
 				id=rs.getString(1);
-				String consulta2= "SELECT contrasenia from empleados where id_empleado="+id+";";
+				String consulta2= "SELECT contrasenia from empleados where id="+id+";";
 				ps=conn.prepareStatement(consulta2);
 				rs=ps.executeQuery();
 				if(rs.next()) {
-					password=rs.getString(1);
+					password=rs.getString(4);
 					if(contrasena.equals(password)) {
 						return true;
 					}else {

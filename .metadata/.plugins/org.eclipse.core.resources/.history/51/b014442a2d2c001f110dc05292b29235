@@ -74,7 +74,7 @@ public class login extends JFrame {
 		contrasena2.setBackground(new Color(192, 192, 192));
 		contrasena2.setBounds(428, 338, 404, 30);
 		contentPane.add(contrasena2);
-
+		setFocusTraversalPolicy(new FocusTraversalOnArray(new Component[]{contentPane, lblNewLabel, lblNewLabel_1, lblNewLabel_2, lblNewLabel_3, correo, lblNewLabel_3_1, btnNewButton, contrasena2}));
 		
 		JLabel lblNewLabel_3_1 = new JLabel("Contraseña:");
 		lblNewLabel_3_1.setFont(new Font("Arial", Font.BOLD, 20));
@@ -83,13 +83,12 @@ public class login extends JFrame {
 		
 		JButton btnNewButton = new JButton("Iniciar Sesion");
 		btnNewButton.addActionListener(new ActionListener() {
+			@SuppressWarnings("deprecation")
 			public void actionPerformed(ActionEvent e) {
 				verificacionCorreo ver1= new verificacionCorreo();
 				String contrasena= new String(contrasena2.getPassword());
 				if(ver1.verificador(correo.getText(), contrasena)) {
 					JOptionPane.showMessageDialog(null, "ingreso permitido");
-					correo.setText("");
-					contrasena2.setText("");
 				}else {
 					JOptionPane.showMessageDialog(null, "ingreso denegado");
 				}

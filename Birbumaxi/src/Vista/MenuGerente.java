@@ -26,7 +26,7 @@ public class MenuGerente extends JFrame {
 		setResizable(false);
 		setType(Type.UTILITY);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 995, 700);
+		setBounds(100, 100, 1030, 721);
 		contentPane = new JPanel();
 		contentPane.setBackground(new Color(255, 128, 0));
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -44,12 +44,12 @@ public class MenuGerente extends JFrame {
 		JLabel lblNewLabel_2 = new JLabel("MENU GERENTE");
 		lblNewLabel_2.setForeground(Color.WHITE);
 		lblNewLabel_2.setFont(new Font("Roboto Black", Font.BOLD, 54));
-		lblNewLabel_2.setBounds(84, 114, 468, 192);
+		lblNewLabel_2.setBounds(48, 134, 468, 128);
 		contentPane.add(lblNewLabel_2);
 		
 		JLabel lblNewLabel = new JLabel("");
 		lblNewLabel.setIcon(new ImageIcon("C:\\Documentos\\imag\\logo330x200.png"));
-		lblNewLabel.setBounds(122, 0, 330, 200);
+		lblNewLabel.setBounds(116, -12, 330, 200);
 		contentPane.add(lblNewLabel);
 		
 		JButton botonRealizarPedido = new JButton("Realizar Pedido");
@@ -65,7 +65,7 @@ public class MenuGerente extends JFrame {
 		botonRealizarPedido.setFocusPainted(false);
 		botonRealizarPedido.setBorder(new LineBorder(new Color(7, 54, 127), 2));
 		botonRealizarPedido.setBackground(new Color(21, 101, 192));
-		botonRealizarPedido.setBounds(74, 259, 422, 64);
+		botonRealizarPedido.setBounds(73, 282, 422, 64);
 		contentPane.add(botonRealizarPedido);
 		
 		JButton botonSimularVentas = new JButton("Simular Ventas");
@@ -74,7 +74,7 @@ public class MenuGerente extends JFrame {
 		botonSimularVentas.setFocusPainted(false);
 		botonSimularVentas.setBorder(new LineBorder(new Color(7, 54, 127), 2));
 		botonSimularVentas.setBackground(new Color(21, 101, 192));
-		botonSimularVentas.setBounds(74, 323, 422, 64);
+		botonSimularVentas.setBounds(73, 348, 422, 64);
 		contentPane.add(botonSimularVentas);
 		
 		botonReportes = new JButton("Reportes");
@@ -90,7 +90,7 @@ public class MenuGerente extends JFrame {
 		botonReportes.setFocusPainted(false);
 		botonReportes.setBorder(new LineBorder(new Color(7, 54, 127), 2));
 		botonReportes.setBackground(new Color(21, 101, 192));
-		botonReportes.setBounds(74, 386, 422, 64);
+		botonReportes.setBounds(73, 414, 422, 64);
 		contentPane.add(botonReportes);
 		
 		JButton btnCerrarSesion = new JButton("Cerrar Sesión");
@@ -106,7 +106,7 @@ public class MenuGerente extends JFrame {
 		btnCerrarSesion.setFocusPainted(false);
 		btnCerrarSesion.setBorder(new LineBorder(new Color(7, 54, 127), 2));
 		btnCerrarSesion.setBackground(new Color(21, 101, 192));
-		btnCerrarSesion.setBounds(74, 603, 143, 39);
+		btnCerrarSesion.setBounds(73, 619, 143, 39);
 		contentPane.add(btnCerrarSesion);
 		
 		JButton botonContratar = new JButton("Contratar personal");
@@ -115,16 +115,20 @@ public class MenuGerente extends JFrame {
 		botonContratar.setFocusPainted(false);
 		botonContratar.setBorder(new LineBorder(new Color(7, 54, 127), 2));
 		botonContratar.setBackground(new Color(21, 101, 192));
-		botonContratar.setBounds(74, 448, 422, 64);
+		botonContratar.setBounds(73, 479, 422, 64);
 		contentPane.add(botonContratar);
 		
 		JButton botonAdmEmpleados = new JButton("Administrar Personal");
+		botonAdmEmpleados.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+			}
+		});
 		botonAdmEmpleados.setForeground(Color.WHITE);
 		botonAdmEmpleados.setFont(new Font("Roboto Medium", Font.BOLD, 24));
 		botonAdmEmpleados.setFocusPainted(false);
 		botonAdmEmpleados.setBorder(new LineBorder(new Color(7, 54, 127), 2));
 		botonAdmEmpleados.setBackground(new Color(21, 101, 192));
-		botonAdmEmpleados.setBounds(74, 512, 422, 64);
+		botonAdmEmpleados.setBounds(73, 544, 422, 64);
 		contentPane.add(botonAdmEmpleados);
 	}
 

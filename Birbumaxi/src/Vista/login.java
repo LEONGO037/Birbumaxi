@@ -76,6 +76,7 @@ public class login extends JFrame {
                     password.setText("");
                     Ventas venta = new Ventas();
                     venta.setVisible(true);
+                    dispose();
                 }else {
                     JOptionPane.showMessageDialog(null, "ingreso denegado");
                 }

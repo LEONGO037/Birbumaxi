@@ -21,13 +21,6 @@ public class MenuGerente extends JFrame {
 	private JPanel contentPane;
 	private JButton botonReportes;
 
-<<<<<<< HEAD
-	/**
-	 * Create the frame.
-	 */
-=======
-
->>>>>>> 99ba1022195f6d026a6c43afcbea50075d52119d
 	public MenuGerente() {
 		setResizable(false);
 		setType(Type.UTILITY);
@@ -50,20 +43,20 @@ public class MenuGerente extends JFrame {
 		JLabel lblNewLabel_2 = new JLabel("MENU GERENTE");
 		lblNewLabel_2.setForeground(Color.WHITE);
 		lblNewLabel_2.setFont(new Font("Roboto Black", Font.BOLD, 54));
-<<<<<<< HEAD
+
 		lblNewLabel_2.setBounds(48, 134, 468, 128);
-=======
+
 		lblNewLabel_2.setBounds(74, 135, 468, 192);
->>>>>>> 5a5721c5a75dfefb2d9072ac802d5f7e3413f5c5
+
 		contentPane.add(lblNewLabel_2);
 		
 		JLabel lblNewLabel = new JLabel("");
 		lblNewLabel.setIcon(new ImageIcon("C:\\Documentos\\imag\\logo330x200.png"));
-<<<<<<< HEAD
+
 		lblNewLabel.setBounds(116, -12, 330, 200);
-=======
+
 		lblNewLabel.setBounds(113, 0, 330, 200);
->>>>>>> 5a5721c5a75dfefb2d9072ac802d5f7e3413f5c5
+
 		contentPane.add(lblNewLabel);
 		
 		JButton botonRealizarPedido = new JButton("Realizar Pedido");
@@ -80,11 +73,11 @@ public class MenuGerente extends JFrame {
 		botonRealizarPedido.setFocusPainted(false);
 		botonRealizarPedido.setBorder(new LineBorder(new Color(7, 54, 127), 2));
 		botonRealizarPedido.setBackground(new Color(21, 101, 192));
-<<<<<<< HEAD
+
 		botonRealizarPedido.setBounds(73, 282, 422, 64);
-=======
+
 		botonRealizarPedido.setBounds(74, 295, 422, 64);
->>>>>>> 5a5721c5a75dfefb2d9072ac802d5f7e3413f5c5
+
 		contentPane.add(botonRealizarPedido);
 		
 		JButton botonSimularVentas = new JButton("Simular Ventas");
@@ -93,12 +86,12 @@ public class MenuGerente extends JFrame {
 		botonSimularVentas.setFocusPainted(false);
 		botonSimularVentas.setBorder(new LineBorder(new Color(7, 54, 127), 2));
 		botonSimularVentas.setBackground(new Color(21, 101, 192));
-<<<<<<< HEAD
+
 		botonSimularVentas.setBounds(73, 348, 422, 64);
-=======
+
 		botonSimularVentas.setBounds(74, 359, 422, 64);
 		botonSimularVentas.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
->>>>>>> 5a5721c5a75dfefb2d9072ac802d5f7e3413f5c5
+
 		contentPane.add(botonSimularVentas);
 		
 		botonReportes = new JButton("Reportes");
@@ -114,12 +107,12 @@ public class MenuGerente extends JFrame {
 		botonReportes.setFocusPainted(false);
 		botonReportes.setBorder(new LineBorder(new Color(7, 54, 127), 2));
 		botonReportes.setBackground(new Color(21, 101, 192));
-<<<<<<< HEAD
+
 		botonReportes.setBounds(73, 414, 422, 64);
-=======
+
 		botonReportes.setBounds(74, 422, 422, 64);
 		botonReportes.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
->>>>>>> 5a5721c5a75dfefb2d9072ac802d5f7e3413f5c5
+
 		contentPane.add(botonReportes);
 		
 		JButton btnCerrarSesion = new JButton("Cerrar Sesión");
@@ -135,7 +128,7 @@ public class MenuGerente extends JFrame {
 		btnCerrarSesion.setFocusPainted(false);
 		btnCerrarSesion.setBorder(new LineBorder(new Color(7, 54, 127), 2));
 		btnCerrarSesion.setBackground(new Color(21, 101, 192));
-<<<<<<< HEAD
+
 		btnCerrarSesion.setBounds(73, 619, 143, 39);
 		contentPane.add(btnCerrarSesion);
 		
@@ -148,12 +141,12 @@ public class MenuGerente extends JFrame {
 		botonContratar.setBounds(73, 479, 422, 64);
 		contentPane.add(botonContratar);
 		
-=======
+
 		btnCerrarSesion.setBounds(74, 585, 143, 39);
 		btnCerrarSesion.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
 		contentPane.add(btnCerrarSesion);
 		
->>>>>>> 5a5721c5a75dfefb2d9072ac802d5f7e3413f5c5
+
 		JButton botonAdmEmpleados = new JButton("Administrar Personal");
 		botonAdmEmpleados.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -164,12 +157,12 @@ public class MenuGerente extends JFrame {
 		botonAdmEmpleados.setFocusPainted(false);
 		botonAdmEmpleados.setBorder(new LineBorder(new Color(7, 54, 127), 2));
 		botonAdmEmpleados.setBackground(new Color(21, 101, 192));
-<<<<<<< HEAD
+
 		botonAdmEmpleados.setBounds(73, 544, 422, 64);
-=======
+
 		botonAdmEmpleados.setBounds(74, 486, 422, 64);
 		botonAdmEmpleados.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
->>>>>>> 5a5721c5a75dfefb2d9072ac802d5f7e3413f5c5
+
 		contentPane.add(botonAdmEmpleados);
 	}
 

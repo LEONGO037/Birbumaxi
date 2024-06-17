@@ -31,7 +31,7 @@ public class Ventas extends JFrame {
     private static final long serialVersionUID = 1L;
     private JPanel contentPane;
     private JTextField textField;
-    public int categoria;
+    public int categoria=4;
     private JTextField busqueda;
     /**
      * Create the frame.
@@ -380,7 +380,9 @@ public class Ventas extends JFrame {
 
                 // Crear el modelo de la tabla
                 DefaultTableModel model = desp.datos(categoria, columnNames);
+
                 
+        		
                 table.setModel(model);
         	}
         });

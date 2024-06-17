@@ -31,8 +31,7 @@ public class Ventas extends JFrame {
     private static final long serialVersionUID = 1L;
     private JPanel contentPane;
     private JTextField textField;
-    public int categoria;
-    private JTextField busqueda;
+    public int categoria=4;
     /**
      * Create the frame.
      */
@@ -308,15 +307,29 @@ public class Ventas extends JFrame {
 
 
         
+        // Nombres de las columnas
+        String[] columnNames = {"ID Producto", "Nombre", "Stock", "Precio"};
+        desplegarPorCategoria desp = new desplegarPorCategoria();
+        
 
-        JTable table = new JTable();
+        // Crear el modelo de la tabla
+        DefaultTableModel model = desp.datos(categoria);
+
+        // cargar la tabla con el modelo
+        model.addColumn("ID_prod");
+        model.addColumn("Nombre");
+        model.addColumn("Stock");
+        model.addColumn("Precio");
+        
+        JTable table = new JTable(model);
         table.setFont(new Font("Roboto Light", Font.BOLD, 18));
         table.setForeground(Color.BLACK);
         table.setBackground(Color.WHITE);
         table.setRowHeight(30);
         
-
-  
+        table.setModel(model);
+       
+        
 
         // Agregar la tabla al JScrollPane
         scrollPane.setViewportView(table);
@@ -346,7 +359,24 @@ public class Ventas extends JFrame {
                 // Obtener la cantidad ingresada por el usuario
                 String cantidadString = textField.getText().trim();
                 if (!cantidadString.isEmpty()) {
+                    try {
+                        int cantidad = Integer.parseInt(cantidadString);
+                        // Aquí puedes agregar lógica para agregar el producto al textAreaCompra
+                        // Por ejemplo, obtener el nombre del producto seleccionado
+                        int selectedRow = table.getSelectedRow();
+                        if (selectedRow != -1) {
+                            String nombre = (String) table.getValueAt(selectedRow, 1); // Nombre del producto
+                            double precioUnitario = (double) table.getValueAt(selectedRow, 4); // Precio del producto (asumiendo que está en la columna 4)
+                            double precioTotal = precioUnitario * cantidad;
 
+                            // Aquí puedes agregar los datos al textAreaCompra
+                            String productoLinea = String.format("%-20s %-10s %-10.2f %-10.2f\n", nombre, cantidad, precioUnitario, precioTotal);
+                        } else {
+                            JOptionPane.showMessageDialog(null, "Selecciona un producto del inventario primero.");
+                        }
+                    } catch (NumberFormatException ex) {
+                        JOptionPane.showMessageDialog(null, "La cantidad debe ser un número entero.");
+                    }
                 } else {
                     JOptionPane.showMessageDialog(null, "Ingresa una cantidad válida.");
                 }
@@ -364,33 +394,6 @@ public class Ventas extends JFrame {
         lblNewLabel_3_1.setFont(new Font("Dialog", Font.BOLD, 24));
         lblNewLabel_3_1.setBounds(0, 320, 157, 30);
         panel.add(lblNewLabel_3_1);
-        
-        busqueda = new JTextField();
-        busqueda.setBounds(7, 354, 150, 30);
-        panel.add(busqueda);
-        busqueda.setColumns(10);
-        
-        JButton btnBuscar = new JButton("Buscar");
-        btnBuscar.addActionListener(new ActionListener() {
-        	public void actionPerformed(ActionEvent e) {
-                // Nombres de las columnas
-                String[] columnNames = {"ID Producto", "Nombre", "Stock", "Precio"};
-                desplegarPorCategoria desp = new desplegarPorCategoria();
-                
-
-                // Crear el modelo de la tabla
-                DefaultTableModel model = desp.datos(categoria, columnNames);
-                
-                table.setModel(model);
-        	}
-        });
-        btnBuscar.setForeground(Color.WHITE);
-        btnBuscar.setFont(new Font("Dialog", Font.BOLD, 18));
-        btnBuscar.setFocusPainted(false);
-        btnBuscar.setBorder(new LineBorder(new Color(7, 54, 127), 2));
-        btnBuscar.setBackground(new Color(21, 101, 192));
-        btnBuscar.setBounds(171, 343, 157, 44);
-        panel.add(btnBuscar);
 
 
 	}

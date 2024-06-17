@@ -31,7 +31,7 @@ public class Ventas extends JFrame {
     private static final long serialVersionUID = 1L;
     private JPanel contentPane;
     private JTextField textField;
-    public int categoria;
+    public int categoria=4;
     private JTextField busqueda;
     /**
      * Create the frame.
@@ -308,15 +308,29 @@ public class Ventas extends JFrame {
 
 
         
+        // Nombres de las columnas
+        String[] columnNames = {"ID Producto", "Nombre", "Stock", "Precio"};
+        desplegarPorCategoria desp = new desplegarPorCategoria();
+        
 
-        JTable table = new JTable();
+        // Crear el modelo de la tabla
+        DefaultTableModel model = desp.datos(categoria);
+
+        // cargar la tabla con el modelo
+        model.addColumn("ID_prod");
+        model.addColumn("Nombre");
+        model.addColumn("Stock");
+        model.addColumn("Precio");
+        
+        JTable table = new JTable(model);
         table.setFont(new Font("Roboto Light", Font.BOLD, 18));
         table.setForeground(Color.BLACK);
         table.setBackground(Color.WHITE);
         table.setRowHeight(30);
         
 
-  
+       
+        
 
         // Agregar la tabla al JScrollPane
         scrollPane.setViewportView(table);
@@ -373,14 +387,6 @@ public class Ventas extends JFrame {
         JButton btnBuscar = new JButton("Buscar");
         btnBuscar.addActionListener(new ActionListener() {
         	public void actionPerformed(ActionEvent e) {
-                // Nombres de las columnas
-                String[] columnNames = {"ID Producto", "Nombre", "Stock", "Precio"};
-                desplegarPorCategoria desp = new desplegarPorCategoria();
-                
-
-                // Crear el modelo de la tabla
-                DefaultTableModel model = desp.datos(categoria, columnNames);
-                
                 table.setModel(model);
         	}
         });

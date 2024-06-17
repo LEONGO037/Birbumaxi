@@ -1,5 +1,5 @@
-INDEX VERSION 1.134+D:\3er semestre\Progra II own\proyecto\Birbumaxi\.metadata\.plugins\org.eclipse.jdt.core
+INDEX VERSION 1.134+C:\Users\leona\OneDrive - Universidad Católica Boliviana San Pablo\Tercer Semestre\Progra2Birbumaxi\Birbumaxi\.metadata\.plugins\org.eclipse.jdt.core
 592067206.index
-1801546640.index
+3839432753.index
 3413270776.index
 1865797976.index

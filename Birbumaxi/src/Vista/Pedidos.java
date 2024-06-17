@@ -23,7 +23,7 @@ import javax.swing.table.DefaultTableModel;
 import javax.swing.JTextField;
 import javax.swing.JTextArea;
 
-public class Ventas extends JFrame {
+public class Pedidos extends JFrame {
 
     private static final long serialVersionUID = 1L;
     private JPanel contentPane;
@@ -32,7 +32,7 @@ public class Ventas extends JFrame {
     /**
      * Create the frame.
      */
-    public Ventas() {
+    public Pedidos() {
         setType(Type.UTILITY);
         setResizable(false);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -281,23 +281,19 @@ public class Ventas extends JFrame {
         
 
         
-        JButton btnCerrarSesion = new JButton("Cerrar Sesion");
-        btnCerrarSesion.addActionListener(new ActionListener() {
+        JButton botonCancelar = new JButton("Cancelar Pedido");
+        botonCancelar.addActionListener(new ActionListener() {
         	public void actionPerformed(ActionEvent e) {
-        		login log = new login();
-        		log.setVisible(true);
+        		MenuGerente menuGerente = new MenuGerente();
+        		menuGerente.setVisible(true);
         		dispose();
         	}
         });
-        btnCerrarSesion.setBounds(70, 694, 192, 44);
-        panel.add(btnCerrarSesion);
-        btnCerrarSesion.setForeground(Color.WHITE);
-        btnCerrarSesion.setFont(new Font("Arial Black", Font.BOLD, 14));
-        btnCerrarSesion.setBackground(new Color(51, 102, 255));
-        
-        JScrollPane scrollPane = new JScrollPane();
-        scrollPane.setBounds(380, 10, 682, 290);
-        contentPane.add(scrollPane);
+        botonCancelar.setBounds(70, 694, 192, 44);
+        panel.add(botonCancelar);
+        botonCancelar.setForeground(Color.WHITE);
+        botonCancelar.setFont(new Font("Arial Black", Font.BOLD, 14));
+        botonCancelar.setBackground(new Color(51, 102, 255));
 
         // Datos de ejemplo para el JTable (se pueden cambiar o adaptar según tus necesidades)
         Object[][] data = {
@@ -312,43 +308,13 @@ public class Ventas extends JFrame {
 
         // Crear el modelo de la tabla
         DefaultTableModel model = new DefaultTableModel(data, columnNames);
-
-        // Crear la tabla con el modelo
-        JTable table = new JTable(model);
-        table.setFont(new Font("Roboto Light", Font.BOLD, 18));
-        table.setForeground(Color.BLACK);
-        table.setBackground(Color.WHITE);
-        table.setRowHeight(30);
-
-        // Agregar la tabla al JScrollPane
-        scrollPane.setViewportView(table);
         
-        // Agregar listener para detectar selecciones en la tabla
-        table.getSelectionModel().addListSelectionListener(e -> {
-            // Obtener la fila seleccionada
-            int selectedRow = table.getSelectedRow();
-            if (selectedRow != -1) { // Si se ha seleccionado una fila válida
-                // Obtener datos de la fila seleccionada
-                String nombre = (String) table.getValueAt(selectedRow, 1); // Nombre del producto
-                // Mostrar el nombre del producto seleccionado en un JOptionPane (ejemplo)
-                JOptionPane.showMessageDialog(null, "Producto seleccionado: " + nombre);
-            }
-        });
-
-        JTextArea textAreaCompra = new JTextArea();
-        textAreaCompra.setBounds(380, 331, 682, 350);
-        contentPane.add(textAreaCompra);
-        
-        JTextArea textAreaCompra1 = new JTextArea();
-        textAreaCompra1.setBounds(380, 361, 682, 301);
-        contentPane.add(textAreaCompra1);
-        
-        JButton btnRealizarVenta = new JButton("Realizar Venta");
-        btnRealizarVenta.setForeground(Color.WHITE);
-        btnRealizarVenta.setFont(new Font("Arial Black", Font.BOLD, 16));
-        btnRealizarVenta.setBackground(new Color(51, 102, 255));
-        btnRealizarVenta.setBounds(832, 691, 230, 49);
-        contentPane.add(btnRealizarVenta);
+        JButton btnRealizarPedido = new JButton("Realizar Pedido");
+        btnRealizarPedido.setForeground(Color.WHITE);
+        btnRealizarPedido.setFont(new Font("Arial Black", Font.BOLD, 16));
+        btnRealizarPedido.setBackground(new Color(51, 102, 255));
+        btnRealizarPedido.setBounds(832, 691, 230, 49);
+        contentPane.add(btnRealizarPedido);
         
         JButton btnAgregarProducto = new JButton("Agregar Producto");
         btnAgregarProducto.addActionListener(new ActionListener() {
@@ -358,7 +324,8 @@ public class Ventas extends JFrame {
                 if (!cantidadString.isEmpty()) {
                     try {
                         int cantidad = Integer.parseInt(cantidadString);
-                        // Aquí puedes agregar lógica para agregar el producto al textAreaCompra
+                        JTable table = null;
+						// Aquí puedes agregar lógica para agregar el producto al textAreaCompra
                         // Por ejemplo, obtener el nombre del producto seleccionado
                         int selectedRow = table.getSelectedRow();
                         if (selectedRow != -1) {
@@ -368,7 +335,8 @@ public class Ventas extends JFrame {
 
                             // Aquí puedes agregar los datos al textAreaCompra
                             String productoLinea = String.format("%-20s %-10s %-10.2f %-10.2f\n", nombre, cantidad, precioUnitario, precioTotal);
-                            textAreaCompra.append(productoLinea);
+                            JTextArea textAreaCompra = null;
+							textAreaCompra.append(productoLinea);
                         } else {
                             JOptionPane.showMessageDialog(null, "Selecciona un producto del inventario primero.");
                         }

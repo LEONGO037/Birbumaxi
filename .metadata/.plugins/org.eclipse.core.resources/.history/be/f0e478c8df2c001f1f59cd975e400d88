@@ -40,10 +40,11 @@ public class Ventas extends JFrame {
         setType(Type.UTILITY);
         setResizable(false);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+<<<<<<< HEAD
         setBounds(100, 100, 1100, 785);
-
+=======
         setBounds(100, 100, 1133, 829);
-
+>>>>>>> 6e4291696ff622d61c0d64278d66286122f8497a
         contentPane = new JPanel();
         contentPane.setBackground(new Color(255, 128, 0));
         contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -294,21 +295,21 @@ public class Ventas extends JFrame {
         JButton btnCerrarSesion = new JButton("Cerrar Sesion");
         btnCerrarSesion.addActionListener(new ActionListener() {
         	public void actionPerformed(ActionEvent e) {
-
+<<<<<<< HEAD
         		login log = new login();
         		log.setVisible(true);
         		dispose();
         	}
         });
         btnCerrarSesion.setBounds(70, 694, 192, 44);
-
+=======
         		login vent1 = new login();
         		vent1.setVisible(true);
         		dispose();
         	}
         });
         btnCerrarSesion.setBounds(73, 735, 192, 44);
-
+>>>>>>> 6e4291696ff622d61c0d64278d66286122f8497a
         panel.add(btnCerrarSesion);
         btnCerrarSesion.setForeground(Color.WHITE);
         btnCerrarSesion.setFont(new Font("Arial Black", Font.BOLD, 14));
@@ -369,7 +370,8 @@ public class Ventas extends JFrame {
         btnAgregarProducto.setBackground(new Color(51, 102, 255));
         btnAgregarProducto.setBounds(55, 675, 230, 49);
         panel.add(btnAgregarProducto);
-
+<<<<<<< HEAD
+=======
         
         JLabel lblNewLabel_3_1 = new JLabel("Busqueda:");
         lblNewLabel_3_1.setForeground(Color.WHITE);
@@ -409,5 +411,7 @@ public class Ventas extends JFrame {
         lblNewLabel.setBounds(-23, 44, 373, 197);
         panel.add(lblNewLabel);
 
+
+>>>>>>> 6e4291696ff622d61c0d64278d66286122f8497a
 	}
 }

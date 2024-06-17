@@ -379,7 +379,7 @@ public class Ventas extends JFrame {
                 
 
                 // Crear el modelo de la tabla
-                DefaultTableModel model = desp.datos(categoria, columnNames, busqueda.getText());
+                DefaultTableModel model = desp.datos(categoria, columnNames);
                 
                 table.setModel(model);
         	}

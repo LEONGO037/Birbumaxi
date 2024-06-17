@@ -6,10 +6,10 @@ import java.sql.*;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 public class desplegarPorCategoria {
-	public DefaultTableModel datos(int categoria, String[] columnas, String palabra) {
+	public DefaultTableModel datos(int categoria, String[] columnas) {
 		DefaultTableModel model = new DefaultTableModel(null, columnas);
 		
-		String consulta= "SELECT ID_producto, nombre, stock, precio_venta from productos WHERE categoria="+categoria+" AND ( id_producto LIKE '%"+ palabra+"%' OR nombre LIKE '%"+palabra+"%');" ;
+		String consulta= "SELECT ID_producto, nombre, stock, precio_venta from productos WHERE categoria="+categoria+";";
 		conexionBD conec= new conexionBD();
 		Connection conn= conec.conexion();
 		String[] tabla = new String[4];

@@ -36,6 +36,7 @@ public class login extends JFrame {
 
         setContentPane(contentPane);
         contentPane.setLayout(null);
+		setLocationRelativeTo(null);
         
         JLabel lblNewLabel_2 = new JLabel("INICIAR SESION");
         lblNewLabel_2.setForeground(new Color(255, 255, 255));
@@ -74,6 +75,8 @@ public class login extends JFrame {
                     JOptionPane.showMessageDialog(null, "ingreso permitido");
                     correo.setText("");
                     password.setText("");
+                    Ventas venta = new Ventas();
+                    venta.setVisible(true);
                 }else {
                     JOptionPane.showMessageDialog(null, "ingreso denegado");
                 }

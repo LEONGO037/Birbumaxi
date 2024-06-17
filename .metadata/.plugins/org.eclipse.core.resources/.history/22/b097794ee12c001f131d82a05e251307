@@ -294,12 +294,20 @@ public class Ventas extends JFrame {
         JButton btnCerrarSesion = new JButton("Cerrar Sesion");
         btnCerrarSesion.addActionListener(new ActionListener() {
         	public void actionPerformed(ActionEvent e) {
+
         		login log = new login();
         		log.setVisible(true);
         		dispose();
         	}
         });
-        btnCerrarSesion.setBounds(65, 735, 192, 44);
+        btnCerrarSesion.setBounds(70, 694, 192, 44);
+
+        		login vent1 = new login();
+        		vent1.setVisible(true);
+        		dispose();
+        	}
+        });
+        btnCerrarSesion.setBounds(73, 735, 192, 44);
 
         panel.add(btnCerrarSesion);
         btnCerrarSesion.setForeground(Color.WHITE);

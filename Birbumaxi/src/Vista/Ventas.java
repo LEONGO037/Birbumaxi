@@ -36,17 +36,19 @@ public class Ventas extends JFrame {
         setType(Type.UTILITY);
         setResizable(false);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setBounds(100, 100, 1100, 825);
+        setBounds(100, 100, 1100, 791);
         contentPane = new JPanel();
         contentPane.setBackground(new Color(255, 128, 0));
         contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 
         setContentPane(contentPane);
         contentPane.setLayout(null);
+		setLocationRelativeTo(null);
+
         
         JPanel panel = new JPanel();
         panel.setBackground(new Color(13, 71, 170));
-        panel.setBounds(0, 0, 350, 788);
+        panel.setBounds(0, 0, 350, 760);
         contentPane.add(panel);
         panel.setLayout(null);
         
@@ -266,7 +268,7 @@ public class Ventas extends JFrame {
         JLabel lblNewLabel_3 = new JLabel("Cantidad/Kg:");
         lblNewLabel_3.setForeground(Color.WHITE);
         lblNewLabel_3.setFont(new Font("Roboto Medium", Font.BOLD, 24));
-        lblNewLabel_3.setBounds(10, 603, 157, 30);
+        lblNewLabel_3.setBounds(10, 581, 157, 30);
         panel.add(lblNewLabel_3);
         
         textField = new JTextField();
@@ -274,20 +276,20 @@ public class Ventas extends JFrame {
         textField.setFont(new Font("Roboto Light", Font.BOLD, 18));
         textField.setColumns(10);
         textField.setBackground(Color.WHITE);
-        textField.setBounds(171, 599, 169, 44);
+        textField.setBounds(171, 581, 169, 44);
         panel.add(textField);
         
 
         
         JButton btnCerrarSesion = new JButton("Cerrar Sesion");
-        btnCerrarSesion.setBounds(60, 723, 192, 44);
+        btnCerrarSesion.setBounds(70, 694, 192, 44);
         panel.add(btnCerrarSesion);
         btnCerrarSesion.setForeground(Color.WHITE);
         btnCerrarSesion.setFont(new Font("Arial Black", Font.BOLD, 14));
         btnCerrarSesion.setBackground(new Color(51, 102, 255));
         
         JScrollPane scrollPane = new JScrollPane();
-        scrollPane.setBounds(380, 37, 682, 290);
+        scrollPane.setBounds(380, 10, 682, 290);
         contentPane.add(scrollPane);
 
         // Datos de ejemplo para el JTable (se pueden cambiar o adaptar según tus necesidades)
@@ -327,18 +329,18 @@ public class Ventas extends JFrame {
         });
 
         JTextArea textAreaCompra = new JTextArea();
-        textAreaCompra.setBounds(380, 361, 682, 350);
+        textAreaCompra.setBounds(380, 331, 682, 350);
         contentPane.add(textAreaCompra);
         
         JTextArea textAreaCompra1 = new JTextArea();
-        textAreaCompra1.setBounds(380, 361, 682, 350);
+        textAreaCompra1.setBounds(380, 361, 682, 301);
         contentPane.add(textAreaCompra1);
         
         JButton btnRealizarVenta = new JButton("Realizar Venta");
         btnRealizarVenta.setForeground(Color.WHITE);
         btnRealizarVenta.setFont(new Font("Arial Black", Font.BOLD, 16));
         btnRealizarVenta.setBackground(new Color(51, 102, 255));
-        btnRealizarVenta.setBounds(832, 729, 230, 49);
+        btnRealizarVenta.setBounds(832, 691, 230, 49);
         contentPane.add(btnRealizarVenta);
         
         JButton btnAgregarProducto = new JButton("Agregar Producto");
@@ -375,7 +377,7 @@ public class Ventas extends JFrame {
         btnAgregarProducto.setForeground(Color.WHITE);
         btnAgregarProducto.setFont(new Font("Arial Black", Font.BOLD, 16));
         btnAgregarProducto.setBackground(new Color(51, 102, 255));
-        btnAgregarProducto.setBounds(60, 664, 230, 49);
+        btnAgregarProducto.setBounds(60, 635, 230, 49);
         panel.add(btnAgregarProducto);
 
 

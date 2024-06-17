@@ -50,6 +50,7 @@ public class login extends JFrame {
         contentPane.add(lblNewLabel_3);
         
         correo = new JTextField();
+        correo.setText("Ingrese su correo");
         correo.setForeground(new Color(128, 128, 128));
         correo.setFont(new Font("Roboto Light", Font.BOLD, 18));
         correo.setBackground(new Color(255, 255, 255));

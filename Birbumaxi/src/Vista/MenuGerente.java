@@ -21,9 +21,13 @@ public class MenuGerente extends JFrame {
 	private JPanel contentPane;
 	private JButton botonReportes;
 
+<<<<<<< HEAD
 	/**
 	 * Create the frame.
 	 */
+=======
+
+>>>>>>> 99ba1022195f6d026a6c43afcbea50075d52119d
 	public MenuGerente() {
 		setResizable(false);
 		setType(Type.UTILITY);

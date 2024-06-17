@@ -21,6 +21,7 @@ import java.awt.Font;
 import javax.swing.border.LineBorder;
 import javax.swing.table.DefaultTableModel;
 
+import Modelo.carrito;
 import Modelo.desplegarPorCategoria;
 
 import javax.swing.JTextField;
@@ -33,6 +34,7 @@ public class Ventas extends JFrame {
     private JTextField textField;
     public int categoria;
     private JTextField busqueda;
+    public String productoSeleccionado="";
     /**
      * Create the frame.
      */
@@ -320,47 +322,6 @@ public class Ventas extends JFrame {
         table.setRowHeight(30);
         
 
-  
-
-        // Agregar la tabla al JScrollPane
-        scrollPane.setViewportView(table);
-        
-        // Agregar listener para detectar selecciones en la tabla
-        table.getSelectionModel().addListSelectionListener(e -> {
-            // Obtener la fila seleccionada
-            int selectedRow = table.getSelectedRow();
-            if (selectedRow != -1) { // Si se ha seleccionado una fila válida
-                // Obtener datos de la fila seleccionada
-                String nombre = (String) table.getValueAt(selectedRow, 1); // Nombre del producto
-                // Mostrar el nombre del producto seleccionado en un JOptionPane (ejemplo)
-                JOptionPane.showMessageDialog(null, "Producto seleccionado: " + nombre);
-            }
-        });
-        
-        JButton btnRealizarVenta = new JButton("Realizar Venta");
-        btnRealizarVenta.setForeground(Color.WHITE);
-        btnRealizarVenta.setFont(new Font("Arial Black", Font.BOLD, 16));
-        btnRealizarVenta.setBackground(new Color(51, 102, 255));
-        btnRealizarVenta.setBounds(877, 730, 230, 49);
-        contentPane.add(btnRealizarVenta);
-        
-        JButton btnAgregarProducto = new JButton("Agregar Producto");
-        btnAgregarProducto.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                // Obtener la cantidad ingresada por el usuario
-                String cantidadString = textField.getText().trim();
-                if (!cantidadString.isEmpty()) {
-
-                } else {
-                    JOptionPane.showMessageDialog(null, "Ingresa una cantidad válida.");
-                }
-            }
-        });
-        btnAgregarProducto.setForeground(Color.WHITE);
-        btnAgregarProducto.setFont(new Font("Arial Black", Font.BOLD, 16));
-        btnAgregarProducto.setBackground(new Color(51, 102, 255));
-        btnAgregarProducto.setBounds(55, 675, 230, 49);
-        panel.add(btnAgregarProducto);
 
         
         JLabel lblNewLabel_3_1 = new JLabel("Busqueda:");
@@ -381,7 +342,6 @@ public class Ventas extends JFrame {
                 String[] columnNames = {"ID Producto", "Nombre", "Stock", "Precio"};
                 desplegarPorCategoria desp = new desplegarPorCategoria();
                 
-
                 // Crear el modelo de la tabla
                 DefaultTableModel model = desp.datos(categoria, columnNames, busqueda.getText());
                 
@@ -400,6 +360,66 @@ public class Ventas extends JFrame {
         lblNewLabel.setIcon(new ImageIcon("C:\\Documentos\\imag\\BIRBUMAXI.png"));
         lblNewLabel.setBounds(-23, 44, 373, 197);
         panel.add(lblNewLabel);
+        
+        
+        
+        
+        
+
+        // Agregar la tabla al JScrollPane
+        scrollPane.setViewportView(table);
+        // Agregar listener para detectar selecciones en la tabla
+        table.getSelectionModel().addListSelectionListener(e -> {
+            // Obtener la fila seleccionada
+            int selectedRow = table.getSelectedRow();
+            if (selectedRow != -1) { // Si se ha seleccionado una fila válida
+                // Obtener datos de la fila seleccionada
+            	productoSeleccionado = (String) table.getValueAt(selectedRow, 1); // Nombre del producto
+
+            }
+        });
+        
+        JButton btnRealizarVenta = new JButton("Realizar Venta");
+        btnRealizarVenta.setForeground(Color.WHITE);
+        btnRealizarVenta.setFont(new Font("Arial Black", Font.BOLD, 16));
+        btnRealizarVenta.setBackground(new Color(51, 102, 255));
+        btnRealizarVenta.setBounds(877, 730, 230, 49);
+        contentPane.add(btnRealizarVenta);
+        
+        JScrollPane pedidos = new JScrollPane();
+        pedidos.setBounds(387, 361, 678, 346);
+        contentPane.add(pedidos);
+        
+        JTable pedidosRealizados = new JTable();
+        pedidosRealizados.setFont(new Font("Roboto Light", Font.BOLD, 18));
+        pedidosRealizados.setForeground(Color.BLACK);
+        pedidosRealizados.setBackground(Color.WHITE);
+        pedidosRealizados.setRowHeight(30);
+        pedidos.setColumnHeaderView(pedidosRealizados);
+        
+        String[] columnasNombres = {"ID Producto", "Nombre", "Stock", "Precio"};
+        carrito carr = new carrito();
+        DefaultTableModel tabla2= carr.carritos( columnasNombres, productoSeleccionado);
+        pedidosRealizados.setModel(tabla2);
+        JButton btnAgregarProducto = new JButton("Agregar Producto");
+        btnAgregarProducto.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                // Obtener la cantidad ingresada por el usuario
+                String cantidadString = textField.getText().trim();
+                if (!cantidadString.isEmpty()) {
+                	pedidosRealizados.setModel(tabla2);
+                } else {
+                    JOptionPane.showMessageDialog(null, "Ingresa una cantidad válida.");
+                }
+            }
+        });
+        btnAgregarProducto.setForeground(Color.WHITE);
+        btnAgregarProducto.setFont(new Font("Arial Black", Font.BOLD, 16));
+        btnAgregarProducto.setBackground(new Color(51, 102, 255));
+        btnAgregarProducto.setBounds(55, 675, 230, 49);
+        panel.add(btnAgregarProducto);
+
+        
 
 	}
 }

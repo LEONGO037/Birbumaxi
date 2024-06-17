@@ -21,7 +21,25 @@ public class MenuGerente extends JFrame {
 	private JPanel contentPane;
 	private JButton botonReportes;
 
+	/**
+	 * Launch the application.
+	 */
+	public static void main(String[] args) {
+		EventQueue.invokeLater(new Runnable() {
+			public void run() {
+				try {
+					MenuGerente frame = new MenuGerente();
+					frame.setVisible(true);
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+		});
+	}
 
+	/**
+	 * Create the frame.
+	 */
 	public MenuGerente() {
 		setResizable(false);
 		setType(Type.UTILITY);

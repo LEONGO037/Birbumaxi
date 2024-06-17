@@ -74,18 +74,9 @@ public class login extends JFrame {
                     JOptionPane.showMessageDialog(null, "ingreso permitido");
                     correo.setText("");
                     password.setText("");
-                    if(correo.getText().contains("birbuemp.com")) {
-                        Ventas venta = new Ventas();
-                        venta.setVisible(true);
-                        dispose();
-                    }else if(correo.getText().contains("birbuadmin.com")) {
-                    	MenuGerente menu = new MenuGerente();
-                    	menu.setVisible(true);
-                    	dispose();
-                    }else {
-                    	JOptionPane.showMessageDialog(null, "ups, paso algo!");
-                    }
-
+                    Ventas venta = new Ventas();
+                    venta.setVisible(true);
+                    dispose();
                 }else {
                     JOptionPane.showMessageDialog(null, "ingreso denegado");
                 }

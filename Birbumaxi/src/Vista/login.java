@@ -29,7 +29,7 @@ public class login extends JFrame {
         setResizable(false);
         setType(Type.UTILITY);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setBounds(100, 100, 996, 700);
+        setBounds(100, 100, 995, 700);
         contentPane = new JPanel();
         contentPane.setBackground(new Color(255, 128, 0));
         contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));

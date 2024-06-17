@@ -39,7 +39,7 @@ public class ReporteInventario {
 
             document.open();
             
-            String imagePath = "C:\\Documentos\\imag\\logo330x200.png";
+            String imagePath = "C:\\\\Documentos\\\\imag\\\\logo330x200.png";
             Image imagen = Image.getInstance(imagePath);
             imagen.scaleToFit(100, 100);
             imagen.setAbsolutePosition(10, document.getPageSize().getHeight() - imagen.getScaledHeight() - 10);

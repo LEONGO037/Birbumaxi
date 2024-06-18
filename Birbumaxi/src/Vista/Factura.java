@@ -179,6 +179,11 @@ public class Factura extends JFrame {
         contentPane.add(btnCerrarSesion);
 
         JButton btnFacturar = new JButton("Facturar");
+        btnFacturar.addActionListener(new ActionListener() {
+        	public void actionPerformed(ActionEvent e) {
+        		
+        	}
+        });
         btnFacturar.setForeground(Color.WHITE);
         btnFacturar.setFont(new Font("Roboto Medium", Font.BOLD, 25));
         btnFacturar.setFocusPainted(false);

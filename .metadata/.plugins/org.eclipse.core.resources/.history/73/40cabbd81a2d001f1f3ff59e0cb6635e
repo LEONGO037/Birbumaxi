@@ -12,9 +12,6 @@ import javax.swing.ImageIcon;
 import java.awt.Font;
 import javax.swing.JButton;
 import javax.swing.border.LineBorder;
-
-import Modelo.ReporteInventario;
-
 import javax.swing.JTextField;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
@@ -55,15 +52,10 @@ public class Reportes extends JFrame {
 		JLabel lblNewLabel_2 = new JLabel("REPORTES\r\n");
 		lblNewLabel_2.setForeground(Color.WHITE);
 		lblNewLabel_2.setFont(new Font("Roboto Black", Font.BOLD, 54));
-		lblNewLabel_2.setBounds(138, 166, 330, 140);
+		lblNewLabel_2.setBounds(138, 166, 294, 140);
 		contentPane.add(lblNewLabel_2);
 		
 		JButton btnGenerarReporteDe = new JButton("Generar Reporte de Inventario");
-		btnGenerarReporteDe.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				ReporteInventario.GenerarReporte();
-			}
-		});
 		btnGenerarReporteDe.setForeground(Color.WHITE);
 		btnGenerarReporteDe.setFont(new Font("Roboto Medium", Font.BOLD, 24));
 		btnGenerarReporteDe.setFocusPainted(false);

@@ -350,7 +350,6 @@ public class Ventas extends JFrame {
 
                 
                 desplegarPorCategoria desp = new desplegarPorCategoria();
-                
                 model=desp.datos(categoria, columnNames, busqueda.getText());
                 table.setModel(model);
                 

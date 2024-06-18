@@ -1149,6 +1149,10 @@
 2024-06-17 15:34:01,483 [main] INFO  o.b.c.a.StaticComponentContainer - (StaticComponentContainer.java:443) - org.burningwave.core.assembler.StaticComponentContainer initialized in 0.0787249 seconds
 2024-06-17 15:34:02,888 [Worker-4: Loading available Gradle versions] INFO  o.e.b.c.i.u.g.PublishedGradleVersions - Gradle version information cache is up-to-date. Trying to read.
 >>>>>>> c3f491f769c9757adf771173f2cdae1ab673372e
+<<<<<<< HEAD
+2024-06-17 16:01:25,972 [Worker-4: Loading available Gradle versions] INFO  o.e.b.c.i.u.g.PublishedGradleVersions - Gradle version information cache is up-to-date. Trying to read.
+2024-06-17 17:19:16,582 [Worker-7: Loading available Gradle versions] INFO  o.e.b.c.i.u.g.PublishedGradleVersions - Gradle version information cache is up-to-date. Trying to read.
+=======
 2024-06-17 16:16:31,619 [Worker-4: Loading available Gradle versions] INFO  o.e.b.c.i.u.g.PublishedGradleVersions - Gradle version information cache is up-to-date. Trying to read.
 2024-06-17 16:16:32,649 [Java indexing] INFO  o.b.c.a.StaticComponentContainer - (StaticComponentContainer.java:366) - No custom properties found for file burningwave.static.properties
 2024-06-17 16:16:32,649 [Java indexing] INFO  o.b.c.a.StaticComponentContainer - (StaticComponentContainer.java:368) - Instantiated org.burningwave.core.SLF4JManagedLoggerRepository
@@ -1256,3 +1260,4 @@
 2024-06-17 17:48:58,357 [Burningwave - Resource releaser] INFO  o.b.c.a.StaticComponentContainer - (StaticComponentContainer.java:420) - Stopping all threads monitoring thread
 2024-06-17 17:48:58,357 [Burningwave - Resource releaser] INFO  o.b.c.a.StaticComponentContainer - (StaticComponentContainer.java:425) - Closing ThreadHolder
 2024-06-17 17:48:58,358 [Burningwave - Resource releaser] INFO  o.b.c.a.StaticComponentContainer - (StaticComponentContainer.java:430) - Shutting down ThreadSupplier
+>>>>>>> 3b76a95302c5463e3afad4e747a3b2501d5e461c

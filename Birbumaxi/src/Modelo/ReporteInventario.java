@@ -29,8 +29,8 @@ import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 
 public class ReporteInventario {
-	public static void main(String[] args) {
-        String dest = "reporte.pdf";
+	public static void GenerarReporte() {
+        String dest = "ReporteInventario.pdf";
         
         Document document = new Document();
 
@@ -63,8 +63,8 @@ public class ReporteInventario {
 
             Font headerFont = new Font(Font.FontFamily.HELVETICA, 12, Font.BOLD);
 
-            addTableHeader(table, headerFont, "Categoría");
             addTableHeader(table, headerFont, "Número");
+            addTableHeader(table, headerFont, "Categoría");
             addTableHeader(table, headerFont, "Nombre");
             addTableHeader(table, headerFont, "Stock");
             
@@ -72,34 +72,11 @@ public class ReporteInventario {
             inv = obtenerDatos();
             
             for(DatosInventario d : inv) {
-            	addTableCell(table, d.getCategoria());
                 addTableCell(table, "" + d.getNumero());
+                addTableCell(table, d.getCategoria());
                 addTableCell(table, d.getNombre());
                 addTableCell(table, "" + d.getStock());
             }
-            
-            
-            /*
-            addTableCell(table, "1");
-            addTableCell(table, "001");
-            addTableCell(table, "Producto A");
-            addTableCell(table, "10");
-
-            addTableCell(table, "2");
-            addTableCell(table, "002");
-            addTableCell(table, "Producto B");
-            addTableCell(table, "20");
-
-            addTableCell(table, "3");
-            addTableCell(table, "003");
-            addTableCell(table, "Producto C");
-            addTableCell(table, "30");
-            
-            addTableCell(table, "4");
-            addTableCell(table, "004");
-            addTableCell(table, "Producto D");
-            addTableCell(table, "40");
-             */
 
             document.add(table);
 
@@ -121,10 +98,8 @@ public class ReporteInventario {
         } catch (DocumentException | FileNotFoundException e) {
             e.printStackTrace();
         } catch (MalformedURLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
     }

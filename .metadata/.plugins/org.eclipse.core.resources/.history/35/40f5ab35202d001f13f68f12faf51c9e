@@ -75,6 +75,19 @@ public class Reportes extends JFrame {
 		btnGenerarReporteDe.setBounds(71, 279, 422, 64);
 		contentPane.add(btnGenerarReporteDe);
 		
+		JButton botonReporteDia = new JButton("GENERAR REPORTE");
+		botonReporteDia.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+			}
+		});
+		botonReporteDia.setForeground(Color.WHITE);
+		botonReporteDia.setFont(new Font("Roboto Medium", Font.BOLD, 24));
+		botonReporteDia.setFocusPainted(false);
+		botonReporteDia.setBorder(new LineBorder(new Color(7, 54, 127), 2));
+		botonReporteDia.setBackground(new Color(21, 101, 192));
+		botonReporteDia.setBounds(71, 516, 422, 64);
+		contentPane.add(botonReporteDia);
+		
 		JButton btnCerrarSesion = new JButton("Atras");
 		btnCerrarSesion.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -91,7 +104,24 @@ public class Reportes extends JFrame {
 		btnCerrarSesion.setBounds(29, 603, 143, 39);
 		contentPane.add(btnCerrarSesion);
 		
-
+		JLabel lblNewLabel_3 = new JLabel("REPORTE POR DIA");
+		lblNewLabel_3.setForeground(Color.WHITE);
+		lblNewLabel_3.setFont(new Font("Roboto Medium", Font.BOLD, 24));
+		lblNewLabel_3.setBounds(173, 370, 275, 30);
+		contentPane.add(lblNewLabel_3);
+		
+		JTextField textField = new JTextField();
+		textField.setFont(new Font("Roboto", Font.ITALIC, 15));
+		textField.setBounds(71, 460, 189, 45);
+		contentPane.add(textField);
+		textField.setColumns(10);
+		
+		JLabel lblNewLabel_3_1 = new JLabel("Ingrese la fecha:");
+		lblNewLabel_3_1.setForeground(Color.WHITE);
+		lblNewLabel_3_1.setFont(new Font("Roboto Medium", Font.BOLD, 24));
+		lblNewLabel_3_1.setBounds(71, 420, 275, 30);
+		contentPane.add(lblNewLabel_3_1);
+	
 
         panelIntervalos = new JPanel(); // Inicializar panelIntervalos
         panelIntervalos.setBackground(new Color(255, 128, 0));

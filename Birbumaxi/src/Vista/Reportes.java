@@ -4,10 +4,18 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JButton;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.ImageIcon;
 import javax.swing.border.EmptyBorder;
 import javax.swing.border.LineBorder;
 
+import Modelo.ReporteInventario;
+
+import javax.swing.JTextField;
+import java.awt.event.ActionListener;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Font;
@@ -36,33 +44,61 @@ public class Reportes extends JFrame {
         contentPane.setLayout(null);
         setLocationRelativeTo(null);
 
+		
+		JLabel lblNewLabel_1 = new JLabel("");
+		lblNewLabel_1.setIcon(new ImageIcon("C:\\Documentos\\imag\\Imagenreporte.jpg"));
+		lblNewLabel_1.setBounds(610, 0, 372, 663);
+		contentPane.add(lblNewLabel_1);
+		
+		JLabel lblNewLabel = new JLabel("");
+		lblNewLabel.setIcon(new ImageIcon("C:\\Documentos\\imag\\logo330x200.png"));
+		lblNewLabel.setBounds(118, 10, 330, 200);
+		contentPane.add(lblNewLabel);
+		
+		JLabel lblNewLabel_2 = new JLabel("REPORTES\r\n");
+		lblNewLabel_2.setForeground(Color.WHITE);
+		lblNewLabel_2.setFont(new Font("Roboto Black", Font.BOLD, 54));
+		lblNewLabel_2.setBounds(138, 166, 330, 140);
+		contentPane.add(lblNewLabel_2);
+		
+		JButton btnGenerarReporteDe = new JButton("Generar Reporte de Inventario");
+		btnGenerarReporteDe.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				ReporteInventario.GenerarReporte();
+			}
+		});
+		btnGenerarReporteDe.setForeground(Color.WHITE);
+		btnGenerarReporteDe.setFont(new Font("Roboto Medium", Font.BOLD, 24));
+		btnGenerarReporteDe.setFocusPainted(false);
+		btnGenerarReporteDe.setBorder(new LineBorder(new Color(7, 54, 127), 2));
+		btnGenerarReporteDe.setBackground(new Color(21, 101, 192));
+		btnGenerarReporteDe.setBounds(71, 279, 422, 64);
+		contentPane.add(btnGenerarReporteDe);
+		
+		JButton btnCerrarSesion = new JButton("Atras");
+		btnCerrarSesion.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+        		MenuGerente menuGerente = new MenuGerente();
+        		menuGerente.setVisible(true);
+        		dispose();
+			}
+		});
+		btnCerrarSesion.setForeground(Color.WHITE);
+		btnCerrarSesion.setFont(new Font("Roboto Medium", Font.BOLD, 15));
+		btnCerrarSesion.setFocusPainted(false);
+		btnCerrarSesion.setBorder(new LineBorder(new Color(7, 54, 127), 2));
+		btnCerrarSesion.setBackground(new Color(21, 101, 192));
+		btnCerrarSesion.setBounds(29, 603, 143, 39);
+		contentPane.add(btnCerrarSesion);
+		
+
+
         panelIntervalos = new JPanel(); // Inicializar panelIntervalos
         panelIntervalos.setBackground(new Color(255, 128, 0));
         panelIntervalos.setBounds(71, 515, 422, 75);
         contentPane.add(panelIntervalos);
 
-        JLabel lblNewLabel_1 = new JLabel("");
-        lblNewLabel_1.setIcon(new ImageIcon("C:\\Documentos\\imag\\Imagenreporte.jpg"));
-        lblNewLabel_1.setBounds(610, 0, 372, 663);
-        contentPane.add(lblNewLabel_1);
 
-        JLabel lblNewLabel = new JLabel("");
-        lblNewLabel.setIcon(new ImageIcon("C:\\Documentos\\imag\\logo330x200.png"));
-        lblNewLabel.setBounds(118, 10, 330, 200);
-        contentPane.add(lblNewLabel);
-
-        JLabel lblNewLabel_2 = new JLabel("REPORTES\r\n");
-        lblNewLabel_2.setForeground(Color.WHITE);
-        lblNewLabel_2.setFont(new Font("Roboto Black", Font.BOLD, 54));
-        lblNewLabel_2.setBounds(138, 156, 294, 140);
-        contentPane.add(lblNewLabel_2);
-
-        JButton btnGenerarReporteDe = new JButton("Generar Reporte de Inventario");
-        btnGenerarReporteDe.addActionListener(new ActionListener() {
-        	public void actionPerformed(ActionEvent e) {
-                limpiarPanelIntervalos(); //limpia el panel de fechas
-        	}
-        });
         btnGenerarReporteDe.setForeground(Color.WHITE);
         btnGenerarReporteDe.setFont(new Font("Roboto Medium", Font.BOLD, 24));
         btnGenerarReporteDe.setFocusPainted(false);
@@ -71,14 +107,6 @@ public class Reportes extends JFrame {
         btnGenerarReporteDe.setBounds(71, 260, 422, 64);
         contentPane.add(btnGenerarReporteDe);
 
-        JButton btnCerrarSesion = new JButton("Atras");
-        btnCerrarSesion.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                MenuGerente menuGerente = new MenuGerente();
-                menuGerente.setVisible(true);
-                dispose();
-            }
-        });
         btnCerrarSesion.setForeground(Color.WHITE);
         btnCerrarSesion.setFont(new Font("Roboto Medium", Font.BOLD, 15));
         btnCerrarSesion.setFocusPainted(false);
@@ -144,4 +172,21 @@ public class Reportes extends JFrame {
         panelIntervalos.revalidate();
         panelIntervalos.repaint();
     }
+    
+    public static LocalDate ingresarFecha(String tiempo) {
+        DateTimeFormatter formatoFecha = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+        
+        while (true) {
+            String input = JOptionPane.showInputDialog("Ingrese la fecha " + tiempo + " en formato dd/MM/yyyy:");
+            try {
+                LocalDate fecha = LocalDate.parse(input, formatoFecha);
+                return fecha;
+            } catch (DateTimeParseException e) {
+                JOptionPane.showMessageDialog(null, "Formato de fecha incorrecto. Inténtelo de nuevo.");
+            }
+        }
+    }
+    
+    //public static 
+
 }

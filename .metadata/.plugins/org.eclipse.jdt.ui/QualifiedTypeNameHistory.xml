@@ -1,2 +1,11 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<<<<<<< HEAD
 <qualifiedTypeNameHistroy/>
+=======
+<qualifiedTypeNameHistroy>
+    <fullyQualifiedTypeName name="java.beans.PropertyEditor"/>
+    <fullyQualifiedTypeName name="Modelo.PedidosDatos"/>
+    <fullyQualifiedTypeName name="com.itextpdf.text.Paragraph"/>
+    <fullyQualifiedTypeName name="Modelo.ReporteInventario"/>
+</qualifiedTypeNameHistroy>
+>>>>>>> aa05a803804563a5cad1281dedfc9bf61c47605c

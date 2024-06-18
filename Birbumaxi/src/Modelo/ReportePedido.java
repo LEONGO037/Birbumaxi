@@ -31,12 +31,6 @@ import com.itextpdf.text.pdf.PdfWriter;
 import conexionBase.conexionBD;
 
 public class ReportePedido {
-	
-	public static void main(String[] args) {
-		GenerarReporte();
-	}
-	
-	
 	public static void GenerarReporte() {
         String dest = "ReportePedidos.pdf";
         

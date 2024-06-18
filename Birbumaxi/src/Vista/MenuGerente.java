@@ -1,11 +1,8 @@
 package Vista;
 
-import java.awt.EventQueue;
-
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
-import java.awt.Window.Type;
 import java.awt.Color;
 import javax.swing.JLabel;
 import javax.swing.ImageIcon;
@@ -21,13 +18,6 @@ public class MenuGerente extends JFrame {
 	private JPanel contentPane;
 	private JButton botonReportes;
 
-<<<<<<< HEAD
-	/**
-	 * Create the frame.
-	 */
-=======
-
->>>>>>> 99ba1022195f6d026a6c43afcbea50075d52119d
 	public MenuGerente() {
 		setResizable(false);
 		setType(Type.UTILITY);
@@ -120,6 +110,13 @@ public class MenuGerente extends JFrame {
 		contentPane.add(btnCerrarSesion);
 		
 		JButton botonAdmEmpleados = new JButton("Administrar Personal");
+		botonAdmEmpleados.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				AdministrarEmpleados adm = new AdministrarEmpleados();
+				adm.setVisible(true);
+				dispose();
+			}
+		});
 		botonAdmEmpleados.setForeground(Color.WHITE);
 		botonAdmEmpleados.setFont(new Font("Roboto Medium", Font.BOLD, 24));
 		botonAdmEmpleados.setFocusPainted(false);

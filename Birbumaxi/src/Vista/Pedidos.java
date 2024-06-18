@@ -278,22 +278,6 @@ public class Pedidos extends JFrame {
         textField.setBackground(Color.WHITE);
         textField.setBounds(171, 581, 169, 44);
         panel.add(textField);
-        
-
-        
-        JButton botonCancelar = new JButton("Cancelar Pedido");
-        botonCancelar.addActionListener(new ActionListener() {
-        	public void actionPerformed(ActionEvent e) {
-        		MenuGerente menuGerente = new MenuGerente();
-        		menuGerente.setVisible(true);
-        		dispose();
-        	}
-        });
-        botonCancelar.setBounds(70, 694, 192, 44);
-        panel.add(botonCancelar);
-        botonCancelar.setForeground(Color.WHITE);
-        botonCancelar.setFont(new Font("Arial Black", Font.BOLD, 14));
-        botonCancelar.setBackground(new Color(51, 102, 255));
 
         // Datos de ejemplo para el JTable (se pueden cambiar o adaptar según tus necesidades)
         Object[][] data = {
@@ -309,49 +293,42 @@ public class Pedidos extends JFrame {
         // Crear el modelo de la tabla
         DefaultTableModel model = new DefaultTableModel(data, columnNames);
         
-        JButton btnRealizarPedido = new JButton("Realizar Pedido");
-        btnRealizarPedido.setForeground(Color.WHITE);
-        btnRealizarPedido.setFont(new Font("Arial Black", Font.BOLD, 16));
-        btnRealizarPedido.setBackground(new Color(51, 102, 255));
-        btnRealizarPedido.setBounds(832, 691, 230, 49);
-        contentPane.add(btnRealizarPedido);
-        
         JButton btnAgregarProducto = new JButton("Agregar Producto");
-        btnAgregarProducto.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                // Obtener la cantidad ingresada por el usuario
-                String cantidadString = textField.getText().trim();
-                if (!cantidadString.isEmpty()) {
-                    try {
-                        int cantidad = Integer.parseInt(cantidadString);
-                        JTable table = null;
-						// Aquí puedes agregar lógica para agregar el producto al textAreaCompra
-                        // Por ejemplo, obtener el nombre del producto seleccionado
-                        int selectedRow = table.getSelectedRow();
-                        if (selectedRow != -1) {
-                            String nombre = (String) table.getValueAt(selectedRow, 1); // Nombre del producto
-                            double precioUnitario = (double) table.getValueAt(selectedRow, 4); // Precio del producto (asumiendo que está en la columna 4)
-                            double precioTotal = precioUnitario * cantidad;
-
-                            // Aquí puedes agregar los datos al textAreaCompra
-                            String productoLinea = String.format("%-20s %-10s %-10.2f %-10.2f\n", nombre, cantidad, precioUnitario, precioTotal);
-                            JTextArea textAreaCompra = null;
-							textAreaCompra.append(productoLinea);
-                        } else {
-                            JOptionPane.showMessageDialog(null, "Selecciona un producto del inventario primero.");
-                        }
-                    } catch (NumberFormatException ex) {
-                        JOptionPane.showMessageDialog(null, "La cantidad debe ser un número entero.");
-                    }
-                } else {
-                    JOptionPane.showMessageDialog(null, "Ingresa una cantidad válida.");
-                }
-            }
-        });
         btnAgregarProducto.setForeground(Color.WHITE);
-        btnAgregarProducto.setFont(new Font("Arial Black", Font.BOLD, 16));
-        btnAgregarProducto.setBackground(new Color(51, 102, 255));
-        btnAgregarProducto.setBounds(60, 635, 230, 49);
+        btnAgregarProducto.setFont(new Font("Roboto Black", Font.BOLD, 23));
+        btnAgregarProducto.setFocusPainted(false);
+        btnAgregarProducto.setBorder(new LineBorder(new Color(7, 54, 127), 2));
+        btnAgregarProducto.setBackground(new Color(21, 101, 192));
+        btnAgregarProducto.setBounds(38, 635, 252, 49);
         panel.add(btnAgregarProducto);
+        
+        JButton btnCancelarPedido = new JButton("Cancelar Pedido");
+        btnCancelarPedido.addActionListener(new ActionListener() {
+        	public void actionPerformed(ActionEvent e) {
+        		MenuGerente meng = new MenuGerente();
+        		meng.setVisible(true);
+        		dispose();
+        	}
+        });
+        btnCancelarPedido.setForeground(Color.WHITE);
+        btnCancelarPedido.setFont(new Font("Roboto Medium", Font.BOLD, 21));
+        btnCancelarPedido.setFocusPainted(false);
+        btnCancelarPedido.setBorder(new LineBorder(new Color(7, 54, 127), 2));
+        btnCancelarPedido.setBackground(new Color(21, 101, 192));
+        btnCancelarPedido.setBounds(63, 694, 206, 49);
+        panel.add(btnCancelarPedido);
+        
+        JButton btnRealizarPedido = new JButton("Realizar Pedido");
+        btnRealizarPedido.addActionListener(new ActionListener() {
+        	public void actionPerformed(ActionEvent e) {
+        	}
+        });
+        btnRealizarPedido.setForeground(Color.WHITE);
+        btnRealizarPedido.setFont(new Font("Roboto Black", Font.BOLD, 23));
+        btnRealizarPedido.setFocusPainted(false);
+        btnRealizarPedido.setBorder(new LineBorder(new Color(7, 54, 127), 2));
+        btnRealizarPedido.setBackground(new Color(21, 101, 192));
+        btnRealizarPedido.setBounds(824, 689, 252, 49);
+        contentPane.add(btnRealizarPedido);
 	}
 }

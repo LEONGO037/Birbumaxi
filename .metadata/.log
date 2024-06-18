@@ -4849,3 +4849,18 @@ not correct please set the HOME environment variable and restart Eclipse. Otherw
 EGit might behave differently since they see different configuration options.
 This warning can be switched off on the Team > Git > Confirmations and Warnings preference page.
 >>>>>>> 1e713d2b4bbf6a77e966c0a87217f5b2b891665e
+
+!ENTRY org.eclipse.pde.build 2 0 2024-06-17 22:37:39.632
+!MESSAGE No JVM system-packages available for environment JRE-1.1
+
+!ENTRY org.eclipse.pde.build 2 0 2024-06-17 22:37:49.949
+!MESSAGE No JVM system-packages available for environment JRE-1.1
+
+!ENTRY org.eclipse.pde.build 2 0 2024-06-17 22:37:51.131
+!MESSAGE No JVM system-packages available for environment JRE-1.1
+
+!ENTRY org.eclipse.pde.build 2 0 2024-06-17 22:37:55.793
+!MESSAGE No JVM system-packages available for environment JRE-1.1
+
+!ENTRY org.eclipse.pde.build 2 0 2024-06-17 22:51:04.122
+!MESSAGE No JVM system-packages available for environment JRE-1.1

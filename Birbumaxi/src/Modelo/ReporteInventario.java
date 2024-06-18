@@ -28,8 +28,13 @@ import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 
-public class ReporteInventario {
-	public static void GenerarReporte() {
+public class ReporteInventario extends ReportePapa{
+	
+	public ReporteInventario() {
+		super();
+	}
+	
+	public void GenerarReporte() {
         String dest = "ReporteInventario.pdf";
         
         Document document = new Document();
@@ -104,18 +109,16 @@ public class ReporteInventario {
 		}
     }
 	
-	private static String horita () {
-		LocalTime ahora = LocalTime.now();
-        DateTimeFormatter formato24Horas = DateTimeFormatter.ofPattern("HH:mm:ss");
-        String horaActual = ahora.format(formato24Horas);
-        return horaActual;
+	@Override
+	public String horita() {
+		// TODO Auto-generated method stub
+		return super.horita();
 	}
 	
-	private static String Fechita () {
-		LocalDate fechaActual = LocalDate.now();
-        DateTimeFormatter formato = DateTimeFormatter.ofPattern("dd/MM/yyyy");
-        String fechaActualStr = fechaActual.format(formato);
-        return fechaActualStr;
+	@Override
+	public String Fechita() {
+		// TODO Auto-generated method stub
+		return super.Fechita();
 	}
 	
 	private static ArrayList<DatosInventario> obtenerDatos (){
@@ -145,18 +148,16 @@ public class ReporteInventario {
 		return inv;
 	}
 
-    private static void addTableHeader(PdfPTable table, Font font, String text) {
-        PdfPCell header = new PdfPCell();
-        header.setPhrase(new Phrase(text, font));
-        header.setHorizontalAlignment(Element.ALIGN_CENTER);
-        table.addCell(header);
+    @Override
+    public void addTableHeader(PdfPTable table, Font font, String text) {
+    	// TODO Auto-generated method stub
+    	super.addTableHeader(table, font, text);
     }
 
-    private static void addTableCell(PdfPTable table, String text) {
-        PdfPCell cell = new PdfPCell();
-        cell.setPhrase(new Phrase(text));
-        cell.setHorizontalAlignment(Element.ALIGN_CENTER);
-        table.addCell(cell);
+    @Override
+    public void addTableCell(PdfPTable table, String text) {
+    	// TODO Auto-generated method stub
+    	super.addTableCell(table, text);
     }
 	
 	

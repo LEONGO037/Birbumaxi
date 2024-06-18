@@ -64,7 +64,8 @@ public class Reportes extends JFrame {
 		JButton btnGenerarReporteDe = new JButton("Generar Reporte de Inventario");
 		btnGenerarReporteDe.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				ReporteInventario.GenerarReporte();
+				ReporteInventario rep = new ReporteInventario();
+				rep.GenerarReporte();
 			}
 		});
 		btnGenerarReporteDe.setForeground(Color.WHITE);
@@ -118,7 +119,11 @@ public class Reportes extends JFrame {
         JButton btnGenerarReporteDiario = new JButton("Generar Reporte de Pedidos");
         btnGenerarReporteDiario.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
+<<<<<<< HEAD
                 Panel4 panel4 = new Panel4();
+=======
+            	Panel4 panel4 = new Panel4(1);
+>>>>>>> cb6dcec8d5ec062714f0078e5337dad35084bf9a
                 panel4.setSize(422, 75); // Ajuste del tamaño
                 panel4.setLocation(0, 0); // Ajuste de la ubicacion
 
@@ -126,7 +131,11 @@ public class Reportes extends JFrame {
                 panelIntervalos.setLayout(new BorderLayout());
                 panelIntervalos.add(panel4, BorderLayout.CENTER);
                 panelIntervalos.revalidate();
+<<<<<<< HEAD
                 panelIntervalos.repaint();
+=======
+                panelIntervalos.repaint(); //limpia el panel de fechas
+>>>>>>> cb6dcec8d5ec062714f0078e5337dad35084bf9a
             }
         });
         btnGenerarReporteDiario.setForeground(Color.WHITE);
@@ -154,7 +163,7 @@ public class Reportes extends JFrame {
         JButton btnGenerarReporteDe_1 = new JButton("Generar Reporte de Ventas");
         btnGenerarReporteDe_1.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                Panel4 panel4 = new Panel4();
+                Panel4 panel4 = new Panel4(2);
                 panel4.setSize(422, 75); // Ajuste del tamaño
                 panel4.setLocation(0, 0); // Ajuste de la ubicacion
 
@@ -180,5 +189,9 @@ public class Reportes extends JFrame {
         panelIntervalos.revalidate();
         panelIntervalos.repaint();
     }
+<<<<<<< HEAD
     
+=======
+
+>>>>>>> cb6dcec8d5ec062714f0078e5337dad35084bf9a
 }

@@ -16,6 +16,11 @@ import javax.swing.border.LineBorder;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
+import Modelo.ReportePedido;
+
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
+
 public class Panel4 extends JPanel {
 
 	private static final long serialVersionUID = 1L;
@@ -25,7 +30,7 @@ public class Panel4 extends JPanel {
 	/**
 	 * Create the panel.
 	 */
-	public Panel4() {
+	public Panel4(int t) {
 		setBackground(new Color(13, 71, 170));
 		setLayout(null);
 		
@@ -62,6 +67,19 @@ public class Panel4 extends JPanel {
 		JButton btnGenerarReporte = new JButton("Generar Reporte");
 		btnGenerarReporte.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+<<<<<<< HEAD
+=======
+				if(coerenciaDeFecha(textField.getText(), textField_1.getText())) {
+					LocalDate inicio = ingresarFecha(textField.getText());
+					LocalDate fin = ingresarFecha(textField_1.getText());
+					if(t == 1) {
+						ReportePedido pe = new ReportePedido();
+						pe.GenerarReporte(inicio, fin);
+					} else {
+						
+					}
+				}
+>>>>>>> cb6dcec8d5ec062714f0078e5337dad35084bf9a
 			}
 		});
 		btnGenerarReporte.setForeground(Color.WHITE);
@@ -73,5 +91,32 @@ public class Panel4 extends JPanel {
 		add(btnGenerarReporte);
 
 	}
+	
+	public static LocalDate ingresarFecha(String tiempo) {
+        DateTimeFormatter formatoFecha = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+        LocalDate f = null;
+        try {
+            LocalDate fecha = LocalDate.parse(tiempo, formatoFecha);
+            return fecha;
+        } catch (DateTimeParseException e) {
+            JOptionPane.showMessageDialog(null, "Formato de fecha incorrecto. Inténtelo de nuevo.", "MENSAJE", JOptionPane.WARNING_MESSAGE);
+        }
+        return f;
+    }
+	
+	public static boolean coerenciaDeFecha (String inicio, String fin) {
+		if(ingresarFecha(inicio) != null && ingresarFecha(fin) != null) {
+			LocalDate finicio = ingresarFecha(inicio);
+			LocalDate ffin = ingresarFecha(fin);
+			if (finicio.isBefore(ffin)) {
+				return true;
+			} else {
+				JOptionPane.showMessageDialog(null, "La fecha inferior debe ser antes de la fecha superior", "MENSAJE", JOptionPane.WARNING_MESSAGE);
+				return false;
+			}
+		} 
+		return false;
+	}
+	
 
 }

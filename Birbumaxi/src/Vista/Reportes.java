@@ -9,6 +9,7 @@ import javax.swing.ImageIcon;
 import javax.swing.border.EmptyBorder;
 import javax.swing.border.LineBorder;
 
+import Modelo.ReporteFinanzas;
 import Modelo.ReporteInventario;
 
 import javax.swing.JTextField;
@@ -119,16 +120,7 @@ public class Reportes extends JFrame {
         JButton btnGenerarReporteDiario = new JButton("Generar Reporte de Pedidos");
         btnGenerarReporteDiario.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-<<<<<<< HEAD
-
-
             	Panel4 panel4 = new Panel4(1);
-
-
-
-=======
-            	Panel4 panel4 = new Panel4(1);
->>>>>>> b082067e7c8c51bd807f631c4803fd6fd269c383
                 panel4.setSize(422, 75); // Ajuste del tamaño
                 panel4.setLocation(0, 0); // Ajuste de la ubicacion
 
@@ -140,15 +132,8 @@ public class Reportes extends JFrame {
                 panelIntervalos.repaint();
 
                 panelIntervalos.repaint(); //limpia el panel de fechas
-
-<<<<<<< HEAD
-
-
-
-=======
                 panelIntervalos.repaint();
                 panelIntervalos.repaint(); //limpia el panel de fechas
->>>>>>> b082067e7c8c51bd807f631c4803fd6fd269c383
             }
         });
         btnGenerarReporteDiario.setForeground(Color.WHITE);
@@ -162,6 +147,8 @@ public class Reportes extends JFrame {
         JButton btnGenerarReporteFinanciero = new JButton("Generar Reporte Financiero");
         btnGenerarReporteFinanciero.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
+            	ReporteFinanzas fina = new ReporteFinanzas();
+            	fina.GenerarReporte();
                 limpiarPanelIntervalos(); //limpia el panel de fechas
             }
         });
@@ -202,8 +189,4 @@ public class Reportes extends JFrame {
         panelIntervalos.revalidate();
         panelIntervalos.repaint();
     }
-<<<<<<< HEAD
-
-=======
->>>>>>> b082067e7c8c51bd807f631c4803fd6fd269c383
 }

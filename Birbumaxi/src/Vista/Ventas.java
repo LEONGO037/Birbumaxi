@@ -25,6 +25,7 @@ import java.awt.Font;
 import javax.swing.border.LineBorder;
 import javax.swing.table.DefaultTableModel;
 
+import Modelo.VentasFactura;
 import Modelo.carrito;
 import Modelo.desplegarPorCategoria;
 import conexionBase.conexionBD;
@@ -366,18 +367,12 @@ public class Ventas extends JFrame {
         btnBuscar.setBounds(183, 283, 157, 44);
         panel.add(btnBuscar);
         
-        
-        
-        
-        
-
-
-
-        
         JButton btnRealizarVenta = new JButton("Realizar Venta");
         btnRealizarVenta.addActionListener(new ActionListener() {
         	public void actionPerformed(ActionEvent e) {
-        		Factura factura = new Factura();
+        		VentasFactura v = new VentasFactura();
+        		int facturaID = v.RealizarVenta(productos, cantidades);
+        		Factura factura = new Factura(facturaID);
         		factura.setVisible(true);
         		dispose();
         	}
@@ -501,6 +496,7 @@ public class Ventas extends JFrame {
                                 double cantidadDouble = Double.parseDouble(cantidadString);
                                 int index = productos.indexOf(productoSeleccionado);
                                 cantidades.set(index, cantidades.get(index) + cantidadDouble);
+                                actualizarStock(cantidadDouble, 1);
                             } catch (NumberFormatException ex) {
                                 JOptionPane.showMessageDialog(null, "Ingresa una cantidad válida.");
                             }
@@ -513,6 +509,7 @@ public class Ventas extends JFrame {
                                 double cantidadDouble = Double.parseDouble(cantidadString);
                                 productos.add(productoSeleccionado);
                                 cantidades.add(cantidadDouble);
+                                actualizarStock(cantidadDouble, 1);
                             } catch (NumberFormatException ex) {
                                 JOptionPane.showMessageDialog(null, "Ingresa una cantidad válida.");
                             }
@@ -558,6 +555,41 @@ public class Ventas extends JFrame {
 
 
 	}
+    
+    public static void actualizarStock (double cantidad, int op) {
+    	String consulta= "SELECT stock from productos WHERE id_producto="+productoSeleccionado+";" ;
+    	double stock = 0.0;
+		conexionBD conec= new conexionBD();
+		Connection conn= conec.conexion();
+		PreparedStatement ps= null;
+		ResultSet rs= null;
+		try {
+			ps=conn.prepareStatement(consulta);
+			rs=ps.executeQuery();
+			if(rs.next()) {
+				stock=Double.parseDouble(rs.getString(1));
+			}
+			
+			double actual;
+			if(op == 1) {
+				actual = stock - cantidad;
+			} else {
+				actual = stock + cantidad;
+			}
+			
+			String act = "update productos set stock =" + actual + " where ID_producto = " + productoSeleccionado + ";";
+			ps = conn.prepareStatement(act);
+			int v = ps.executeUpdate();
+			if (v > 0) {
+				System.out.println("Actualizado");
+			} else {
+				System.out.println("No Actualizado");
+			}
+			
+		}catch(Exception e) {
+			JOptionPane.showMessageDialog(null, "no se pudo cargar el stock");
+		}
+    }
 	public int eliminar() {
 		int posicion=0;
 		for(int i=0; i<productos.size(); i++) {
@@ -574,6 +606,7 @@ public class Ventas extends JFrame {
 	public void eliminarCantidad() {
 	    int posicion = eliminar();
 	    if (posicion != -1) {
+	    	actualizarStock(cantidades.get(posicion), 2);
 	        cantidades.remove(posicion);
 	    }
 	}

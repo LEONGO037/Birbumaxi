@@ -3,10 +3,21 @@ package Vista;
 import javax.swing.JPanel;
 import java.awt.Color;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+
 import java.awt.Font;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
+
 import javax.swing.JTextField;
 import javax.swing.JButton;
 import javax.swing.border.LineBorder;
+
+import Modelo.ReportePedido;
+
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 public class Panel4 extends JPanel {
 
@@ -17,7 +28,7 @@ public class Panel4 extends JPanel {
 	/**
 	 * Create the panel.
 	 */
-	public Panel4() {
+	public Panel4(int t) {
 		setBackground(new Color(13, 71, 170));
 		setLayout(null);
 		
@@ -52,6 +63,19 @@ public class Panel4 extends JPanel {
 		add(textField_1);
 		
 		JButton btnGenerarReporte = new JButton("Generar Reporte");
+		btnGenerarReporte.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				if(coerenciaDeFecha(textField.getText(), textField_1.getText())) {
+					LocalDate inicio = ingresarFecha(textField.getText());
+					LocalDate fin = ingresarFecha(textField_1.getText());
+					if(t == 1) {
+						ReportePedido.GenerarReporte(inicio, fin);
+					} else {
+						
+					}
+				}
+			}
+		});
 		btnGenerarReporte.setForeground(Color.WHITE);
 		btnGenerarReporte.setFont(new Font("Roboto Medium", Font.BOLD, 15));
 		btnGenerarReporte.setFocusPainted(false);
@@ -61,5 +85,32 @@ public class Panel4 extends JPanel {
 		add(btnGenerarReporte);
 
 	}
+	
+	public static LocalDate ingresarFecha(String tiempo) {
+        DateTimeFormatter formatoFecha = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+        LocalDate f = null;
+        try {
+            LocalDate fecha = LocalDate.parse(tiempo, formatoFecha);
+            return fecha;
+        } catch (DateTimeParseException e) {
+            JOptionPane.showMessageDialog(null, "Formato de fecha incorrecto. Inténtelo de nuevo.", "MENSAJE", JOptionPane.WARNING_MESSAGE);
+        }
+        return f;
+    }
+	
+	public static boolean coerenciaDeFecha (String inicio, String fin) {
+		if(ingresarFecha(inicio) != null && ingresarFecha(fin) != null) {
+			LocalDate finicio = ingresarFecha(inicio);
+			LocalDate ffin = ingresarFecha(fin);
+			if (finicio.isBefore(ffin)) {
+				return true;
+			} else {
+				JOptionPane.showMessageDialog(null, "La fecha inferior debe ser antes de la fecha superior", "MENSAJE", JOptionPane.WARNING_MESSAGE);
+				return false;
+			}
+		} 
+		return false;
+	}
+	
 
 }

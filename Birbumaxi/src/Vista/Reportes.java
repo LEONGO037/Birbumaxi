@@ -148,7 +148,15 @@ public class Reportes extends JFrame {
         JButton btnGenerarReporteDiario = new JButton("Generar Reporte de Pedidos");
         btnGenerarReporteDiario.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                limpiarPanelIntervalos(); //limpia el panel de fechas
+            	Panel4 panel4 = new Panel4(1);
+                panel4.setSize(422, 75); // Ajuste del tamaño
+                panel4.setLocation(0, 0); // Ajuste de la ubicacion
+
+                limpiarPanelIntervalos();
+                panelIntervalos.setLayout(new BorderLayout());
+                panelIntervalos.add(panel4, BorderLayout.CENTER);
+                panelIntervalos.revalidate();
+                panelIntervalos.repaint(); //limpia el panel de fechas
             }
         });
         btnGenerarReporteDiario.setForeground(Color.WHITE);
@@ -176,7 +184,7 @@ public class Reportes extends JFrame {
         JButton btnGenerarReporteDe_1 = new JButton("Generar Reporte de Ventas");
         btnGenerarReporteDe_1.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                Panel4 panel4 = new Panel4();
+                Panel4 panel4 = new Panel4(2);
                 panel4.setSize(422, 75); // Ajuste del tamaño
                 panel4.setLocation(0, 0); // Ajuste de la ubicacion
 
@@ -202,21 +210,5 @@ public class Reportes extends JFrame {
         panelIntervalos.revalidate();
         panelIntervalos.repaint();
     }
-    
-    public static LocalDate ingresarFecha(String tiempo) {
-        DateTimeFormatter formatoFecha = DateTimeFormatter.ofPattern("dd/MM/yyyy");
-        
-        while (true) {
-            String input = JOptionPane.showInputDialog("Ingrese la fecha " + tiempo + " en formato dd/MM/yyyy:");
-            try {
-                LocalDate fecha = LocalDate.parse(input, formatoFecha);
-                return fecha;
-            } catch (DateTimeParseException e) {
-                JOptionPane.showMessageDialog(null, "Formato de fecha incorrecto. Inténtelo de nuevo.");
-            }
-        }
-    }
-    
-    //public static 
 
 }

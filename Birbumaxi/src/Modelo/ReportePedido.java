@@ -31,15 +31,12 @@ import com.itextpdf.text.pdf.PdfWriter;
 import conexionBase.conexionBD;
 
 public class ReportePedido {
-	public static void GenerarReporte() {
+	public static void GenerarReporte(LocalDate fechaInicio, LocalDate fechaFin) {
         String dest = "ReportePedidos.pdf";
         
         Document document = new Document();
 
         try {
-        	
-        	LocalDate fechaInicio = LocalDate.now().minusDays(10);
-            LocalDate fechaFin = LocalDate.now().plusDays(1);
             PdfWriter.getInstance(document, new FileOutputStream(dest));
 
             document.open();

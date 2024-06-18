@@ -68,6 +68,10 @@ public class Panel4 extends JPanel {
 		JButton btnGenerarReporte = new JButton("Generar Reporte");
 		btnGenerarReporte.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+<<<<<<< HEAD
+
+=======
+>>>>>>> b082067e7c8c51bd807f631c4803fd6fd269c383
 				if(coerenciaDeFecha(textField.getText(), textField_1.getText())) {
 					LocalDate inicio = ingresarFecha(textField.getText());
 					LocalDate fin = ingresarFecha(textField_1.getText());

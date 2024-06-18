@@ -30,16 +30,18 @@ import com.itextpdf.text.pdf.PdfWriter;
 
 import conexionBase.conexionBD;
 
-public class ReportePedido {
-	public static void GenerarReporte() {
+public class ReportePedido extends ReportePapa{
+	
+	public ReportePedido() {
+		super();
+	}
+	
+	public void GenerarReporte(LocalDate fechaInicio, LocalDate fechaFin) {
         String dest = "ReportePedidos.pdf";
         
         Document document = new Document();
 
         try {
-        	
-        	LocalDate fechaInicio = LocalDate.now().minusDays(10);
-            LocalDate fechaFin = LocalDate.now().plusDays(1);
             PdfWriter.getInstance(document, new FileOutputStream(dest));
 
             document.open();
@@ -91,7 +93,7 @@ public class ReportePedido {
             
             for(PedidosDatos d : inv) {
             	addTableCell(table, "" + d.getNumero());
-                addTableCell(table, "" + d.getProducto());
+                addTableCell(table, "" + d.getNombre());
                 addTableCell(table, d.getFecha());
                 addTableCell(table, "" + d.getCantidad());
                 addTableCell(table, "" + d.getCosto());
@@ -129,18 +131,17 @@ public class ReportePedido {
 		}
     }
 	
-	private static String horita () {
-		LocalTime ahora = LocalTime.now();
-        DateTimeFormatter formato24Horas = DateTimeFormatter.ofPattern("HH:mm:ss");
-        String horaActual = ahora.format(formato24Horas);
-        return horaActual;
+
+	@Override
+	public String horita() {
+		// TODO Auto-generated method stub
+		return super.horita();
 	}
 	
-	private static String Fechita () {
-		LocalDate fechaActual = LocalDate.now();
-        DateTimeFormatter formato = DateTimeFormatter.ofPattern("dd/MM/yyyy");
-        String fechaActualStr = fechaActual.format(formato);
-        return fechaActualStr;
+	@Override
+	public String Fechita() {
+		// TODO Auto-generated method stub
+		return super.Fechita();
 	}
 	
 	public static double SumaTotal (ArrayList<PedidosDatos> ped) {
@@ -188,17 +189,16 @@ public class ReportePedido {
 		return inv;
 	}
 
-    private static void addTableHeader(PdfPTable table, Font font, String text) {
-        PdfPCell header = new PdfPCell();
-        header.setPhrase(new Phrase(text, font));
-        header.setHorizontalAlignment(Element.ALIGN_CENTER);
-        table.addCell(header);
-    }
 
-    private static void addTableCell(PdfPTable table, String text) {
-        PdfPCell cell = new PdfPCell();
-        cell.setPhrase(new Phrase(text));
-        cell.setHorizontalAlignment(Element.ALIGN_CENTER);
-        table.addCell(cell);
+	@Override
+	public void addTableHeader(PdfPTable table, Font font, String text) {
+		// TODO Auto-generated method stub
+		super.addTableHeader(table, font, text);
+	}
+
+    @Override
+    public void addTableCell(PdfPTable table, String text) {
+    	// TODO Auto-generated method stub
+    	super.addTableCell(table, text);
     }
 }

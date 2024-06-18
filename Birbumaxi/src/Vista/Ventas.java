@@ -53,7 +53,7 @@ public class Ventas extends JFrame {
         setType(Type.UTILITY);
         setResizable(false);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setBounds(100, 100, 1100, 785);
+        setBounds(100, 100, 1133, 803);
 
         setBounds(100, 100, 1133, 829);
 
@@ -68,7 +68,7 @@ public class Ventas extends JFrame {
         
         JPanel panel = new JPanel();
         panel.setBackground(new Color(13, 71, 170));
-        panel.setBounds(0, 0, 350, 790);
+        panel.setBounds(0, 0, 350, 792);
         contentPane.add(panel);
         panel.setLayout(null);
         
@@ -80,7 +80,7 @@ public class Ventas extends JFrame {
         botonFrutas.setBorder(new LineBorder(new Color(7, 54, 127), 2)); // Borde azul oscuro de 2 píxeles
         botonFrutas.setFocusPainted(false); // No mostrar el efecto de foco al presionar
         botonFrutas.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        botonFrutas.setBounds(0, 440, 157, 44);
+        botonFrutas.setBounds(0, 376, 175, 44);
         // Evento de entrada del mouse (hover)
         botonFrutas.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseEntered(java.awt.event.MouseEvent evt) {
@@ -107,7 +107,7 @@ public class Ventas extends JFrame {
         botonVerduras.setBorder(new LineBorder(new Color(7, 54, 127), 2)); // Borde azul oscuro de 2 píxeles
         botonVerduras.setFocusPainted(false); // No mostrar el efecto de foco al presionar
         botonVerduras.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        botonVerduras.setBounds(183, 440, 157, 44);
+        botonVerduras.setBounds(174, 376, 175, 44);
         // Evento de entrada del mouse (hover)
         botonVerduras.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseEntered(java.awt.event.MouseEvent evt) {
@@ -134,7 +134,7 @@ public class Ventas extends JFrame {
         botonCarnes.setBorder(new LineBorder(new Color(7, 54, 127), 2)); // Borde azul oscuro de 2 píxeles
         botonCarnes.setFocusPainted(false); // No mostrar el efecto de foco al presionar
         botonCarnes.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        botonCarnes.setBounds(183, 483, 157, 44);
+        botonCarnes.setBounds(174, 415, 175, 44);
         // Evento de entrada del mouse (hover)
         botonCarnes.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseEntered(java.awt.event.MouseEvent evt) {
@@ -161,7 +161,7 @@ public class Ventas extends JFrame {
         botonLacteos.setBorder(new LineBorder(new Color(7, 54, 127), 2)); // Borde azul oscuro de 2 píxeles
         botonLacteos.setFocusPainted(false); // No mostrar el efecto de foco al presionar
         botonLacteos.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        botonLacteos.setBounds(0, 483, 157, 44);
+        botonLacteos.setBounds(0, 417, 175, 44);
         // Evento de entrada del mouse (hover)
         botonLacteos.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseEntered(java.awt.event.MouseEvent evt) {
@@ -188,7 +188,7 @@ public class Ventas extends JFrame {
         botonCereales.setBorder(new LineBorder(new Color(7, 54, 127), 2)); // Borde azul oscuro de 2 píxeles
         botonCereales.setFocusPainted(false); // No mostrar el efecto de foco al presionar
         botonCereales.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        botonCereales.setBounds(0, 526, 157, 44);
+        botonCereales.setBounds(0, 458, 175, 44);
         // Evento de entrada del mouse (hover)
         botonCereales.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseEntered(java.awt.event.MouseEvent evt) {
@@ -215,7 +215,7 @@ public class Ventas extends JFrame {
         botonDulces.setBorder(new LineBorder(new Color(7, 54, 127), 2)); // Borde azul oscuro de 2 píxeles
         botonDulces.setFocusPainted(false); // No mostrar el efecto de foco al presionar
         botonDulces.setCursor(new Cursor(Cursor.HAND_CURSOR));
-        botonDulces.setBounds(183, 526, 157, 44);
+        botonDulces.setBounds(174, 458, 175, 44);
         // Evento de entrada del mouse (hover)
         botonDulces.addMouseListener((MouseListener) new MouseAdapter() {
             public void mouseEntered(MouseEvent evt) {
@@ -242,7 +242,7 @@ public class Ventas extends JFrame {
         botonLimpieza.setBorder(new LineBorder(new Color(7, 54, 127), 2)); // Borde azul oscuro de 2 píxeles
         botonLimpieza.setFocusPainted(false); // No mostrar el efecto de foco al presionar
         botonLimpieza.setCursor(new Cursor(Cursor.HAND_CURSOR));
-        botonLimpieza.setBounds(0, 569, 157, 44);
+        botonLimpieza.setBounds(0, 501, 175, 44);
         // Evento de entrada del mouse (hover)
         botonLimpieza.addMouseListener(new MouseAdapter() {
             public void mouseEntered(MouseEvent evt) {
@@ -269,7 +269,7 @@ public class Ventas extends JFrame {
         botonAseoPer.setBorder(new LineBorder(new Color(7, 54, 127), 2)); // Borde azul oscuro de 2 píxeles
         botonAseoPer.setFocusPainted(false); // No mostrar el efecto de foco al presionar
         botonAseoPer.setCursor(new Cursor(Cursor.HAND_CURSOR));
-        botonAseoPer.setBounds(183, 569, 157, 44);
+        botonAseoPer.setBounds(174, 501, 175, 44);
         // Evento de entrada del mouse (hover)
         botonAseoPer.addMouseListener(new MouseAdapter() {
             public void mouseEntered(MouseEvent evt) {
@@ -291,7 +291,7 @@ public class Ventas extends JFrame {
         JLabel lblNewLabel_3 = new JLabel("Cantidad/Kg:");
         lblNewLabel_3.setForeground(Color.WHITE);
         lblNewLabel_3.setFont(new Font("Roboto Medium", Font.BOLD, 24));
-        lblNewLabel_3.setBounds(10, 629, 157, 30);
+        lblNewLabel_3.setBounds(10, 582, 157, 30);
         panel.add(lblNewLabel_3);
         
         cantidad = new JTextField();
@@ -299,7 +299,7 @@ public class Ventas extends JFrame {
         cantidad.setFont(new Font("Roboto Light", Font.BOLD, 18));
         cantidad.setColumns(10);
         cantidad.setBackground(Color.WHITE);
-        cantidad.setBounds(171, 624, 169, 44);
+        cantidad.setBounds(174, 578, 169, 44);
         panel.add(cantidad);
         
 
@@ -312,11 +312,11 @@ public class Ventas extends JFrame {
         		dispose();
         	}
         });
-        btnCerrarSesion.setBounds(65, 735, 192, 44);
+        btnCerrarSesion.setBounds(66, 708, 192, 44);
 
         panel.add(btnCerrarSesion);
         btnCerrarSesion.setForeground(Color.WHITE);
-        btnCerrarSesion.setFont(new Font("Arial Black", Font.BOLD, 14));
+        btnCerrarSesion.setFont(new Font("Roboto Black", Font.BOLD, 22));
         btnCerrarSesion.setBackground(new Color(51, 102, 255));
         
         JScrollPane scrollPane = new JScrollPane();
@@ -333,14 +333,15 @@ public class Ventas extends JFrame {
         table.setFocusable(false); // Deshabilitar el enfoque para evitar la edición por teclado
 
         
-        JLabel lblNewLabel_3_1 = new JLabel("Busqueda:");
+        JLabel lblNewLabel_3_1 = new JLabel("Busqueda de Producto:");
         lblNewLabel_3_1.setForeground(Color.WHITE);
-        lblNewLabel_3_1.setFont(new Font("Dialog", Font.BOLD, 24));
-        lblNewLabel_3_1.setBounds(0, 320, 157, 30);
+        lblNewLabel_3_1.setFont(new Font("Roboto Black", Font.BOLD, 27));
+        lblNewLabel_3_1.setBounds(10, 205, 330, 30);
         panel.add(lblNewLabel_3_1);
         
         busqueda = new JTextField();
-        busqueda.setBounds(7, 354, 150, 30);
+        busqueda.setFont(new Font("Roboto Light", Font.BOLD, 21));
+        busqueda.setBounds(7, 284, 166, 43);
         panel.add(busqueda);
         busqueda.setColumns(10);
         
@@ -361,13 +362,8 @@ public class Ventas extends JFrame {
         btnBuscar.setFocusPainted(false);
         btnBuscar.setBorder(new LineBorder(new Color(7, 54, 127), 2));
         btnBuscar.setBackground(new Color(21, 101, 192));
-        btnBuscar.setBounds(171, 343, 157, 44);
+        btnBuscar.setBounds(183, 283, 157, 44);
         panel.add(btnBuscar);
-        
-        JLabel lblNewLabel = new JLabel("");
-        lblNewLabel.setIcon(new ImageIcon("C:\\Documentos\\imag\\BIRBUMAXI.png"));
-        lblNewLabel.setBounds(-23, 44, 373, 197);
-        panel.add(lblNewLabel);
         
         
         
@@ -415,14 +411,21 @@ public class Ventas extends JFrame {
 
         
         JButton btnRealizarVenta = new JButton("Realizar Venta");
+        btnRealizarVenta.addActionListener(new ActionListener() {
+        	public void actionPerformed(ActionEvent e) {
+        		Factura factura = new Factura();
+        		factura.setVisible(true);
+        		dispose();
+        	}
+        });
         btnRealizarVenta.setForeground(Color.WHITE);
-        btnRealizarVenta.setFont(new Font("Arial Black", Font.BOLD, 16));
+        btnRealizarVenta.setFont(new Font("Roboto Black", Font.BOLD, 24));
         btnRealizarVenta.setBackground(new Color(51, 102, 255));
-        btnRealizarVenta.setBounds(877, 730, 230, 49);
+        btnRealizarVenta.setBounds(837, 687, 230, 49);
         contentPane.add(btnRealizarVenta);
         
         JScrollPane pedidos = new JScrollPane();
-        pedidos.setBounds(387, 361, 678, 346);
+        pedidos.setBounds(387, 330, 678, 346);
         contentPane.add(pedidos);
         
         
@@ -457,10 +460,27 @@ public class Ventas extends JFrame {
 
 
         btnAgregarProducto.setForeground(Color.WHITE);
-        btnAgregarProducto.setFont(new Font("Arial Black", Font.BOLD, 16));
+        btnAgregarProducto.setFont(new Font("Roboto Black", Font.BOLD, 21));
         btnAgregarProducto.setBackground(new Color(51, 102, 255));
-        btnAgregarProducto.setBounds(55, 675, 230, 49);
+        btnAgregarProducto.setBounds(52, 637, 230, 49);
         panel.add(btnAgregarProducto);
+        
+        JLabel lblNewLabel = new JLabel("");
+        lblNewLabel.setIcon(new ImageIcon("C:\\Documentos\\imag\\logo330x200.png"));
+        lblNewLabel.setBounds(10, 10, 330, 200);
+        panel.add(lblNewLabel);
+        
+        JLabel lblBusquedaPorId = new JLabel("Busqueda por ID o Nombre:");
+        lblBusquedaPorId.setForeground(Color.WHITE);
+        lblBusquedaPorId.setFont(new Font("Roboto Light", Font.ITALIC, 18));
+        lblBusquedaPorId.setBounds(10, 245, 275, 29);
+        panel.add(lblBusquedaPorId);
+        
+        JLabel lblBusquedaPorTipo = new JLabel("Busqueda por Tipo:");
+        lblBusquedaPorTipo.setForeground(Color.WHITE);
+        lblBusquedaPorTipo.setFont(new Font("Roboto Light", Font.ITALIC, 18));
+        lblBusquedaPorTipo.setBounds(10, 337, 282, 29);
+        panel.add(lblBusquedaPorTipo);
 
         
 
@@ -488,4 +508,3 @@ public class Ventas extends JFrame {
 
 	}
 }
-

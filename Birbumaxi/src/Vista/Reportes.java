@@ -64,7 +64,8 @@ public class Reportes extends JFrame {
 		JButton btnGenerarReporteDe = new JButton("Generar Reporte de Inventario");
 		btnGenerarReporteDe.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				ReporteInventario.GenerarReporte();
+				ReporteInventario rep = new ReporteInventario();
+				rep.GenerarReporte();
 			}
 		});
 		btnGenerarReporteDe.setForeground(Color.WHITE);
@@ -118,7 +119,23 @@ public class Reportes extends JFrame {
         JButton btnGenerarReporteDiario = new JButton("Generar Reporte de Pedidos");
         btnGenerarReporteDiario.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                limpiarPanelIntervalos(); //limpia el panel de fechas
+<<<<<<< HEAD
+                Panel4 panel4 = new Panel4();
+=======
+            	Panel4 panel4 = new Panel4(1);
+>>>>>>> cb6dcec8d5ec062714f0078e5337dad35084bf9a
+                panel4.setSize(422, 75); // Ajuste del tamaño
+                panel4.setLocation(0, 0); // Ajuste de la ubicacion
+
+                limpiarPanelIntervalos();
+                panelIntervalos.setLayout(new BorderLayout());
+                panelIntervalos.add(panel4, BorderLayout.CENTER);
+                panelIntervalos.revalidate();
+<<<<<<< HEAD
+                panelIntervalos.repaint();
+=======
+                panelIntervalos.repaint(); //limpia el panel de fechas
+>>>>>>> cb6dcec8d5ec062714f0078e5337dad35084bf9a
             }
         });
         btnGenerarReporteDiario.setForeground(Color.WHITE);
@@ -146,7 +163,7 @@ public class Reportes extends JFrame {
         JButton btnGenerarReporteDe_1 = new JButton("Generar Reporte de Ventas");
         btnGenerarReporteDe_1.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                Panel4 panel4 = new Panel4();
+                Panel4 panel4 = new Panel4(2);
                 panel4.setSize(422, 75); // Ajuste del tamaño
                 panel4.setLocation(0, 0); // Ajuste de la ubicacion
 
@@ -172,21 +189,9 @@ public class Reportes extends JFrame {
         panelIntervalos.revalidate();
         panelIntervalos.repaint();
     }
+<<<<<<< HEAD
     
-    public static LocalDate ingresarFecha(String tiempo) {
-        DateTimeFormatter formatoFecha = DateTimeFormatter.ofPattern("dd/MM/yyyy");
-        
-        while (true) {
-            String input = JOptionPane.showInputDialog("Ingrese la fecha " + tiempo + " en formato dd/MM/yyyy:");
-            try {
-                LocalDate fecha = LocalDate.parse(input, formatoFecha);
-                return fecha;
-            } catch (DateTimeParseException e) {
-                JOptionPane.showMessageDialog(null, "Formato de fecha incorrecto. Inténtelo de nuevo.");
-            }
-        }
-    }
-    
-    //public static 
+=======
 
+>>>>>>> cb6dcec8d5ec062714f0078e5337dad35084bf9a
 }

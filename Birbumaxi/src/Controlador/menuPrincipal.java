@@ -1,7 +1,7 @@
 package Controlador;
 
 
-import Vista.MenuGerente;
+//import Vista.MenuGerente;
 
 import Vista.login;
 

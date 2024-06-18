@@ -4891,3 +4891,47 @@ Caused by: java.io.FileNotFoundException: C:\Users\leona\OneDrive - Universidad 
 	at java.base/java.io.FileOutputStream.<init>(FileOutputStream.java:118)
 	at org.eclipse.swt.graphics.ImageLoader.save(ImageLoader.java:254)
 	... 12 more
+
+!ENTRY org.eclipse.core.resources 2 2 2024-06-17 23:02:52.635
+!MESSAGE Save operation warnings.
+!SUBENTRY 1 org.eclipse.core.resources 2 234 2024-06-17 23:02:52.636
+!MESSAGE The project description file (.project) for '.org.eclipse.egit.core.cmp' was missing.  This file contains important information about the project.  A new project description file has been created, but some information about the project may have been lost.
+
+!ENTRY org.eclipse.core.resources 4 566 2024-06-17 23:03:32.033
+!MESSAGE Could not save master table to file 'C:\Users\leona\OneDrive - Universidad Católica Boliviana San Pablo\Tercer Semestre\Progra2Birbumaxi\Birbumaxi\.metadata\.plugins\org.eclipse.core.resources\.safetable\org.eclipse.core.resources.bak'.
+!STACK 0
+java.io.FileNotFoundException: C:\Users\leona\OneDrive - Universidad Católica Boliviana San Pablo\Tercer Semestre\Progra2Birbumaxi\Birbumaxi\.metadata\.plugins\org.eclipse.core.resources\.safetable\org.eclipse.core.resources.bak (The system cannot find the path specified)
+	at java.base/java.io.FileOutputStream.open0(Native Method)
+	at java.base/java.io.FileOutputStream.open(FileOutputStream.java:289)
+	at java.base/java.io.FileOutputStream.<init>(FileOutputStream.java:230)
+	at java.base/java.io.FileOutputStream.<init>(FileOutputStream.java:150)
+	at org.eclipse.core.internal.localstore.SafeChunkyOutputStream.<init>(SafeChunkyOutputStream.java:52)
+	at org.eclipse.core.internal.localstore.SafeChunkyOutputStream.<init>(SafeChunkyOutputStream.java:48)
+	at org.eclipse.core.internal.resources.SaveManager.saveMasterTable(SaveManager.java:1331)
+	at org.eclipse.core.internal.resources.SaveManager.cleanMasterTable(SaveManager.java:305)
+	at org.eclipse.core.internal.resources.SaveManager.save(SaveManager.java:1234)
+	at org.eclipse.core.internal.resources.Workspace.save(Workspace.java:2489)
+	at org.eclipse.ui.internal.ide.application.IDEWorkbenchAdvisor.lambda$1(IDEWorkbenchAdvisor.java:553)
+	at org.eclipse.jface.operation.ModalContext$ModalContextThread.run(ModalContext.java:124)
+
+!ENTRY org.eclipse.ui.ide 4 4 2024-06-17 23:03:34.613
+!MESSAGE Problems saving workspace
+
+!ENTRY org.eclipse.ui.ide 4 1 2024-06-17 23:03:34.614
+!MESSAGE Problems occurred while trying to save the state of the workbench.
+!SUBENTRY 1 org.eclipse.core.resources 4 566 2024-06-17 23:03:34.614
+!MESSAGE Could not save master table to file 'C:\Users\leona\OneDrive - Universidad Católica Boliviana San Pablo\Tercer Semestre\Progra2Birbumaxi\Birbumaxi\.metadata\.plugins\org.eclipse.core.resources\.safetable\org.eclipse.core.resources'.
+!STACK 0
+java.io.FileNotFoundException: C:\Users\leona\OneDrive - Universidad Católica Boliviana San Pablo\Tercer Semestre\Progra2Birbumaxi\Birbumaxi\.metadata\.plugins\org.eclipse.core.resources\.safetable\org.eclipse.core.resources (The system cannot find the path specified)
+	at java.base/java.io.FileOutputStream.open0(Native Method)
+	at java.base/java.io.FileOutputStream.open(FileOutputStream.java:289)
+	at java.base/java.io.FileOutputStream.<init>(FileOutputStream.java:230)
+	at java.base/java.io.FileOutputStream.<init>(FileOutputStream.java:150)
+	at org.eclipse.core.internal.localstore.SafeChunkyOutputStream.<init>(SafeChunkyOutputStream.java:52)
+	at org.eclipse.core.internal.localstore.SafeChunkyOutputStream.<init>(SafeChunkyOutputStream.java:48)
+	at org.eclipse.core.internal.resources.SaveManager.saveMasterTable(SaveManager.java:1331)
+	at org.eclipse.core.internal.resources.SaveManager.saveMasterTable(SaveManager.java:1320)
+	at org.eclipse.core.internal.resources.SaveManager.save(SaveManager.java:1293)
+	at org.eclipse.core.internal.resources.Workspace.save(Workspace.java:2489)
+	at org.eclipse.ui.internal.ide.application.IDEWorkbenchAdvisor.lambda$1(IDEWorkbenchAdvisor.java:553)
+	at org.eclipse.jface.operation.ModalContext$ModalContextThread.run(ModalContext.java:124)

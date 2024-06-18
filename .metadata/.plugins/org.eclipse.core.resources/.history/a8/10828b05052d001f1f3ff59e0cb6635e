@@ -8,7 +8,6 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.net.MalformedURLException;
 import java.sql.Connection;
-import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.time.LocalDate;
@@ -162,8 +161,7 @@ public class ReportePedido {
 		String consulta = "SELECT productos.nombre, productos.precio_compra, pedidosReporte.fecha, pedidosReporte.cantidad " +
                 "FROM productos, pedidosReporte " +
                 "WHERE productos.ID_producto = pedidosReporte.id_producto " +
-                "AND (pedidosReporte.fecha >= ? AND pedidosReporte.fecha <= ?)"
-                + "ORDER BY pedidosReporte.fecha;";
+                "AND (pedidosReporte.fecha >= ? AND pedidosReporte.fecha <= ?)";
 		conexionBD conec= new conexionBD();
 		Connection conn= conec.conexion();
 		PreparedStatement ps= null;
@@ -177,9 +175,8 @@ public class ReportePedido {
 			while(rs.next()) {
 				String nombre = rs.getString("nombre");
                 double precioCompra = rs.getDouble("precio_compra");
-                Date fecha = rs.getDate("fecha");
+                java.sql.Date fecha = rs.getDate("fecha");
                 LocalDate fechaLocal = fecha.toLocalDate();
-                fechaLocal = fechaLocal.plusDays(1);
                 DateTimeFormatter formato = DateTimeFormatter.ofPattern("dd/MM/yyyy");
                 String fechaActualStr = fechaLocal.format(formato);
                 int cantidad = rs.getInt("cantidad");

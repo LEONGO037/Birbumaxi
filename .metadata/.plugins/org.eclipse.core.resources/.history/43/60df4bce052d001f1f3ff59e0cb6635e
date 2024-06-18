@@ -8,7 +8,6 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.net.MalformedURLException;
 import java.sql.Connection;
-import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.time.LocalDate;
@@ -177,9 +176,8 @@ public class ReportePedido {
 			while(rs.next()) {
 				String nombre = rs.getString("nombre");
                 double precioCompra = rs.getDouble("precio_compra");
-                Date fecha = rs.getDate("fecha");
+                java.sql.Date fecha = rs.getDate("fecha");
                 LocalDate fechaLocal = fecha.toLocalDate();
-                fechaLocal = fechaLocal.plusDays(1);
                 DateTimeFormatter formato = DateTimeFormatter.ofPattern("dd/MM/yyyy");
                 String fechaActualStr = fechaLocal.format(formato);
                 int cantidad = rs.getInt("cantidad");

@@ -8,7 +8,6 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.net.MalformedURLException;
 import java.sql.Connection;
-import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.time.LocalDate;
@@ -43,9 +42,6 @@ public class ReportePedido {
         Document document = new Document();
 
         try {
-        	
-        	LocalDate fechaInicio = LocalDate.now().minusDays(10);
-            LocalDate fechaFin = LocalDate.now().plusDays(1);
             PdfWriter.getInstance(document, new FileOutputStream(dest));
 
             document.open();
@@ -57,28 +53,16 @@ public class ReportePedido {
             document.add(imagen);
 
             Font titleFont = new Font(Font.FontFamily.HELVETICA, 18, Font.BOLD, BaseColor.BLUE);
-            Paragraph title = new Paragraph("Reporte de Pedidos", titleFont);
+            Paragraph title = new Paragraph("Reporte de Inventario", titleFont);
             title.setAlignment(Element.ALIGN_CENTER);
             document.add(title);
             
-            Paragraph espaciador = new Paragraph(" ");
-            espaciador.setSpacingBefore(10);
-            document.add(espaciador);
-            
             Font fechayHora = new Font(Font.FontFamily.HELVETICA, 14, Font.NORMAL);
-            Paragraph fechaReporte = new Paragraph("Fecha de Reporte: " + Fechita() + "            Hora de Reporte:" + horita(), fechayHora);
+            Paragraph fechaReporte = new Paragraph("Fecha: " + Fechita() + "            Hora:" + horita(), fechayHora);
             document.add(fechaReporte);
             
-            DateTimeFormatter formato = DateTimeFormatter.ofPattern("dd/MM/yyyy");
-            String fechaActualStrI = fechaInicio.format(formato);
-            String fechaActualStrF = fechaFin.format(formato);
-            
-            
-            document.add(espaciador);
-            
-            Paragraph intervaloInforme = new Paragraph("Reporte del: " + fechaActualStrI + " al " + fechaActualStrF, fechayHora);
-            document.add(intervaloInforme);
-            
+            Paragraph espaciador = new Paragraph(" ");
+            espaciador.setSpacingBefore(10);
             document.add(espaciador);
 
             PdfPTable table = new PdfPTable(5);
@@ -91,6 +75,9 @@ public class ReportePedido {
             addTableHeader(table, headerFont, "Fecha");
             addTableHeader(table, headerFont, "Cantidad");
             addTableHeader(table, headerFont, "Total");
+            
+            LocalDate fechaInicio = LocalDate.now().minusDays(1);
+            LocalDate fechaFin = LocalDate.now().plusDays(1);
             
             ArrayList<PedidosDatos> inv = new ArrayList<>();
             inv = obtenerDatos(fechaInicio, fechaFin);
@@ -161,9 +148,8 @@ public class ReportePedido {
 		ArrayList<PedidosDatos> inv = new ArrayList<>();
 		String consulta = "SELECT productos.nombre, productos.precio_compra, pedidosReporte.fecha, pedidosReporte.cantidad " +
                 "FROM productos, pedidosReporte " +
-                "WHERE productos.ID_producto = pedidosReporte.id_producto " +
-                "AND (pedidosReporte.fecha >= ? AND pedidosReporte.fecha <= ?)"
-                + "ORDER BY pedidosReporte.fecha;";
+                "WHERE productos.ID_producto = pedidosReporte.id_pedido " +
+                "AND (pedidosReporte.fecha >= ? AND pedidosReporte.fecha <= ?)";
 		conexionBD conec= new conexionBD();
 		Connection conn= conec.conexion();
 		PreparedStatement ps= null;
@@ -177,9 +163,8 @@ public class ReportePedido {
 			while(rs.next()) {
 				String nombre = rs.getString("nombre");
                 double precioCompra = rs.getDouble("precio_compra");
-                Date fecha = rs.getDate("fecha");
+                java.sql.Date fecha = rs.getDate("fecha");
                 LocalDate fechaLocal = fecha.toLocalDate();
-                fechaLocal = fechaLocal.plusDays(1);
                 DateTimeFormatter formato = DateTimeFormatter.ofPattern("dd/MM/yyyy");
                 String fechaActualStr = fechaLocal.format(formato);
                 int cantidad = rs.getInt("cantidad");

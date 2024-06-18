@@ -44,7 +44,7 @@ public class ReportePedido {
 
         try {
         	
-        	LocalDate fechaInicio = LocalDate.now().minusDays(10);
+        	LocalDate fechaInicio = LocalDate.now();
             LocalDate fechaFin = LocalDate.now().plusDays(1);
             PdfWriter.getInstance(document, new FileOutputStream(dest));
 
@@ -179,7 +179,6 @@ public class ReportePedido {
                 double precioCompra = rs.getDouble("precio_compra");
                 Date fecha = rs.getDate("fecha");
                 LocalDate fechaLocal = fecha.toLocalDate();
-                fechaLocal = fechaLocal.plusDays(1);
                 DateTimeFormatter formato = DateTimeFormatter.ofPattern("dd/MM/yyyy");
                 String fechaActualStr = fechaLocal.format(formato);
                 int cantidad = rs.getInt("cantidad");

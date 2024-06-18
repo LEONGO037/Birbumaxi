@@ -179,7 +179,6 @@ public class ReportePedido {
                 double precioCompra = rs.getDouble("precio_compra");
                 Date fecha = rs.getDate("fecha");
                 LocalDate fechaLocal = fecha.toLocalDate();
-                fechaLocal = fechaLocal.plusDays(1);
                 DateTimeFormatter formato = DateTimeFormatter.ofPattern("dd/MM/yyyy");
                 String fechaActualStr = fechaLocal.format(formato);
                 int cantidad = rs.getInt("cantidad");

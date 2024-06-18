@@ -8,7 +8,6 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.net.MalformedURLException;
 import java.sql.Connection;
-import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.time.LocalDate;
@@ -44,7 +43,7 @@ public class ReportePedido {
 
         try {
         	
-        	LocalDate fechaInicio = LocalDate.now().minusDays(10);
+        	LocalDate fechaInicio = LocalDate.now().minusDays(1);
             LocalDate fechaFin = LocalDate.now().plusDays(1);
             PdfWriter.getInstance(document, new FileOutputStream(dest));
 
@@ -61,10 +60,6 @@ public class ReportePedido {
             title.setAlignment(Element.ALIGN_CENTER);
             document.add(title);
             
-            Paragraph espaciador = new Paragraph(" ");
-            espaciador.setSpacingBefore(10);
-            document.add(espaciador);
-            
             Font fechayHora = new Font(Font.FontFamily.HELVETICA, 14, Font.NORMAL);
             Paragraph fechaReporte = new Paragraph("Fecha de Reporte: " + Fechita() + "            Hora de Reporte:" + horita(), fechayHora);
             document.add(fechaReporte);
@@ -73,7 +68,8 @@ public class ReportePedido {
             String fechaActualStrI = fechaInicio.format(formato);
             String fechaActualStrF = fechaFin.format(formato);
             
-            
+            Paragraph espaciador = new Paragraph(" ");
+            espaciador.setSpacingBefore(10);
             document.add(espaciador);
             
             Paragraph intervaloInforme = new Paragraph("Reporte del: " + fechaActualStrI + " al " + fechaActualStrF, fechayHora);
@@ -162,8 +158,7 @@ public class ReportePedido {
 		String consulta = "SELECT productos.nombre, productos.precio_compra, pedidosReporte.fecha, pedidosReporte.cantidad " +
                 "FROM productos, pedidosReporte " +
                 "WHERE productos.ID_producto = pedidosReporte.id_producto " +
-                "AND (pedidosReporte.fecha >= ? AND pedidosReporte.fecha <= ?)"
-                + "ORDER BY pedidosReporte.fecha;";
+                "AND (pedidosReporte.fecha >= ? AND pedidosReporte.fecha <= ?)";
 		conexionBD conec= new conexionBD();
 		Connection conn= conec.conexion();
 		PreparedStatement ps= null;
@@ -177,9 +172,8 @@ public class ReportePedido {
 			while(rs.next()) {
 				String nombre = rs.getString("nombre");
                 double precioCompra = rs.getDouble("precio_compra");
-                Date fecha = rs.getDate("fecha");
+                java.sql.Date fecha = rs.getDate("fecha");
                 LocalDate fechaLocal = fecha.toLocalDate();
-                fechaLocal = fechaLocal.plusDays(1);
                 DateTimeFormatter formato = DateTimeFormatter.ofPattern("dd/MM/yyyy");
                 String fechaActualStr = fechaLocal.format(formato);
                 int cantidad = rs.getInt("cantidad");

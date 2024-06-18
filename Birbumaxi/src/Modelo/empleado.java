@@ -116,7 +116,7 @@ public class empleado extends persona{
 		return false;
 	}
 	public boolean contratar() {
-		String sql= "INSERT INTO empleados (estado, corre, contrasenia, cargo, nombre, apellido, ci ) VALUES (true,'"+correo+"', '"+contrasena+"', "+cargo+",'"+nombre+"','"+apellido+"','"+ci+"',"+salario+";"; 
+		String sql= "INSERT INTO empleados (estado, correo, contrasenia, cargo, nombre, apellido, ci ) VALUES (true,'"+correo+"', '"+contrasena+"', "+cargo+",'"+nombre+"','"+apellido+"','"+ci+"',"+salario+";"; 
 		PreparedStatement ps=null;
 		ResultSet rs= null;
 		conexionBD conec= new conexionBD();

@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<qualifiedTypeNameHistroy>
+<<<<<<< HEAD
+    <fullyQualifiedTypeName name="javax.swing.JOptionPane"/>
+=======
+    <fullyQualifiedTypeName name="java.beans.PropertyEditor"/>
+    <fullyQualifiedTypeName name="Modelo.PedidosDatos"/>
+    <fullyQualifiedTypeName name="com.itextpdf.text.Paragraph"/>
+    <fullyQualifiedTypeName name="java.time.LocalDate"/>
+    <fullyQualifiedTypeName name="javax.swing.JOptionPane"/>
+    <fullyQualifiedTypeName name="Modelo.DatosPadre"/>
+    <fullyQualifiedTypeName name="java.lang.Override"/>
+    <fullyQualifiedTypeName name="Modelo.ReportePedido"/>
+    <fullyQualifiedTypeName name="Modelo.ReporteInventario"/>
+    <fullyQualifiedTypeName name="Modelo.ReportePapa"/>
+    <fullyQualifiedTypeName name="java.util.ArrayList"/>
+<<<<<<< HEAD
+    <fullyQualifiedTypeName name="Modelo.DatosVentas"/>
+    <fullyQualifiedTypeName name="Modelo.ReporteVentas"/>
+=======
+>>>>>>> dbf7cae5371a3543614f3d4375c493dbb97f3a57
+>>>>>>> 800ce00a5adc9ceac13f6cc3a37dce5c2d87d2e5
+</qualifiedTypeNameHistroy>

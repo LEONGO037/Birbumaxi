@@ -64,7 +64,8 @@ public class Reportes extends JFrame {
 		JButton btnGenerarReporteDe = new JButton("Generar Reporte de Inventario");
 		btnGenerarReporteDe.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				ReporteInventario.GenerarReporte();
+				ReporteInventario rep = new ReporteInventario();
+				rep.GenerarReporte();
 			}
 		});
 		btnGenerarReporteDe.setForeground(Color.WHITE);

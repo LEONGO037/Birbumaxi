@@ -69,7 +69,8 @@ public class Panel4 extends JPanel {
 					LocalDate inicio = ingresarFecha(textField.getText());
 					LocalDate fin = ingresarFecha(textField_1.getText());
 					if(t == 1) {
-						ReportePedido.GenerarReporte(inicio, fin);
+						ReportePedido pe = new ReportePedido();
+						pe.GenerarReporte(inicio, fin);
 					} else {
 						
 					}

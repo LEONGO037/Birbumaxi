@@ -23,7 +23,7 @@ public class Panel1 extends JPanel {
     public Panel1() {
         setBackground(new Color(13, 71, 170));
         setBorder(new EmptyBorder(5, 5, 5, 5));
-        setLayout(null); // Asegúrate de usar un layout que puedas controlar
+        setLayout(null);
 
         JScrollPane scrollPane = new JScrollPane();
         scrollPane.setBounds(0, 49, 554, 400);

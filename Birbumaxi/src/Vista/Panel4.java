@@ -24,7 +24,7 @@ public class Panel4 extends JPanel {
 		JLabel lblNewLabel = new JLabel("Ingrese el intervalo de fecha:");
 		lblNewLabel.setForeground(new Color(255, 255, 255));
 		lblNewLabel.setFont(new Font("Roboto Black", Font.BOLD, 14));
-		lblNewLabel.setBounds(10, 0, 199, 26);
+		lblNewLabel.setBounds(10, 0, 220, 26);
 		add(lblNewLabel);
 		
 		JLabel lblMenor = new JLabel("Inferior:");

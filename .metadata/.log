@@ -4864,3 +4864,30 @@ This warning can be switched off on the Team > Git > Confirmations and Warnings 
 
 !ENTRY org.eclipse.pde.build 2 0 2024-06-17 22:51:04.122
 !MESSAGE No JVM system-packages available for environment JRE-1.1
+
+!ENTRY org.eclipse.jface.text 4 0 2024-06-17 22:56:11.982
+!MESSAGE Unexpected runtime error while computing a text hover
+!STACK 0
+org.eclipse.swt.SWTException: i/o error (java.io.FileNotFoundException: C:\Users\leona\OneDrive - Universidad Católica Boliviana San Pablo\Tercer Semestre\Progra2Birbumaxi\Birbumaxi\.metadata\.plugins\org.eclipse.jdt.ui\jdt-images\10.png (The system cannot find the path specified))
+	at org.eclipse.swt.SWT.error(SWT.java:4922)
+	at org.eclipse.swt.SWT.error(SWT.java:4837)
+	at org.eclipse.swt.graphics.ImageLoader.save(ImageLoader.java:257)
+	at org.eclipse.jdt.internal.ui.viewsupport.ImagesOnFileSystemRegistry.getImageURL(ImagesOnFileSystemRegistry.java:115)
+	at org.eclipse.jdt.internal.ui.viewsupport.ImagesOnFileSystemRegistry.getImageURL(ImagesOnFileSystemRegistry.java:91)
+	at org.eclipse.jdt.internal.ui.text.java.hover.JavadocHover.getImageURL(JavadocHover.java:936)
+	at org.eclipse.jdt.internal.ui.text.java.hover.JavadocHover.getImageAndLabel(JavadocHover.java:1094)
+	at org.eclipse.jdt.internal.ui.text.java.hover.JavadocHover.getInfoText(JavadocHover.java:837)
+	at org.eclipse.jdt.internal.ui.text.java.hover.JavadocHover.getHoverInfo(JavadocHover.java:748)
+	at org.eclipse.jdt.internal.ui.text.java.hover.JavadocHover.internalGetHoverInfo(JavadocHover.java:671)
+	at org.eclipse.jdt.internal.ui.text.java.hover.JavadocHover.getHoverInfo2(JavadocHover.java:663)
+	at org.eclipse.jdt.internal.ui.text.java.hover.BestMatchHover.getHoverInfo2(BestMatchHover.java:163)
+	at org.eclipse.jdt.internal.ui.text.java.hover.BestMatchHover.getHoverInfo2(BestMatchHover.java:130)
+	at org.eclipse.jdt.internal.ui.text.java.hover.JavaEditorTextHoverProxy.getHoverInfo2(JavaEditorTextHoverProxy.java:89)
+	at org.eclipse.jface.text.TextViewerHoverManager$1.run(TextViewerHoverManager.java:155)
+Caused by: java.io.FileNotFoundException: C:\Users\leona\OneDrive - Universidad Católica Boliviana San Pablo\Tercer Semestre\Progra2Birbumaxi\Birbumaxi\.metadata\.plugins\org.eclipse.jdt.ui\jdt-images\10.png (The system cannot find the path specified)
+	at java.base/java.io.FileOutputStream.open0(Native Method)
+	at java.base/java.io.FileOutputStream.open(FileOutputStream.java:289)
+	at java.base/java.io.FileOutputStream.<init>(FileOutputStream.java:230)
+	at java.base/java.io.FileOutputStream.<init>(FileOutputStream.java:118)
+	at org.eclipse.swt.graphics.ImageLoader.save(ImageLoader.java:254)
+	... 12 more

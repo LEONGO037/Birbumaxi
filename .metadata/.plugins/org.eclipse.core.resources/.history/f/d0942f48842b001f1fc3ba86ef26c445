@@ -1,9 +1,0 @@
-package conexionBase;
-
-public class conexionBD {
-	public static String driver = "com.mysql.cj.jdbc.Driver";
-    public static final String url = "jdbc:mysql://viaduct.proxy.rlwy.net:3306/birbumaxi&serverTimezone=UTC";
-    public static final String user = "root";
-    public static final String password = "ShWxSyPeOxPEXKXrVmJrCEkpSgYlxVvB";
-    public Connection conexion()
-}

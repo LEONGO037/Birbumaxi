@@ -119,13 +119,7 @@ public class Reportes extends JFrame {
         JButton btnGenerarReporteDiario = new JButton("Generar Reporte de Pedidos");
         btnGenerarReporteDiario.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-<<<<<<< HEAD
-
             	Panel4 panel4 = new Panel4(1);
-
-=======
-            	Panel4 panel4 = new Panel4(1);
->>>>>>> 1589091fd94d4320de2e05a90ea9017dc5ccec45
                 panel4.setSize(422, 75); // Ajuste del tamaño
                 panel4.setLocation(0, 0); // Ajuste de la ubicacion
 
@@ -133,16 +127,12 @@ public class Reportes extends JFrame {
                 panelIntervalos.setLayout(new BorderLayout());
                 panelIntervalos.add(panel4, BorderLayout.CENTER);
                 panelIntervalos.revalidate();
-<<<<<<< HEAD
-
                 panelIntervalos.repaint();
 
                 panelIntervalos.repaint(); //limpia el panel de fechas
 
-=======
                 panelIntervalos.repaint();
                 panelIntervalos.repaint(); //limpia el panel de fechas
->>>>>>> 1589091fd94d4320de2e05a90ea9017dc5ccec45
             }
         });
         btnGenerarReporteDiario.setForeground(Color.WHITE);
@@ -196,8 +186,4 @@ public class Reportes extends JFrame {
         panelIntervalos.revalidate();
         panelIntervalos.repaint();
     }
-<<<<<<< HEAD
-
-=======
->>>>>>> 1589091fd94d4320de2e05a90ea9017dc5ccec45
 }

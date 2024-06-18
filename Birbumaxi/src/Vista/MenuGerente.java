@@ -1,11 +1,8 @@
 package Vista;
 
-import java.awt.EventQueue;
-
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
-import java.awt.Window.Type;
 import java.awt.Color;
 import javax.swing.JLabel;
 import javax.swing.ImageIcon;
@@ -150,6 +147,12 @@ public class MenuGerente extends JFrame {
 		JButton botonAdmEmpleados = new JButton("Administrar Personal");
 		botonAdmEmpleados.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+<<<<<<< HEAD
+				AdministrarEmpleados adm = new AdministrarEmpleados();
+				adm.setVisible(true);
+				dispose();
+=======
+>>>>>>> 65e0a0b692bc99f8262ab2755d2fa3e3ce4cd95e
 			}
 		});
 		botonAdmEmpleados.setForeground(Color.WHITE);

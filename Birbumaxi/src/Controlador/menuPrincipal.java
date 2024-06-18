@@ -1,6 +1,8 @@
 package Controlador;
 
 
+import Vista.Ventas;
+
 //import Vista.MenuGerente;
 
 import Vista.login;
@@ -14,6 +16,8 @@ public class menuPrincipal {
 		menug.setVisible(true);*/
 		//MenuGerente menug = new MenuGerente();
 		//menug.setVisible(true);
+		//Ventas v = new Ventas();
+		//v.setVisible(true);
 	}
 
 }

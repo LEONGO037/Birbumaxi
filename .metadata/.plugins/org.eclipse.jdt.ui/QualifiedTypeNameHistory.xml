@@ -4,4 +4,6 @@
     <fullyQualifiedTypeName name="Modelo.ReportePapa"/>
     <fullyQualifiedTypeName name="Modelo.DatosFinanzas"/>
     <fullyQualifiedTypeName name="Modelo.ReporteFinanzas"/>
+    <fullyQualifiedTypeName name="Modelo.VentasFactura"/>
+    <fullyQualifiedTypeName name="Vista.Ventas"/>
 </qualifiedTypeNameHistroy>

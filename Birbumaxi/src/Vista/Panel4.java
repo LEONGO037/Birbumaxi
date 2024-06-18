@@ -13,6 +13,8 @@ import java.time.format.DateTimeParseException;
 import javax.swing.JTextField;
 import javax.swing.JButton;
 import javax.swing.border.LineBorder;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 import Modelo.ReportePedido;
 
@@ -65,6 +67,8 @@ public class Panel4 extends JPanel {
 		JButton btnGenerarReporte = new JButton("Generar Reporte");
 		btnGenerarReporte.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+<<<<<<< HEAD
+=======
 				if(coerenciaDeFecha(textField.getText(), textField_1.getText())) {
 					LocalDate inicio = ingresarFecha(textField.getText());
 					LocalDate fin = ingresarFecha(textField_1.getText());
@@ -75,6 +79,7 @@ public class Panel4 extends JPanel {
 						
 					}
 				}
+>>>>>>> cb6dcec8d5ec062714f0078e5337dad35084bf9a
 			}
 		});
 		btnGenerarReporte.setForeground(Color.WHITE);

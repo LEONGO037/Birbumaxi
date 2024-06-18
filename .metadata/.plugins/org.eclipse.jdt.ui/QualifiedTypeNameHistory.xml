@@ -1,2 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<qualifiedTypeNameHistroy/>
+<qualifiedTypeNameHistroy>
+    <fullyQualifiedTypeName name="Modelo.DatosPadre"/>
+    <fullyQualifiedTypeName name="Modelo.ReportePapa"/>
+    <fullyQualifiedTypeName name="Modelo.DatosFinanzas"/>
+    <fullyQualifiedTypeName name="Modelo.ReporteFinanzas"/>
+</qualifiedTypeNameHistroy>

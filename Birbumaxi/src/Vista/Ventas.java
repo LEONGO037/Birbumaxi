@@ -25,6 +25,7 @@ import java.awt.Font;
 import javax.swing.border.LineBorder;
 import javax.swing.table.DefaultTableModel;
 
+import Modelo.VentasFactura;
 import Modelo.carrito;
 import Modelo.desplegarPorCategoria;
 import conexionBase.conexionBD;
@@ -46,6 +47,7 @@ public class Ventas extends JFrame {
     public String[] columnasNombres = {"ID Producto", "Nombre", "Stock", "Precio", "Cantidad"};
     public DefaultTableModel tabla2= new DefaultTableModel(null, columnasNombres);
     public ArrayList<Double> cantidades= new ArrayList<>();
+    public static String eliminarProd="";
     /**
      * Create the frame.
      */
@@ -365,55 +367,12 @@ public class Ventas extends JFrame {
         btnBuscar.setBounds(183, 283, 157, 44);
         panel.add(btnBuscar);
         
-        
-        
-        
-        
-     // Agregar la tabla al JScrollPane
-        scrollPane.setViewportView(table);
-     // Agregar el listener a la tabla para manejar clics simples y dobles
-        // Agregar listener para detectar selecciones en la tabla
-        table.getSelectionModel().addListSelectionListener(e -> {
-            if (!e.getValueIsAdjusting()) { // Verificar que el evento no es intermedio
-                // Obtener la fila seleccionada
-                int selectedRow = table.getSelectedRow();
-                if (selectedRow != -1) { // Si se ha seleccionado una fila válida
-                    // Obtener datos de la fila seleccionada
-                    productoSeleccionado = (String) table.getValueAt(selectedRow, 0); // ID del producto
-
-                    // Verificar si el producto ya está en la lista
-                    if (productos.contains(productoSeleccionado)) {
-                        // Si el producto ya está en la lista, eliminarlo y deseleccionar la fila
-                        int index = productos.indexOf(productoSeleccionado);
-                        productos.remove(index);
-                        cantidades.remove(index);
-                        table.removeRowSelectionInterval(selectedRow, selectedRow);
-                    } else {
-                        // Si el producto no está en la lista, agregarlo con su cantidad
-                        String cantidadString = cantidad.getText().trim();
-                        if (!cantidadString.isEmpty() && Double.parseDouble(cantidad.getText())>0 && Double.parseDouble(cantidad.getText())<= stockCalculo()) {
-                            try {
-                                double cantidadDouble = Double.parseDouble(cantidadString);
-                                productos.add(productoSeleccionado);
-                                cantidades.add(cantidadDouble);
-                            } catch (NumberFormatException ex) {
-                                JOptionPane.showMessageDialog(null, "Ingresa una cantidad válida.");
-                            }
-                        }else {
-                        	JOptionPane.showMessageDialog(null, "Ingresa una cantidad válida.");
-                        }
-                    }
-                    System.out.println(productoSeleccionado);
-                }
-            }
-        });
-
-
-        
         JButton btnRealizarVenta = new JButton("Realizar Venta");
         btnRealizarVenta.addActionListener(new ActionListener() {
         	public void actionPerformed(ActionEvent e) {
-        		Factura factura = new Factura();
+        		VentasFactura v = new VentasFactura();
+        		int facturaID = v.RealizarVenta(productos, cantidades);
+        		Factura factura = new Factura(facturaID);
         		factura.setVisible(true);
         		dispose();
         	}
@@ -421,11 +380,11 @@ public class Ventas extends JFrame {
         btnRealizarVenta.setForeground(Color.WHITE);
         btnRealizarVenta.setFont(new Font("Roboto Black", Font.BOLD, 24));
         btnRealizarVenta.setBackground(new Color(51, 102, 255));
-        btnRealizarVenta.setBounds(837, 687, 230, 49);
+        btnRealizarVenta.setBounds(877, 730, 230, 49);
         contentPane.add(btnRealizarVenta);
         
         JScrollPane pedidos = new JScrollPane();
-        pedidos.setBounds(387, 330, 678, 346);
+        pedidos.setBounds(387, 357, 678, 346);
         contentPane.add(pedidos);
         
         
@@ -437,7 +396,6 @@ public class Ventas extends JFrame {
         pedidos.setColumnHeaderView(pedidosRealizados);
         pedidos.setViewportView(pedidosRealizados);
 
-        
         JButton btnAgregarProducto = new JButton("Agregar Producto");
         btnAgregarProducto.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
@@ -445,9 +403,11 @@ public class Ventas extends JFrame {
                 String cantidadString = cantidad.getText().trim();
                 if (!cantidadString.isEmpty()) {
                     try {
+                        // Llamar a la función para actualizar la tabla
                         carrito carr = new carrito();
                         tabla2 = carr.carritos(columnasNombres, productos, cantidades);
                         pedidosRealizados.setModel(tabla2);
+  
                     } catch (NumberFormatException ex) {
                         JOptionPane.showMessageDialog(null, "Ingresa una cantidad válida.");
                     }
@@ -457,7 +417,18 @@ public class Ventas extends JFrame {
             }
         });
 
-
+        pedidosRealizados.getSelectionModel().addListSelectionListener(e -> {
+            if (!e.getValueIsAdjusting()) { // Verificar que el evento no es intermedio
+                // Obtener la fila seleccionada
+                int selectedRow = pedidosRealizados.getSelectedRow();
+                if (selectedRow != -1) { // Si se ha seleccionado una fila válida
+                    // Obtener datos de la fila seleccionada
+                	eliminarProd = (String) pedidosRealizados.getValueAt(selectedRow, 0); // ID del producto
+                    System.out.println(productoSeleccionado);
+                }
+            }
+        });
+       
 
         btnAgregarProducto.setForeground(Color.WHITE);
         btnAgregarProducto.setFont(new Font("Roboto Black", Font.BOLD, 21));
@@ -482,12 +453,89 @@ public class Ventas extends JFrame {
         lblBusquedaPorTipo.setBounds(10, 337, 282, 29);
         panel.add(lblBusquedaPorTipo);
 
+
+        
+        JButton btnEliminarDelCarrito = new JButton("Eliminar del Carrito");
+        btnEliminarDelCarrito.addActionListener(new ActionListener() {
+        	public void actionPerformed(ActionEvent e) {
+        		eliminarCantidad();
+        		carrito carr = new carrito();
+                tabla2 = carr.carritos(columnasNombres, productos, cantidades);
+                pedidosRealizados.setModel(tabla2);
+        	}
+        });
+        btnEliminarDelCarrito.setForeground(Color.WHITE);
+        btnEliminarDelCarrito.setFont(new Font("Dialog", Font.BOLD, 24));
+        btnEliminarDelCarrito.setBackground(new Color(245, 28, 16));
+        btnEliminarDelCarrito.setBounds(387, 730, 317, 49);
+        contentPane.add(btnEliminarDelCarrito);
+        
+        JLabel lblNewLabel_3_1_1 = new JLabel("Carrito:");
+        lblNewLabel_3_1_1.setForeground(Color.WHITE);
+        lblNewLabel_3_1_1.setFont(new Font("Dialog", Font.BOLD, 27));
+        lblNewLabel_3_1_1.setBounds(387, 312, 330, 30);
+        contentPane.add(lblNewLabel_3_1_1);
+        
+        // Agregar la tabla al JScrollPane
+        scrollPane.setViewportView(table);
+     // Agregar el listener a la tabla para manejar clics simples y dobles
+        table.getSelectionModel().addListSelectionListener(e -> {
+            if (!e.getValueIsAdjusting()) { // Verificar que el evento no es intermedio
+                // Obtener la fila seleccionada
+                int selectedRow = table.getSelectedRow();
+                if (selectedRow != -1) { // Si se ha seleccionado una fila válida
+                    // Obtener datos de la fila seleccionada
+                    productoSeleccionado = (String) table.getValueAt(selectedRow, 0); // ID del producto
+
+                    // Verificar si el producto ya está en la lista
+                    if (productos.contains(productoSeleccionado)) {
+                        // Si el producto ya está en la lista, sumar la cantidad ingresada a la cantidad existente
+                        String cantidadString = cantidad.getText().trim();
+                        if (!cantidadString.isEmpty()) {
+                            try {
+                                double cantidadDouble = Double.parseDouble(cantidadString);
+                                int index = productos.indexOf(productoSeleccionado);
+                                cantidades.set(index, cantidades.get(index) + cantidadDouble);
+                                actualizarStock(cantidadDouble, 1);
+                            } catch (NumberFormatException ex) {
+                                JOptionPane.showMessageDialog(null, "Ingresa una cantidad válida.");
+                            }
+                        }
+                    } else {
+                        // Si el producto no está en la lista, agregarlo con su cantidad
+                        String cantidadString = cantidad.getText().trim();
+                        if (!cantidadString.isEmpty() && Double.parseDouble(cantidad.getText()) > 0 && Double.parseDouble(cantidad.getText()) <= stockCalculo()) {
+                            try {
+                                double cantidadDouble = Double.parseDouble(cantidadString);
+                                productos.add(productoSeleccionado);
+                                cantidades.add(cantidadDouble);
+                                actualizarStock(cantidadDouble, 1);
+                            } catch (NumberFormatException ex) {
+                                JOptionPane.showMessageDialog(null, "Ingresa una cantidad válida.");
+                            }
+                        } else {
+                            JOptionPane.showMessageDialog(null, "Ingresa una cantidad válida.");
+                        }
+                    }
+
+                    // Actualizar la tabla pedidosRealizados con los datos actualizados
+                    try {
+                        carrito carr = new carrito();
+                        tabla2 = carr.carritos(columnasNombres, productos, cantidades);
+                        pedidosRealizados.setModel(tabla2);
+                    } catch (NumberFormatException ex) {
+                        JOptionPane.showMessageDialog(null, "Error al actualizar la tabla.");
+                    }
+
+                    System.out.println(productoSeleccionado);
+                }
+            }
+        });
         
 
 	}
     public static double stockCalculo() {
     	double stock=0;
-
 		String consulta= "SELECT stock from productos WHERE id_producto="+productoSeleccionado+";" ;
 		conexionBD conec= new conexionBD();
 		Connection conn= conec.conexion();
@@ -507,4 +555,73 @@ public class Ventas extends JFrame {
 
 
 	}
+    
+    public static void actualizarStock (double cantidad, int op) {
+    	String consulta= "SELECT stock from productos WHERE id_producto="+productoSeleccionado+";" ;
+    	double stock = 0.0;
+		conexionBD conec= new conexionBD();
+		Connection conn= conec.conexion();
+		PreparedStatement ps= null;
+		ResultSet rs= null;
+		try {
+			ps=conn.prepareStatement(consulta);
+			rs=ps.executeQuery();
+			if(rs.next()) {
+				stock=Double.parseDouble(rs.getString(1));
+			}
+			
+			double actual;
+			if(op == 1) {
+				actual = stock - cantidad;
+			} else {
+				actual = stock + cantidad;
+			}
+			
+			String act = "update productos set stock =" + actual + " where ID_producto = " + productoSeleccionado + ";";
+			ps = conn.prepareStatement(act);
+			int v = ps.executeUpdate();
+			if (v > 0) {
+				System.out.println("Actualizado");
+			} else {
+				System.out.println("No Actualizado");
+			}
+			
+		}catch(Exception e) {
+			JOptionPane.showMessageDialog(null, "no se pudo cargar el stock");
+		}
+    }
+	public int eliminar() {
+		int posicion=0;
+		for(int i=0; i<productos.size(); i++) {
+			if(eliminarProd.equals(productos.get(i))) {
+				posicion=i;
+				productos.remove(posicion);
+			}else {
+				continue;
+			}
+		}
+		return posicion;
+
+	}
+	public void eliminarCantidad() {
+	    int posicion = eliminar();
+	    if (posicion != -1) {
+	    	actualizarStock(cantidades.get(posicion), 2);
+	        cantidades.remove(posicion);
+	    }
+	}
+
+	public int sacarPosicion() {
+		int posicion=0;
+		for(int i=0; i<productos.size(); i++) {
+			if(productoSeleccionado.equals(productos.get(i))) {
+				posicion=i;
+			}else {
+				continue;
+			}
+		}
+		return posicion;
+	}
+
+
 }

@@ -9,6 +9,7 @@ import javax.swing.ImageIcon;
 import javax.swing.border.EmptyBorder;
 import javax.swing.border.LineBorder;
 
+import Modelo.ReporteFinanzas;
 import Modelo.ReporteInventario;
 
 import javax.swing.JTextField;
@@ -127,10 +128,17 @@ public class Reportes extends JFrame {
                 panelIntervalos.setLayout(new BorderLayout());
                 panelIntervalos.add(panel4, BorderLayout.CENTER);
                 panelIntervalos.revalidate();
+<<<<<<< HEAD
                 panelIntervalos.repaint();
 
                 panelIntervalos.repaint(); //limpia el panel de fechas
 
+=======
+
+                panelIntervalos.repaint();
+
+                panelIntervalos.repaint(); //limpia el panel de fechas
+>>>>>>> be30e66057c324b0d440ad9f23d8af98138ac18e
                 panelIntervalos.repaint();
                 panelIntervalos.repaint(); //limpia el panel de fechas
             }
@@ -146,6 +154,8 @@ public class Reportes extends JFrame {
         JButton btnGenerarReporteFinanciero = new JButton("Generar Reporte Financiero");
         btnGenerarReporteFinanciero.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
+            	ReporteFinanzas fina = new ReporteFinanzas();
+            	fina.GenerarReporte();
                 limpiarPanelIntervalos(); //limpia el panel de fechas
             }
         });

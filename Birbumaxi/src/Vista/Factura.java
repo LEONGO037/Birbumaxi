@@ -30,7 +30,7 @@ public class Factura extends JFrame {
     private JTextField correo;
     private JTable detalleFactura;
 
-    public Factura() {
+    public Factura(int FacturaID) {
         setType(Type.UTILITY);
         setResizable(false);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -179,6 +179,11 @@ public class Factura extends JFrame {
         contentPane.add(btnCerrarSesion);
 
         JButton btnFacturar = new JButton("Facturar");
+        btnFacturar.addActionListener(new ActionListener() {
+        	public void actionPerformed(ActionEvent e) {
+        		
+        	}
+        });
         btnFacturar.setForeground(Color.WHITE);
         btnFacturar.setFont(new Font("Roboto Medium", Font.BOLD, 25));
         btnFacturar.setFocusPainted(false);
@@ -198,17 +203,6 @@ public class Factura extends JFrame {
         contentPane.add(scrollPane);
     }
 
-    public static void main(String[] args) {
-        EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                try {
-                    Factura frame = new Factura();
-                    frame.setVisible(true);
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
-            }
-        });
-    }
+    
 }
  

@@ -147,10 +147,12 @@ public class MenuGerente extends JFrame {
 		JButton botonAdmEmpleados = new JButton("Administrar Personal");
 		botonAdmEmpleados.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+<<<<<<< HEAD
 				AdministrarEmpleados adm = new AdministrarEmpleados();
 				adm.setVisible(true);
 				dispose();
-
+=======
+>>>>>>> 65e0a0b692bc99f8262ab2755d2fa3e3ce4cd95e
 			}
 		});
 		botonAdmEmpleados.setForeground(Color.WHITE);

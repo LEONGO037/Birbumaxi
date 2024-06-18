@@ -22,7 +22,7 @@ public class MenuGerente extends JFrame {
 		setResizable(false);
 		setType(Type.UTILITY);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 1030, 721);
+		setBounds(100, 100, 990, 695);
 		contentPane = new JPanel();
 		contentPane.setBackground(new Color(255, 128, 0));
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -129,15 +129,6 @@ public class MenuGerente extends JFrame {
 		btnCerrarSesion.setBounds(73, 619, 143, 39);
 		contentPane.add(btnCerrarSesion);
 		
-		JButton botonContratar = new JButton("Contratar personal");
-		botonContratar.setForeground(Color.WHITE);
-		botonContratar.setFont(new Font("Roboto Medium", Font.BOLD, 24));
-		botonContratar.setFocusPainted(false);
-		botonContratar.setBorder(new LineBorder(new Color(7, 54, 127), 2));
-		botonContratar.setBackground(new Color(21, 101, 192));
-		botonContratar.setBounds(73, 479, 422, 64);
-		contentPane.add(botonContratar);
-		
 
 		btnCerrarSesion.setBounds(74, 585, 143, 39);
 		btnCerrarSesion.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
@@ -147,12 +138,9 @@ public class MenuGerente extends JFrame {
 		JButton botonAdmEmpleados = new JButton("Administrar Personal");
 		botonAdmEmpleados.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-<<<<<<< HEAD
 				AdministrarEmpleados adm = new AdministrarEmpleados();
 				adm.setVisible(true);
 				dispose();
-=======
->>>>>>> 65e0a0b692bc99f8262ab2755d2fa3e3ce4cd95e
 			}
 		});
 		botonAdmEmpleados.setForeground(Color.WHITE);

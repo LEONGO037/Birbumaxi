@@ -3,10 +3,18 @@ package Vista;
 import javax.swing.JPanel;
 import java.awt.Color;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+
 import java.awt.Font;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
+
 import javax.swing.JTextField;
 import javax.swing.JButton;
 import javax.swing.border.LineBorder;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 public class Panel4 extends JPanel {
 
@@ -52,6 +60,10 @@ public class Panel4 extends JPanel {
 		add(textField_1);
 		
 		JButton btnGenerarReporte = new JButton("Generar Reporte");
+		btnGenerarReporte.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+			}
+		});
 		btnGenerarReporte.setForeground(Color.WHITE);
 		btnGenerarReporte.setFont(new Font("Roboto Medium", Font.BOLD, 15));
 		btnGenerarReporte.setFocusPainted(false);

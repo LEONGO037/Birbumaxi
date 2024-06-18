@@ -4,6 +4,7 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JButton;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.ImageIcon;
 import javax.swing.border.EmptyBorder;
 import javax.swing.border.LineBorder;
@@ -12,6 +13,9 @@ import Modelo.ReporteInventario;
 
 import javax.swing.JTextField;
 import java.awt.event.ActionListener;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Font;
@@ -198,5 +202,21 @@ public class Reportes extends JFrame {
         panelIntervalos.revalidate();
         panelIntervalos.repaint();
     }
+    
+    public static LocalDate ingresarFecha(String tiempo) {
+        DateTimeFormatter formatoFecha = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+        
+        while (true) {
+            String input = JOptionPane.showInputDialog("Ingrese la fecha " + tiempo + " en formato dd/MM/yyyy:");
+            try {
+                LocalDate fecha = LocalDate.parse(input, formatoFecha);
+                return fecha;
+            } catch (DateTimeParseException e) {
+                JOptionPane.showMessageDialog(null, "Formato de fecha incorrecto. Inténtelo de nuevo.");
+            }
+        }
+    }
+    
+    //public static 
 
 }

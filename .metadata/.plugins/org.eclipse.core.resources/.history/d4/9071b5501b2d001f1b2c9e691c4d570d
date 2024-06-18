@@ -141,7 +141,10 @@ public class MenuGerente extends JFrame {
 				AdministrarEmpleados adm = new AdministrarEmpleados();
 				adm.setVisible(true);
 				dispose();
+<<<<<<< HEAD
 
+=======
+>>>>>>> 1d68606daea94fbc6e4499aab2dce0a320b95af2
 			}
 		});
 		botonAdmEmpleados.setForeground(Color.WHITE);

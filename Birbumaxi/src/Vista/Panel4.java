@@ -17,6 +17,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
 import Modelo.ReportePedido;
+import Modelo.ReporteVentas;
 
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
@@ -67,8 +68,6 @@ public class Panel4 extends JPanel {
 		JButton btnGenerarReporte = new JButton("Generar Reporte");
 		btnGenerarReporte.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-<<<<<<< HEAD
-=======
 				if(coerenciaDeFecha(textField.getText(), textField_1.getText())) {
 					LocalDate inicio = ingresarFecha(textField.getText());
 					LocalDate fin = ingresarFecha(textField_1.getText());
@@ -76,10 +75,10 @@ public class Panel4 extends JPanel {
 						ReportePedido pe = new ReportePedido();
 						pe.GenerarReporte(inicio, fin);
 					} else {
-						
+						ReporteVentas ve = new ReporteVentas();
+						ve.GenerarReporte(inicio, fin);
 					}
 				}
->>>>>>> cb6dcec8d5ec062714f0078e5337dad35084bf9a
 			}
 		});
 		btnGenerarReporte.setForeground(Color.WHITE);
@@ -108,10 +107,10 @@ public class Panel4 extends JPanel {
 		if(ingresarFecha(inicio) != null && ingresarFecha(fin) != null) {
 			LocalDate finicio = ingresarFecha(inicio);
 			LocalDate ffin = ingresarFecha(fin);
-			if (finicio.isBefore(ffin)) {
+			if (finicio.isBefore(ffin) || finicio.isEqual(ffin)) {
 				return true;
 			} else {
-				JOptionPane.showMessageDialog(null, "La fecha inferior debe ser antes de la fecha superior", "MENSAJE", JOptionPane.WARNING_MESSAGE);
+				JOptionPane.showMessageDialog(null, "La fecha inferior debe ser antes de la fecha superior o igual", "MENSAJE", JOptionPane.WARNING_MESSAGE);
 				return false;
 			}
 		} 

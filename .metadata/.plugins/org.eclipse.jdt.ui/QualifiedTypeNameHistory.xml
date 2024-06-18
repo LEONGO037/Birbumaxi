@@ -11,4 +11,6 @@
     <fullyQualifiedTypeName name="Modelo.ReporteInventario"/>
     <fullyQualifiedTypeName name="Modelo.ReportePapa"/>
     <fullyQualifiedTypeName name="java.util.ArrayList"/>
+    <fullyQualifiedTypeName name="Modelo.DatosVentas"/>
+    <fullyQualifiedTypeName name="Modelo.ReporteVentas"/>
 </qualifiedTypeNameHistroy>

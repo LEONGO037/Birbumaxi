@@ -91,7 +91,7 @@ public class ReporteVentas extends ReportePapa{
 	}
 	
 	public void GenerarReporte(LocalDate fechaInicio, LocalDate fechaFin) {
-        String dest = "ReportePedidos.pdf";
+        String dest = "ReporteVentas.pdf";
         
         Document document = new Document();
 

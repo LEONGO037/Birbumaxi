@@ -102,7 +102,7 @@ public class SimularVentas {
 	public static double simularProductoCantidad (ArrayList<String> productos, ArrayList<Double> cantidades) {
 		Random random = new Random(); 
 		double total = 0.0;
-		int compra = 1; //random.nextInt(2);
+		int compra = random.nextInt(7) + 3;
 		ArrayList<VentasSimularProductos> baseDatos = new ArrayList<>();
 		ArrayList<Integer> ides = new ArrayList<>();
 		baseDatos = obtenerDatos();
@@ -111,7 +111,7 @@ public class SimularVentas {
 		}
 		
 		for(int i = 0; i < compra; i++) {
-			int id = random.nextInt(baseDatos.size());
+			int id = random.nextInt(ides.size());
 			if(ides.contains(id + 1)) {
 				if(baseDatos.get(id).getTipo() == 2) {
 					double cantidad = generarNumeroAleatorio(0.5, 3.5);
@@ -121,6 +121,7 @@ public class SimularVentas {
 						cantidades.add(cantidad);
 						ides.remove(id);
 						total += cantidad * baseDatos.get(id).getPrecio();
+						baseDatos.remove(id);
 					} else {
 						i--;
 					}
@@ -132,6 +133,7 @@ public class SimularVentas {
 						cantidades.add(cantidad);
 						ides.remove(id);
 						total += cantidad * baseDatos.get(id).getPrecio();
+						baseDatos.remove(id);
 					} else {
 						i--;
 					}

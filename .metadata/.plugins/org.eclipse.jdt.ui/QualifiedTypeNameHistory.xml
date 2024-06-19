@@ -1,16 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <qualifiedTypeNameHistroy>
-    <fullyQualifiedTypeName name="Modelo.DatosPadre"/>
-    <fullyQualifiedTypeName name="Modelo.ReportePapa"/>
-    <fullyQualifiedTypeName name="Modelo.DatosFinanzas"/>
-    <fullyQualifiedTypeName name="Modelo.ReporteFinanzas"/>
+    <fullyQualifiedTypeName name="java.awt.event.ActionListener"/>
     <fullyQualifiedTypeName name="Modelo.VentasFactura"/>
-    <fullyQualifiedTypeName name="Vista.Ventas"/>
-<<<<<<< HEAD
-    <fullyQualifiedTypeName name="javax.swing.JOptionPane"/>
-=======
-    <fullyQualifiedTypeName name="java.util.ArrayList"/>
-    <fullyQualifiedTypeName name="Modelo.ClienteFactura"/>
-    <fullyQualifiedTypeName name="Vista.Factura"/>
->>>>>>> 1f8ae197c882a67b3f5641100b5ade240a141788
 </qualifiedTypeNameHistroy>

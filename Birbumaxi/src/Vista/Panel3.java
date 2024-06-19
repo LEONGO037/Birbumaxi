@@ -2,20 +2,28 @@ package Vista;
 
 import javax.swing.JPanel;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JComboBox;
 import javax.swing.JButton;
 import javax.swing.JTextField;
+
+import Modelo.empleado;
+
 import javax.swing.ImageIcon;
 import java.awt.Color;
 import java.awt.Font;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 public class Panel3 extends JPanel {
 
     private static final long serialVersionUID = 1L;
-    private JTextField apellidoemp;
-    private JTextField salarioemp;
-    private JTextField idemp;
-    private JTextField nombremp;
+    public static final JTextField apellidoemp = new JTextField();
+    public static final JTextField salarioemp = new JTextField();
+    public static final JTextField CI = new JTextField();
+    public static final JTextField nombremp = new JTextField();
+    public static String[] cargosOptions = { "Cajero", "Gerente" };
+    public static final JComboBox<String> cargos = new JComboBox<>(cargosOptions);
 
     /**
      * Create the panel.
@@ -66,43 +74,36 @@ public class Panel3 extends JPanel {
         lblSalario.setBounds(10, 266, 73, 29);
         add(lblSalario);
 
-        String[] cargosOptions = { "Gerente", "Cajero" };
-        JComboBox<String> cargos = new JComboBox<>(cargosOptions);
+
         cargos.setForeground(new Color(128, 128, 128));
         cargos.setFont(new Font("Roboto Medium", Font.PLAIN, 14));
         cargos.setBounds(93, 229, 175, 27);
         add(cargos);
 
+        
 
-        JButton btnBuscar = new JButton("Contratar");
-        btnBuscar.setForeground(Color.WHITE);
-        btnBuscar.setFont(new Font("Roboto Black", Font.BOLD, 24));
-        btnBuscar.setBackground(new Color(51, 102, 255));
-        btnBuscar.setBounds(49, 319, 175, 44);
-        add(btnBuscar);
 
-        apellidoemp = new JTextField();
         apellidoemp.setForeground(new Color(128, 128, 128));
         apellidoemp.setFont(new Font("Roboto Medium", Font.PLAIN, 16));
         apellidoemp.setBounds(93, 190, 175, 29);
         add(apellidoemp);
         apellidoemp.setColumns(10);
 
-        salarioemp = new JTextField();
+
         salarioemp.setForeground(new Color(128, 128, 128));
         salarioemp.setFont(new Font("Roboto Medium", Font.PLAIN, 16));
         salarioemp.setColumns(10);
         salarioemp.setBounds(93, 268, 175, 29);
         add(salarioemp);
 
-        idemp = new JTextField();
-        idemp.setForeground(new Color(128, 128, 128));
-        idemp.setFont(new Font("Roboto Medium", Font.PLAIN, 16));
-        idemp.setColumns(10);
-        idemp.setBounds(93, 108, 175, 29);
-        add(idemp);
 
-        nombremp = new JTextField();
+        CI.setForeground(new Color(128, 128, 128));
+        CI.setFont(new Font("Roboto Medium", Font.PLAIN, 16));
+        CI.setColumns(10);
+        CI.setBounds(93, 108, 175, 29);
+        add(CI);
+
+
         nombremp.setForeground(new Color(128, 128, 128));
         nombremp.setFont(new Font("Roboto Medium", Font.PLAIN, 16));
         nombremp.setColumns(10);
@@ -113,5 +114,35 @@ public class Panel3 extends JPanel {
         lblNewLabel.setIcon(new ImageIcon("C:\\Documentos\\imag\\imagenpcontrato.jpg"));
         lblNewLabel.setBounds(295, 0, 260, 449);
         add(lblNewLabel);
+        
+        JButton btnBuscar = new JButton("Contratar");
+        btnBuscar.addActionListener(new ActionListener() {
+        	public void actionPerformed(ActionEvent e) {
+        		empleado emp = new empleado(nombremp.getText(), generarCorreo(), generarContrasenia(), cargos.getSelectedIndex()+1 , apellidoemp.getText(), CI.getText(), Double.parseDouble(salarioemp.getText()));
+        		if(emp.contratar()) {
+        			JOptionPane.showMessageDialog(null, "CONTRATO REALIZADO EXITOSAMENTE!");
+        		}else {
+        			JOptionPane.showMessageDialog(null, "No se pudo realizar el contraro! :(");
+        		}
+        	}
+        });
+        btnBuscar.setForeground(Color.WHITE);
+        btnBuscar.setFont(new Font("Roboto Black", Font.BOLD, 24));
+        btnBuscar.setBackground(new Color(51, 102, 255));
+        btnBuscar.setBounds(49, 319, 175, 44);
+        add(btnBuscar);
+
+    }
+    public String generarContrasenia() {
+    	return "Birbu"+CI.getText();
+    }
+    public String generarCorreo() {
+    	if(cargos.getSelectedIndex()==0) {
+    		return nombremp.getText()+apellidoemp.getText()+"@birbuemp.com";
+    	}else if(cargos.getSelectedIndex()==1) {
+    		return nombremp.getText()+apellidoemp.getText()+"@birbuadmin.com";
+    	}else {
+    		return "";
+    	}
     }
 }

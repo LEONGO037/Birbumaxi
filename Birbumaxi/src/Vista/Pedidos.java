@@ -405,7 +405,7 @@ public class Pedidos extends JFrame {
                 // Actualizar la tabla pedidosRealizados con los datos actualizados
                 try {
                     carrito carr = new carrito();
-                    tabla2 = carr.carritos(columnasNombres, productos, cantidades);
+                    tabla2 = carr.carritos(columnasNombres, cantidades, productos);
                 } catch (NumberFormatException ex) {
                     JOptionPane.showMessageDialog(null, "Error al actualizar la tabla.");
                 }
@@ -530,7 +530,7 @@ public class Pedidos extends JFrame {
                     // Actualizar la tabla pedidosRealizados con los datos actualizados
                     try {
                         carrito carr = new carrito();
-                        tabla2 = carr.carritos(columnasNombres, productos, cantidades);
+                        tabla2 = carr.carritos(columnasNombres, cantidades, productos);
                     } catch (NumberFormatException ex) {
                         JOptionPane.showMessageDialog(null, "Error al actualizar la tabla.");
                     }

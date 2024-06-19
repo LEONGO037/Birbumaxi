@@ -10,7 +10,7 @@ public class conexionBD {
     public static final String user = "root";
     public static final String password = "ShWxSyPeOxPEXKXrVmJrCEkpSgYlxVvB";
 
-    public Connection conexion() {
+    public static Connection conexion() {
         Connection conn = null;
         try {
             Class.forName(driver);

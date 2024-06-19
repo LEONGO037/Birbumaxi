@@ -78,6 +78,13 @@ public class MenuGerente extends JFrame {
 		contentPane.add(botonRealizarPedido);
 		
 		JButton botonSimularVentas = new JButton("Simular Ventas");
+		botonSimularVentas.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				Simulacion sim = new Simulacion();
+				sim.setVisible(true);
+				dispose();
+			}
+		});
 		botonSimularVentas.setForeground(Color.WHITE);
 		botonSimularVentas.setFont(new Font("Roboto Medium", Font.BOLD, 24));
 		botonSimularVentas.setFocusPainted(false);

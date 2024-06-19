@@ -1,3 +1,19 @@
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+/Modelo/
+/Vista/
+=======
+/Controlador/
+>>>>>>> 134a2a56d19d249ebfdf51a1b85272c6eb7e15ba
 /Modelo/
 /Controlador/
 /Vista/
+<<<<<<< HEAD
+=======
+/conexionBase/
+/librerias/
+/module-info.class
+/org/
+>>>>>>> da3eb6fafa690d95ecccf0f4fd66a985f6a02eb8
+>>>>>>> 134a2a56d19d249ebfdf51a1b85272c6eb7e15ba

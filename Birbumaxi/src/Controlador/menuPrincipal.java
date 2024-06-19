@@ -1,6 +1,7 @@
 package Controlador;
 
 
+import Vista.Factura;
 import Vista.Ventas;
 
 //import Vista.MenuGerente;
@@ -18,6 +19,8 @@ public class menuPrincipal {
 		//menug.setVisible(true);
 		//Ventas v = new Ventas();
 		//v.setVisible(true);
+		//Factura fa = new Factura(4);
+		//fa.setVisible(true);
 	}
 
 }

@@ -130,14 +130,11 @@ public class Reportes extends JFrame {
                 panelIntervalos.revalidate();
                 panelIntervalos.repaint();
 
-<<<<<<< HEAD
-=======
                 panelIntervalos.repaint(); //limpia el panel de fechas
                 panelIntervalos.repaint();
                 panelIntervalos.repaint(); //limpia el panel de fechas
                 panelIntervalos.repaint();
                 panelIntervalos.repaint(); //limpia el panel de fechas
->>>>>>> 331af7166903aa75127daa1c91f31b2bb217a9a8
             }
         });
         btnGenerarReporteDiario.setForeground(Color.WHITE);

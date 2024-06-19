@@ -1,14 +1,2 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<<<<<<< HEAD
 <qualifiedTypeNameHistroy/>
-=======
-<qualifiedTypeNameHistroy>
-    <fullyQualifiedTypeName name="java.awt.event.ActionListener"/>
-    <fullyQualifiedTypeName name="Modelo.VentasFactura"/>
-    <fullyQualifiedTypeName name="Vista.Ventas"/>
-    <fullyQualifiedTypeName name="Modelo.DatosPadre"/>
-    <fullyQualifiedTypeName name="Modelo.ReportePapa"/>
-    <fullyQualifiedTypeName name="Modelo.FacturaEnPDF"/>
-    <fullyQualifiedTypeName name="com.itextpdf.text.Paragraph"/>
-</qualifiedTypeNameHistroy>
->>>>>>> 331af7166903aa75127daa1c91f31b2bb217a9a8

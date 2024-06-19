@@ -1,6 +1,7 @@
 package Controlador;
 
 
+import Modelo.FacturaEnPDF;
 import Vista.Factura;
 import Vista.Ventas;
 

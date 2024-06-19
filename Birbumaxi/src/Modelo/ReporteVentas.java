@@ -60,7 +60,8 @@ public class ReporteVentas extends ReportePapa{
 		String consulta = "select persona.nombre, persona.NIT, DATE(factura.fecha) AS fechita, factura.total "
 				+ "from persona, factura "
 				+ "where persona.id_persona = factura.persona_id_persona "
-				+ "and DATE(factura.fecha) >= ? and DATE(factura.fecha) <= ?;";
+				+ "and DATE(factura.fecha) >= ? and DATE(factura.fecha) <= ? "
+				+ "order by fechita;";
 		conexionBD conec= new conexionBD();
 		Connection conn= conec.conexion();
 		PreparedStatement ps= null;

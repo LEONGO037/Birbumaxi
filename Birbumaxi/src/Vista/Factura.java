@@ -228,7 +228,8 @@ public class Factura extends JFrame {
         				cfa.ingresarClienteNuevo();
         			}
         			if(validard(montop.getText()) >= Double.parseDouble(EncontrarPrecio(FacturaID))) {
-        				cfa.agregarFactura(FacturaID, metodoPago.getSelectedIndex() + 1);
+        				int idcliente = cfa.datosEncontrados();
+        				cfa.agregarFactura(FacturaID, metodoPago.getSelectedIndex() + 1, idcliente);
         				FacturaEnPDF facPDF = new FacturaEnPDF (FacturaID);
         				facPDF.GenerarReporte(validard(montop.getText()));
             			Ventas v = new Ventas();

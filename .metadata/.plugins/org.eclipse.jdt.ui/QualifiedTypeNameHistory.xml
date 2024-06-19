@@ -1,2 +1,11 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<qualifiedTypeNameHistroy/>
+<qualifiedTypeNameHistroy>
+    <fullyQualifiedTypeName name="Modelo.DatosPadre"/>
+    <fullyQualifiedTypeName name="Modelo.VentasFactura"/>
+    <fullyQualifiedTypeName name="java.util.ArrayList"/>
+    <fullyQualifiedTypeName name="Modelo.VentasSimularProductos"/>
+    <fullyQualifiedTypeName name="Modelo.ClienteFactura"/>
+    <fullyQualifiedTypeName name="java.util.Random"/>
+    <fullyQualifiedTypeName name="Modelo.SimularVentas"/>
+    <fullyQualifiedTypeName name="Modelo.FacturaEnPDF"/>
+</qualifiedTypeNameHistroy>

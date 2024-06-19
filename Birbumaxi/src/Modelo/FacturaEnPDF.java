@@ -227,7 +227,11 @@ public class FacturaEnPDF extends ReportePapa{
 	
 	private String nitCliente () {
 		String nit = "";
-		String consulta= "select persona_id_persona from factura where id_factura = " + facID + ";";
+		String consulta= "select NIT\r\n"
+				+ "from persona\r\n"
+				+ "where ID_persona = (select persona_id_persona\r\n"
+				+ "from factura\r\n"
+				+ "where factura.id_factura = " + facID + ");";
 		conexionBD conec= new conexionBD();
 		Connection conn= conec.conexion();
 		PreparedStatement ps= null;
@@ -236,7 +240,7 @@ public class FacturaEnPDF extends ReportePapa{
 			ps=conn.prepareStatement(consulta);
 			rs=ps.executeQuery();
 			if(rs.next()) {
-				nit = rs.getString("persona_id_persona");
+				nit = rs.getString("NIT");
 			}
 		}catch(Exception e) {
 			

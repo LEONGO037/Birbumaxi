@@ -48,17 +48,14 @@ public class ClienteFactura extends persona{
 		this.nit = nit;
 	}
 	
-	public void agregarFactura (int idFac, int metPago) {
-		String consulta = "update factura set persona_id_persona = " + nit + ", metodo_pago = " + metPago + " where id_factura = " + idFac + ";";
-		String habilitar = "SET FOREIGN_KEY_CHECKS = 0;"; 
-		String desHabilitar = "SET FOREIGN_KEY_CHECKS = 1;";
+	public void agregarFactura (int idFac, int metPago, int idcliente) {
+		String consulta = "update factura set persona_id_persona = " + idcliente + ", metodo_pago = " + metPago + " where id_factura = " + idFac + ";";
+
 		conexionBD conec= new conexionBD();
 		Connection conn= conec.conexion();
 		PreparedStatement ps= null;
 		ResultSet rs= null;
 		try {
-			ps = conn.prepareStatement(habilitar);
-			ps.executeQuery();
 			ps=conn.prepareStatement(consulta);
 			int actualizado = ps.executeUpdate();
 			if(actualizado > 0) {
@@ -66,8 +63,6 @@ public class ClienteFactura extends persona{
 			} else {
 				System.out.println("No se pudo actualizar");
 			}
-			ps = conn.prepareStatement(desHabilitar);
-			ps.executeQuery();
 		}catch(Exception e) {
 			e.printStackTrace();
 		}
@@ -76,7 +71,6 @@ public class ClienteFactura extends persona{
 	public void ingresarClienteNuevo () {
 		String consulta= super.ingresar();
 		consulta += " persona (nombre, NIT, correo_electronico) values ('" + nombre + "', " + nit + ", '" + correo + "');";
-		System.out.println(consulta);
 		conexionBD conec= new conexionBD();
 		Connection conn= conec.conexion();
 		PreparedStatement ps= null;
@@ -118,8 +112,9 @@ public class ClienteFactura extends persona{
 		}
 	}
 	
-	public void datosEncontrados (){
-		String consulta= "SELECT nombre, correo_electronico from persona where nit = " + nit + ";";
+	public int datosEncontrados (){
+		int idPersona = 1;
+		String consulta= "SELECT id_persona, nombre, correo_electronico from persona where nit = " + nit + ";";
 		conexionBD conec= new conexionBD();
 		Connection conn= conec.conexion();
 		PreparedStatement ps= null;
@@ -130,11 +125,14 @@ public class ClienteFactura extends persona{
 			while(rs.next()) {
 				String nombreI = rs.getString("nombre");
 				String correoI = rs.getString("correo_electronico");
+				idPersona = Integer.parseInt(rs.getString("id_persona"));
 				setNombre(nombreI);
 				setCorreo(correoI);
 			}
 		}catch(Exception e) {
 			e.printStackTrace();
 		}
+		
+		return idPersona;
 	}
 }

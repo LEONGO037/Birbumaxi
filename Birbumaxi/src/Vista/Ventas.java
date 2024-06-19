@@ -368,8 +368,13 @@ public class Ventas extends JFrame {
         	public void actionPerformed(ActionEvent e) {
         		imprimirdatos();
         		VentasFactura v = new VentasFactura(cantidades, productos);
+<<<<<<< HEAD
+        		int facturaID = v.RealizarVenta("NOW()");
+        		Factura factura = new Factura(facturaID);
+=======
         		int facturaID = v.RealizarVenta();
         		Factura factura = new Factura(facturaID, productos, cantidades);
+>>>>>>> a72ee53801cc4e104315ca9098a612c1a81ee2f0
         		factura.setVisible(true);
         		dispose();
         	}

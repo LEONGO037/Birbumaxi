@@ -70,39 +70,5 @@ public class VentasFactura {
 		
 		return facturaID;
 	}
-	public int posicion(int p) {
-		int posicion=0;
-		for(int i=0; i<productos.size();i++) {
-			if(String.valueOf(p).equals(productos.get(i))){
-				posicion=i;
-			}
-		}
-		return posicion;
-	}
-	public void CantidadesMod(int p) {
-		int posicion=posicion(p);
-		String sql= "SELECT tipo from productos WHERE id_producto="+p+";";
-		conexionBD conec = new conexionBD();
-		PreparedStatement ps= null;
-		ResultSet rs= null;
-		String tipo="";
-		Connection conn = conec.conexion();
-		double valorAnt=0;
-		valorAnt=Cantidad.get(posicion);
-		
-		try {
-			ps=conn.prepareStatement(sql);
-			rs=ps.executeQuery();
-			if(rs.next()) {
-				tipo=rs.getString("tipo");
-			}
-		}catch(Exception e) {
-			JOptionPane.showMessageDialog(null, e);
-		}
-		if(tipo.equals("1")) {
-			Cantidad.set(posicion, (double) Math.round(valorAnt));
-		}else if(tipo.equals("2")) {
-			Cantidad.set(posicion, valorAnt);
-		}
-	}
+
 }

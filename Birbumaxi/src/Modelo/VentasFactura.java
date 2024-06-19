@@ -5,15 +5,19 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
 
+import javax.swing.JOptionPane;
+
 import conexionBase.conexionBD;
 
 public class VentasFactura {
-	
-	public VentasFactura() {
-		// TODO Auto-generated constructor stub
+	public ArrayList<Double>Cantidad;
+	public ArrayList<String>productos;
+	public VentasFactura(ArrayList<Double>Cantidad, ArrayList<String>productos) {
+		this.Cantidad=Cantidad;
+		this.productos=productos;
 	}
 	
-	public int RealizarVenta(ArrayList<String>productos, ArrayList<Double>Cantidad) {
+	public int RealizarVenta() {
 		String consulta= "INSERT INTO factura (metodo_pago, persona_id_persona, total, fecha) values (1, 1, 0.0,now())";
 		conexionBD conec= new conexionBD();
 		Connection conn= conec.conexion();
@@ -70,5 +74,40 @@ public class VentasFactura {
 		}
 		
 		return facturaID;
+	}
+	public int posicion(int p) {
+		int posicion=0;
+		for(int i=0; i<productos.size();i++) {
+			if(String.valueOf(p).equals(productos.get(i))){
+				posicion=i;
+			}
+		}
+		return posicion;
+	}
+	public void CantidadesMod(int p) {
+		int posicion=posicion(p);
+		String sql= "SELECT tipo from productos WHERE id_producto="+p+";";
+		conexionBD conec = new conexionBD();
+		PreparedStatement ps= null;
+		ResultSet rs= null;
+		String tipo="";
+		Connection conn = conec.conexion();
+		double valorAnt=0;
+		valorAnt=Cantidad.get(posicion);
+		
+		try {
+			ps=conn.prepareStatement(sql);
+			rs=ps.executeQuery();
+			if(rs.next()) {
+				tipo=rs.getString("tipo");
+			}
+		}catch(Exception e) {
+			JOptionPane.showMessageDialog(null, e);
+		}
+		if(tipo.equals("1")) {
+			Cantidad.set(posicion, (double) Math.round(valorAnt));
+		}else if(tipo.equals("2")) {
+			Cantidad.set(posicion, valorAnt);
+		}
 	}
 }

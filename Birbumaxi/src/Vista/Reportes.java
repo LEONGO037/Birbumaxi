@@ -128,12 +128,8 @@ public class Reportes extends JFrame {
                 panelIntervalos.setLayout(new BorderLayout());
                 panelIntervalos.add(panel4, BorderLayout.CENTER);
                 panelIntervalos.revalidate();
-
                 panelIntervalos.repaint();
 
-                panelIntervalos.repaint(); //limpia el panel de fechas
-                panelIntervalos.repaint();
-                panelIntervalos.repaint(); //limpia el panel de fechas
             }
         });
         btnGenerarReporteDiario.setForeground(Color.WHITE);

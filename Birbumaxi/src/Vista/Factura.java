@@ -22,6 +22,7 @@ import javax.swing.border.LineBorder;
 import javax.swing.table.DefaultTableModel;
 
 import Modelo.ClienteFactura;
+import Modelo.FacturaEnPDF;
 import conexionBase.conexionBD;
 
 import java.awt.event.ActionListener;
@@ -211,7 +212,17 @@ public class Factura extends JFrame {
             			cfa.setCorreo(correo.getText());
         				cfa.ingresarClienteNuevo();
         			}
-        			cfa.agregarFactura(FacturaID, metodoPago.getSelectedIndex() + 1);
+        			if(validard(montop.getText()) >= Double.parseDouble(EncontrarPrecio(FacturaID))) {
+        				cfa.agregarFactura(FacturaID, metodoPago.getSelectedIndex() + 1);
+        				FacturaEnPDF facPDF = new FacturaEnPDF (FacturaID);
+        				facPDF.GenerarReporte(validard(montop.getText()));
+            			Ventas v = new Ventas();
+            			v.setVisible(true);
+            			dispose();
+        			} else {
+        				JOptionPane.showMessageDialog(null, "Dinero Insuficiente o formato no valido", "MENSAJE", JOptionPane.WARNING_MESSAGE);
+        			}
+        			
         		} else {
         			JOptionPane.showMessageDialog(null, "No puede dejar campos vacios", "MENSAJE", JOptionPane.WARNING_MESSAGE);
         		}
@@ -269,5 +280,20 @@ public class Factura extends JFrame {
 		}
     	return "" + num;
     }
+    
+    public static double validard(String v) {
+		double s = 0.0;
+        try {
+            s = Double.parseDouble(v);
+            if(s > 0){
+            	return s;
+            } else {
+                JOptionPane.showMessageDialog(null, "Debe ser un valor numerico positivo", "MENSAJE", JOptionPane.WARNING_MESSAGE);
+            }
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Debe ser un valor numerico", "MENSAJE", JOptionPane.WARNING_MESSAGE);
+        }
+        return s;
+	}
 }
  

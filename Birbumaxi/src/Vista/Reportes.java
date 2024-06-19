@@ -131,10 +131,6 @@ public class Reportes extends JFrame {
                 panelIntervalos.repaint();
 
                 panelIntervalos.repaint(); //limpia el panel de fechas
-<<<<<<< HEAD
-
-=======
->>>>>>> e5d0beafae1901cc1344b4aea94a860a25bb5b4b
                 panelIntervalos.repaint();
                 panelIntervalos.repaint(); //limpia el panel de fechas
                 panelIntervalos.repaint();

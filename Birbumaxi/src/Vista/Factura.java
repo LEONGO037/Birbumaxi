@@ -10,6 +10,8 @@ import javax.swing.border.EmptyBorder;
 import java.awt.Window.Type;
 import java.awt.Color;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+
 import java.awt.Font;
 import javax.swing.ImageIcon;
 import javax.swing.JTextField;
@@ -18,7 +20,14 @@ import javax.swing.JTextArea;
 import javax.swing.JButton;
 import javax.swing.border.LineBorder;
 import javax.swing.table.DefaultTableModel;
+
+import Modelo.ClienteFactura;
+import conexionBase.conexionBD;
+
 import java.awt.event.ActionListener;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.awt.event.ActionEvent;
 
 public class Factura extends JFrame {
@@ -43,6 +52,7 @@ public class Factura extends JFrame {
         contentPane.setLayout(null);
 		setLocationRelativeTo(null);
 
+		ClienteFactura cfa = new ClienteFactura("", "", 0);
 
         JLabel sucursal = new JLabel("Sucursal #1");
         sucursal.setBounds(10, 10, 101, 29);
@@ -137,53 +147,74 @@ public class Factura extends JFrame {
         correo.setColumns(10);
         correo.setBounds(252, 301, 254, 29);
         contentPane.add(correo);
+        
+        nitci.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                String nit = nitci.getText();
+                int nitInt = validarNit(nit);
+                if(nitInt > 0) {
+                	cfa.setNit(nitInt);
+                    if (cfa.buscarCliente()) {
+                        cfa.datosEncontrados();
+                        nombre.setText(cfa.getNombre());
+                        correo.setText(cfa.getCorreo());
+                    } else {
+                        nombre.setText("");
+                        correo.setText("");
+                    }
+                }
+                
+            }
+        });
 
-        JLabel lblma = new JLabel("Monto a pagar:");
+        JLabel lblma = new JLabel("Monto a pagar: " + EncontrarPrecio(FacturaID));
         lblma.setForeground(Color.WHITE);
         lblma.setFont(new Font("Roboto Medium", Font.BOLD, 18));
-        lblma.setBounds(43, 583, 138, 29);
+        lblma.setBounds(43, 583, 229, 29);
         contentPane.add(lblma);
 
-        JTextArea costo = new JTextArea();
-        costo.setForeground(new Color(255, 255, 255));
-        costo.setFont(new Font("Roboto Medium", Font.BOLD, 18));
-        costo.setBackground(new Color(255, 128, 0));
-        costo.setBounds(178, 584, 177, 29);
-        contentPane.add(costo);
-
-        JLabel lblmp = new JLabel("Monto pagado: ");
+        JLabel lblmp = new JLabel("Monto pagado: " );
         lblmp.setForeground(Color.WHITE);
         lblmp.setFont(new Font("Roboto Medium", Font.BOLD, 18));
-        lblmp.setBounds(43, 622, 138, 29);
+        lblmp.setBounds(43, 622, 190, 29);
         contentPane.add(lblmp);
 
         JTextArea montop = new JTextArea();
         montop.setForeground(new Color(255, 255, 255));
         montop.setFont(new Font("Roboto Medium", Font.BOLD, 18));
         montop.setBackground(new Color(255, 128, 0));
-        montop.setBounds(178, 623, 177, 29);
+        montop.setBounds(215, 622, 177, 29);
         contentPane.add(montop);
-
-        JButton btnCerrarSesion = new JButton("Atras");
-        btnCerrarSesion.addActionListener(new ActionListener() {
-        	public void actionPerformed(ActionEvent e) {
-        		Ventas venta = new Ventas();
-        		venta.setVisible(true);
-        		dispose();
-        	}
+        
+        if(metodoPago.getSelectedIndex() == 0) { // Tarjeta
+            montop.setText(EncontrarPrecio(FacturaID));
+        }
+        
+        metodoPago.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                if(metodoPago.getSelectedIndex() == 0) { // Tarjeta
+                    montop.setText(EncontrarPrecio(FacturaID));
+                } else { // Efectivo
+                    montop.setText("");
+                }
+            }
         });
-        btnCerrarSesion.setForeground(Color.WHITE);
-        btnCerrarSesion.setFont(new Font("Roboto Medium", Font.BOLD, 25));
-        btnCerrarSesion.setFocusPainted(false);
-        btnCerrarSesion.setBorder(new LineBorder(new Color(7, 54, 127), 2));
-        btnCerrarSesion.setBackground(new Color(21, 101, 192));
-        btnCerrarSesion.setBounds(491, 589, 202, 46);
-        contentPane.add(btnCerrarSesion);
 
         JButton btnFacturar = new JButton("Facturar");
         btnFacturar.addActionListener(new ActionListener() {
         	public void actionPerformed(ActionEvent e) {
-        		
+        		if(validarNit(nitci.getText()) >= 0 && !nombre.getText().isEmpty() && !correo.getText().isEmpty()) {
+        			cfa.setNit(validarNit(nitci.getText()));
+        			if(!cfa.buscarCliente()) {
+        				System.out.println("Entra");
+        				cfa.setNombre(nombre.getText());
+            			cfa.setCorreo(correo.getText());
+        				cfa.ingresarClienteNuevo();
+        			}
+        			cfa.agregarFactura(FacturaID, metodoPago.getSelectedIndex() + 1);
+        		} else {
+        			JOptionPane.showMessageDialog(null, "No puede dejar campos vacios", "MENSAJE", JOptionPane.WARNING_MESSAGE);
+        		}
         	}
         });
         btnFacturar.setForeground(Color.WHITE);
@@ -205,6 +236,38 @@ public class Factura extends JFrame {
         contentPane.add(scrollPane);
     }
 
+    public static int validarNit(String v) {
+		int s = -1;
+        try {
+            s = Integer.parseInt(v);
+            if(s >= 0){
+            	return s;
+            } else {
+                JOptionPane.showMessageDialog(null, "Debe ser un NIT valido", "MENSAJE", JOptionPane.WARNING_MESSAGE);
+            }
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Debe ser un NIT valido", "MENSAJE", JOptionPane.WARNING_MESSAGE);
+        }
+        return s;
+	}
     
+    public static String EncontrarPrecio (int id) {
+    	String consulta= "SELECT total from factura where id_factura = " + id + ";";
+		conexionBD conec= new conexionBD();
+		Connection conn= conec.conexion();
+		PreparedStatement ps= null;
+		ResultSet rs= null;
+		double num = 0;
+		try {
+			ps=conn.prepareStatement(consulta);
+			rs=ps.executeQuery();
+			while(rs.next()) {
+				num = rs.getDouble("total");
+			}
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
+    	return "" + num;
+    }
 }
  

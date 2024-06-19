@@ -49,12 +49,16 @@ public class ClienteFactura extends persona{
 	}
 	
 	public void agregarFactura (int idFac, int metPago) {
-		String consulta= "update factura set persona_id_persona = " + nit + ", metodo_pago = " + metPago + " where id_factura = " + idFac + ";";
+		String consulta = "update factura set persona_id_persona = " + nit + ", metodo_pago = " + metPago + " where id_factura = " + idFac + ";";
+		String habilitar = "SET FOREIGN_KEY_CHECKS = 0;"; 
+		String desHabilitar = "SET FOREIGN_KEY_CHECKS = 1;";
 		conexionBD conec= new conexionBD();
 		Connection conn= conec.conexion();
 		PreparedStatement ps= null;
 		ResultSet rs= null;
 		try {
+			ps = conn.prepareStatement(habilitar);
+			ps.executeQuery();
 			ps=conn.prepareStatement(consulta);
 			int actualizado = ps.executeUpdate();
 			if(actualizado > 0) {
@@ -62,6 +66,8 @@ public class ClienteFactura extends persona{
 			} else {
 				System.out.println("No se pudo actualizar");
 			}
+			ps = conn.prepareStatement(desHabilitar);
+			ps.executeQuery();
 		}catch(Exception e) {
 			e.printStackTrace();
 		}
@@ -69,7 +75,8 @@ public class ClienteFactura extends persona{
 	
 	public void ingresarClienteNuevo () {
 		String consulta= super.ingresar();
-		consulta += "persona (nombre, NIT, correo_electronico) values ('" + nombre + "', " + nit + ", '" + correo + "';";
+		consulta += " persona (nombre, NIT, correo_electronico) values ('" + nombre + "', " + nit + ", '" + correo + "');";
+		System.out.println(consulta);
 		conexionBD conec= new conexionBD();
 		Connection conn= conec.conexion();
 		PreparedStatement ps= null;

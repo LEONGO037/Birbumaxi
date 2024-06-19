@@ -11,6 +11,9 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
 import javax.swing.border.LineBorder;
+
+import Modelo.SimularVentas;
+
 import javax.swing.ImageIcon;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
@@ -51,7 +54,7 @@ public class Simulacion extends JFrame {
         JLabel lblBusquedaPorId = new JLabel("Ingrese la cantidad de simulaciones:");
         lblBusquedaPorId.setForeground(Color.WHITE);
         lblBusquedaPorId.setFont(new Font("Roboto Light", Font.ITALIC, 18));
-        lblBusquedaPorId.setBounds(24, 266, 275, 29);
+        lblBusquedaPorId.setBounds(24, 266, 333, 29);
         contentPane.add(lblBusquedaPorId);
 
         numSimulaciones = new JTextField();
@@ -74,8 +77,11 @@ public class Simulacion extends JFrame {
             } else {
                 try {
                     int cantidadSimulaciones = Integer.parseInt(input);
-                    System.out.println("Simular " + cantidadSimulaciones + " veces");
-                    // Aquí va el código para iniciar la simulación con cantidadSimulaciones
+                    for(int i = 0; i < cantidadSimulaciones; i++) {
+                    	SimularVentas simu = new SimularVentas();
+                    	simu.EmpezarSimulacion();
+                    	System.out.println("Simulacion: " + i);
+                    }
                 } catch (NumberFormatException ex) {
                     JOptionPane.showMessageDialog(this, "Ingrese un número entero válido.", "Advertencia", JOptionPane.WARNING_MESSAGE);
                 }

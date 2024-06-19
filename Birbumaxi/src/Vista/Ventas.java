@@ -367,7 +367,7 @@ public class Ventas extends JFrame {
         btnRealizarVenta.addActionListener(new ActionListener() {
         	public void actionPerformed(ActionEvent e) {
         		VentasFactura v = new VentasFactura(cantidades, productos);
-        		int facturaID = v.RealizarVenta();
+        		int facturaID = v.RealizarVenta("NOW()");
         		Factura factura = new Factura(facturaID);
         		factura.setVisible(true);
         		dispose();

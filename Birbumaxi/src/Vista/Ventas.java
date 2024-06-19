@@ -19,6 +19,7 @@ import java.awt.event.MouseListener;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.awt.event.ActionEvent;
 import java.awt.Font;
@@ -41,12 +42,12 @@ public class Ventas extends JFrame {
     public int categoria;
     private JTextField busqueda;
     public static String productoSeleccionado="";
-    public final static ArrayList<String> productos= new ArrayList<>(); 
+    public static final ArrayList<String> productos= new ArrayList<>(); 
     public String[] columnNames = {"ID Producto", "Nombre", "Stock", "Precio"};
     public DefaultTableModel model = new DefaultTableModel(null, columnNames);
     public String[] columnasNombres = {"ID Producto", "Nombre", "Stock", "Precio", "Cantidad"};
     public DefaultTableModel tabla2= new DefaultTableModel(null, columnasNombres);
-    public ArrayList<Double> cantidades= new ArrayList<>();
+    public static final ArrayList<Double> cantidades= new ArrayList<>();
     public static String eliminarProd="";
     /**
      * Create the frame.
@@ -301,15 +302,7 @@ public class Ventas extends JFrame {
         cantidad.setBackground(Color.WHITE);
         cantidad.setBounds(174, 543, 169, 44);
         panel.add(cantidad);
-        
-        cantidad.addActionListener(new ActionListener() {
-			
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				VentasFactura vents = new VentasFactura(cantidades, productos);
-				vents.CantidadesMod(Integer.parseInt(productoSeleccionado));
-			}
-		});
+
         
         JButton btnCerrarSesion = new JButton("Cerrar Sesion");
         btnCerrarSesion.addActionListener(new ActionListener() {
@@ -400,19 +393,74 @@ public class Ventas extends JFrame {
         pedidosRealizados.setRowHeight(30);
         pedidos.setColumnHeaderView(pedidosRealizados);
         pedidos.setViewportView(pedidosRealizados);
+        
+        // Agregar la tabla al JScrollPane
+        scrollPane.setViewportView(table);
+        table.getSelectionModel().addListSelectionListener(e -> {
+            if (!e.getValueIsAdjusting()) { // Verificar que el evento no es intermedio
+                // Obtener la fila seleccionada
+                int selectedRow = table.getSelectedRow();
+                if (selectedRow != -1) { // Si se ha seleccionado una fila válida
+                    // Obtener ID del producto de la fila seleccionada
+                    Object selectedId = table.getValueAt(selectedRow, 0); // ID del producto
+                    if (selectedId != null) {
+                        productoSeleccionado = selectedId.toString();
+                        System.out.println("Producto seleccionado: " + productoSeleccionado);
+                    }
+                }
+            }
+        });
 
+        
         JButton btnAgregarProducto = new JButton("Agregar Producto");
         btnAgregarProducto.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 // Obtener la cantidad ingresada por el usuario
                 String cantidadString = cantidad.getText().trim();
+
+
                 if (!cantidadString.isEmpty()) {
+
                     try {
-                        // Llamar a la función para actualizar la tabla
-                        carrito carr = new carrito();
-                        tabla2 = carr.carritos(columnasNombres, productos, cantidades);
-                        pedidosRealizados.setModel(tabla2);
-  
+                        double cantidadDouble = Double.parseDouble(cantidadString);
+
+
+                        if (cantidadDouble <= 0 || cantidadDouble > stockCalculo()) {
+                            JOptionPane.showMessageDialog(null, "Ingresa una cantidad válida.");
+                        } else {
+                        	
+                            if (productos.contains(productoSeleccionado)) {
+                                // Producto ya en la lista, sumar cantidad
+                            	System.out.println("hasta aca bien");
+                                if(CantidadesMod(cantidadDouble, 1)) {
+                                	System.out.println("hasta aca bien");
+                                    // Llamar a la función para actualizar la tabla
+                                    carrito carr = new carrito();
+                                    System.out.println("hasta aca bien");
+                                    tabla2 = carr.carritos(columnasNombres, cantidades, productos);
+                                    System.out.println("hasta aca bien");
+                                    pedidosRealizados.setModel(tabla2);
+                                    System.out.println("hasta aca bien");
+                                    int index= productos.indexOf(productoSeleccionado);
+                                    actualizarStock(cantidades.get(index), 1);
+                                }
+                           }else{
+                        	    productos.add(productoSeleccionado);
+                                if(CantidadesMod(cantidadDouble, 0)) {
+                                	System.out.println("hasta aca bien");
+                                    // Llamar a la función para actualizar la tabla
+                                    carrito carr = new carrito();
+                                    System.out.println("hasta aca bien");
+                                    tabla2 = carr.carritos(columnasNombres, cantidades, productos);
+                                    System.out.println("hasta aca bien");
+                                    pedidosRealizados.setModel(tabla2);
+                                    System.out.println("hasta aca bien");
+                                    int index= productos.indexOf(productoSeleccionado);
+                                    actualizarStock(cantidades.get(index), 1);
+                                }
+                           }
+                     
+                        }
                     } catch (NumberFormatException ex) {
                         JOptionPane.showMessageDialog(null, "Ingresa una cantidad válida.");
                     }
@@ -422,18 +470,10 @@ public class Ventas extends JFrame {
             }
         });
 
-        pedidosRealizados.getSelectionModel().addListSelectionListener(e -> {
-            if (!e.getValueIsAdjusting()) { // Verificar que el evento no es intermedio
-                // Obtener la fila seleccionada
-                int selectedRow = pedidosRealizados.getSelectedRow();
-                if (selectedRow != -1) { // Si se ha seleccionado una fila válida
-                    // Obtener datos de la fila seleccionada
-                	eliminarProd = (String) pedidosRealizados.getValueAt(selectedRow, 0); // ID del producto
-                    System.out.println(productoSeleccionado);
-                }
-            }
-        });
-       
+
+
+
+
 
         btnAgregarProducto.setForeground(Color.WHITE);
         btnAgregarProducto.setFont(new Font("Roboto Black", Font.BOLD, 21));
@@ -458,14 +498,24 @@ public class Ventas extends JFrame {
         lblBusquedaPorTipo.setBounds(10, 337, 282, 29);
         panel.add(lblBusquedaPorTipo);
 
-
+        pedidosRealizados.getSelectionModel().addListSelectionListener(e -> {
+            if (!e.getValueIsAdjusting()) { // Verificar que el evento no es intermedio
+                // Obtener la fila seleccionada
+                int selectedRow = pedidosRealizados.getSelectedRow();
+                if (selectedRow != -1) { // Si se ha seleccionado una fila válida
+                    // Obtener datos de la fila seleccionada
+                	eliminarProd = (String) pedidosRealizados.getValueAt(selectedRow, 0); // ID del producto
+                    System.out.println(productoSeleccionado);
+                }
+            }
+        });
         
         JButton btnEliminarDelCarrito = new JButton("Eliminar del Carrito");
         btnEliminarDelCarrito.addActionListener(new ActionListener() {
         	public void actionPerformed(ActionEvent e) {
         		eliminarCantidad();
         		carrito carr = new carrito();
-                tabla2 = carr.carritos(columnasNombres, productos, cantidades);
+                tabla2 = carr.carritos(columnasNombres, cantidades, productos);
                 pedidosRealizados.setModel(tabla2);
         	}
         });
@@ -481,62 +531,9 @@ public class Ventas extends JFrame {
         lblNewLabel_3_1_1.setBounds(387, 312, 330, 30);
         contentPane.add(lblNewLabel_3_1_1);
         
-        // Agregar la tabla al JScrollPane
-        scrollPane.setViewportView(table);
-     // Agregar el listener a la tabla para manejar clics simples y dobles
-        table.getSelectionModel().addListSelectionListener(e -> {
-            if (!e.getValueIsAdjusting()) { // Verificar que el evento no es intermedio
-                // Obtener la fila seleccionada
-                int selectedRow = table.getSelectedRow();
-                if (selectedRow != -1) { // Si se ha seleccionado una fila válida
-                    // Obtener datos de la fila seleccionada
-                    productoSeleccionado = (String) table.getValueAt(selectedRow, 0); // ID del producto
 
-                    // Verificar si el producto ya está en la lista
-                    if (productos.contains(productoSeleccionado)) {
-                        // Si el producto ya está en la lista, sumar la cantidad ingresada a la cantidad existente
-                        String cantidadString = cantidad.getText().trim();
-                        if (!cantidadString.isEmpty()) {
-                            try {
-                                double cantidadDouble = Double.parseDouble(cantidadString);
-                                int index = productos.indexOf(productoSeleccionado);
-                                
-                                cantidades.set(index, cantidades.get(index) + cantidadDouble);
-                                actualizarStock(cantidadDouble, 1);
-                            } catch (NumberFormatException ex) {
-                                JOptionPane.showMessageDialog(null, "Ingresa una cantidad válida.");
-                            }
-                        }
-                    } else {
-                        // Si el producto no está en la lista, agregarlo con su cantidad
-                        String cantidadString = cantidad.getText().trim();
-                        if (!cantidadString.isEmpty() && Double.parseDouble(cantidad.getText()) > 0 && Double.parseDouble(cantidad.getText()) <= stockCalculo()) {
-                            try {
-                                double cantidadDouble = Double.parseDouble(cantidadString);
-                                productos.add(productoSeleccionado);
-                                cantidades.add(cantidadDouble);
-                                actualizarStock(cantidadDouble, 1);
-                            } catch (NumberFormatException ex) {
-                                JOptionPane.showMessageDialog(null, "Ingresa una cantidad válida.");
-                            }
-                        } else {
-                            JOptionPane.showMessageDialog(null, "Ingresa una cantidad válida.");
-                        }
-                    }
+       
 
-                    // Actualizar la tabla pedidosRealizados con los datos actualizados
-                    try {
-                        carrito carr = new carrito();
-                        tabla2 = carr.carritos(columnasNombres, productos, cantidades);
-                        pedidosRealizados.setModel(tabla2);
-                    } catch (NumberFormatException ex) {
-                        JOptionPane.showMessageDialog(null, "Error al actualizar la tabla.");
-                    }
-
-                    System.out.println(productoSeleccionado);
-                }
-            }
-        });
         
 
 	}
@@ -629,42 +626,92 @@ public class Ventas extends JFrame {
 		return posicion;
 	}
 
-	
-	public int posicion(int p) {
-		int posicion=0;
-		for(int i=0; i<productos.size();i++) {
-			if(String.valueOf(p).equals(productos.get(i))){
-				posicion=i;
-			}
-		}
-		return posicion;
-	}
-	
-	public void CantidadesMod(int p) {
-		int posicion=posicion(p);
-		String sql= "SELECT tipo from productos WHERE id_producto="+p+";";
-		conexionBD conec = new conexionBD();
-		PreparedStatement ps= null;
-		ResultSet rs= null;
-		String tipo="";
-		Connection conn = conec.conexion();
-		double valorAnt=0;
-		valorAnt=cantidades.get(posicion);
-		
+
+	public int posicion1() {
 		try {
-			ps=conn.prepareStatement(sql);
-			rs=ps.executeQuery();
-			if(rs.next()) {
-				tipo=rs.getString("tipo");
-			}
+			int posicion;
+			posicion=productos.indexOf(productoSeleccionado);
+			return posicion;
 		}catch(Exception e) {
-			JOptionPane.showMessageDialog(null, e);
+			JOptionPane.showMessageDialog(null, "valor raro");
+			return 0;
 		}
-		if(tipo.equals("1")) {
-			cantidades.set(posicion, (double) Math.round(valorAnt));
-		}else if(tipo.equals("2")) {
-			cantidades.set(posicion, valorAnt);
-		}
+
+	}
+	// Método CantidadesMod
+	public boolean CantidadesMod(double cantidad, int Ingreso) {
+		System.out.println("hasta aca bien");
+	    
+	    
+
+	    String sql = "SELECT tipo FROM productos WHERE id_producto=" + productoSeleccionado + ";";
+	    conexionBD conec = new conexionBD();
+	    PreparedStatement ps = null;
+	    ResultSet rs = null;
+	    String tipo = "";
+	    Connection conn = conec.conexion();
+	    System.out.println("hasta aca crea la conexion");
+	    try {
+	    	System.out.println("entra al try");
+	        ps = conn.prepareStatement(sql);
+	        
+	        rs = ps.executeQuery();
+	        System.out.println("hace el query");
+	        if (rs.next()) {
+	        	System.out.println("verifica");
+	            tipo = rs.getString("tipo");
+	            System.out.println("sale");
+	        }
+	    } catch (Exception e) {
+	    	 System.out.println("salta el catch");
+	        JOptionPane.showMessageDialog(null, "no se hace la consulta"+e);
+	        return false;
+	    }
+	    int posicion = sacarPosicion();
+	    System.out.println("la posicion es: "+posicion);
+	    System.out.println("entra a la seccion de if");
+	    if (tipo.equals("1")) {
+	    	 System.out.println("entra al tipo 1");
+	        if (cantidad % 1 != 0) {
+	        	System.out.println("no da la operacion");
+	            JOptionPane.showMessageDialog(null, "La cantidad debe ser un número entero para este tipo de producto.");
+	            System.out.println("se verifica y esta mal");
+	            return false;
+	        }else {
+	        	System.out.println("entra al tipo 1 y verifica que es un entero");
+	        	if (Ingreso == 0) {
+	        		System.out.println("entra a settear");
+		            cantidades.add(posicion, cantidad);
+		            System.out.println("se verifica");
+		            return true;
+		        } else if (Ingreso == 1) {
+		        	System.out.println("entra a settear ingreso tipo 1");
+		            cantidades.set(posicion, cantidades.get(posicion) + cantidad);
+		            System.out.println("se verifica");
+		            return true;
+		        }
+	        } 
+	        System.out.println("sale del tipo 1");
+	    } else if (tipo.equals("2")) {
+	    	 System.out.println("entra al tipo 2");
+	        if (Ingreso == 0) {
+	            cantidades.add(posicion, cantidad);
+	            System.out.println("se verifica");
+	            return true;
+	        } else if (Ingreso == 1) {
+	            cantidades.set(posicion, cantidades.get(posicion) + cantidad);
+	            System.out.println("se verifica");
+	            return true;
+	        }
+	    }else {
+	    	 System.out.println("sale del metodo");
+	    	 return false;
+	    }
+	    System.out.println("no se verifica ninguno");
+	    return false;
 	}
 
 }
+
+
+

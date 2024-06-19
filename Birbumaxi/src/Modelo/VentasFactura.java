@@ -35,13 +35,7 @@ public class VentasFactura {
 				facturaID = rs.getInt("id_factura");
 			}
 			double totalEsteSi = 0.0;
-			System.out.println("size cantidad" + Cantidad.size());
-			System.out.println("size productos" + productos.size());
-			for(int i = 0; i < productos.size(); i++) {
-				String p = productos.get(i);
-				System.out.println("Producto " + p);
-				System.out.println("Cantidad " + Cantidad.get(i));
-			}
+			
 			for(int i = 0; i < productos.size(); i++) {
 				String p = productos.get(i);
 				System.out.println("Producto " + p);

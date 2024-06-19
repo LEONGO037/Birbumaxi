@@ -6,5 +6,11 @@
     <fullyQualifiedTypeName name="Modelo.ReporteFinanzas"/>
     <fullyQualifiedTypeName name="Modelo.VentasFactura"/>
     <fullyQualifiedTypeName name="Vista.Ventas"/>
+<<<<<<< HEAD
     <fullyQualifiedTypeName name="javax.swing.JOptionPane"/>
+=======
+    <fullyQualifiedTypeName name="java.util.ArrayList"/>
+    <fullyQualifiedTypeName name="Modelo.ClienteFactura"/>
+    <fullyQualifiedTypeName name="Vista.Factura"/>
+>>>>>>> 1f8ae197c882a67b3f5641100b5ade240a141788
 </qualifiedTypeNameHistroy>

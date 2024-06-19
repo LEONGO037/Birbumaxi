@@ -55,9 +55,7 @@ public class Ventas extends JFrame {
         setType(Type.UTILITY);
         setResizable(false);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setBounds(100, 100, 1133, 803);
-
-        setBounds(100, 100, 1133, 829);
+        setBounds(100, 100, 1111, 758);
 
         contentPane = new JPanel();
         contentPane.setBackground(new Color(255, 128, 0));
@@ -70,7 +68,7 @@ public class Ventas extends JFrame {
         
         JPanel panel = new JPanel();
         panel.setBackground(new Color(13, 71, 170));
-        panel.setBounds(0, 0, 350, 792);
+        panel.setBounds(0, 0, 350, 758);
         contentPane.add(panel);
         panel.setLayout(null);
         
@@ -82,7 +80,7 @@ public class Ventas extends JFrame {
         botonFrutas.setBorder(new LineBorder(new Color(7, 54, 127), 2)); // Borde azul oscuro de 2 píxeles
         botonFrutas.setFocusPainted(false); // No mostrar el efecto de foco al presionar
         botonFrutas.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        botonFrutas.setBounds(0, 376, 175, 44);
+        botonFrutas.setBounds(0, 364, 175, 44);
         // Evento de entrada del mouse (hover)
         botonFrutas.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseEntered(java.awt.event.MouseEvent evt) {
@@ -109,7 +107,7 @@ public class Ventas extends JFrame {
         botonVerduras.setBorder(new LineBorder(new Color(7, 54, 127), 2)); // Borde azul oscuro de 2 píxeles
         botonVerduras.setFocusPainted(false); // No mostrar el efecto de foco al presionar
         botonVerduras.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        botonVerduras.setBounds(174, 376, 175, 44);
+        botonVerduras.setBounds(174, 364, 175, 44);
         // Evento de entrada del mouse (hover)
         botonVerduras.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseEntered(java.awt.event.MouseEvent evt) {
@@ -136,7 +134,7 @@ public class Ventas extends JFrame {
         botonCarnes.setBorder(new LineBorder(new Color(7, 54, 127), 2)); // Borde azul oscuro de 2 píxeles
         botonCarnes.setFocusPainted(false); // No mostrar el efecto de foco al presionar
         botonCarnes.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        botonCarnes.setBounds(174, 415, 175, 44);
+        botonCarnes.setBounds(174, 403, 175, 44);
         // Evento de entrada del mouse (hover)
         botonCarnes.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseEntered(java.awt.event.MouseEvent evt) {
@@ -163,7 +161,7 @@ public class Ventas extends JFrame {
         botonLacteos.setBorder(new LineBorder(new Color(7, 54, 127), 2)); // Borde azul oscuro de 2 píxeles
         botonLacteos.setFocusPainted(false); // No mostrar el efecto de foco al presionar
         botonLacteos.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        botonLacteos.setBounds(0, 417, 175, 44);
+        botonLacteos.setBounds(0, 405, 175, 44);
         // Evento de entrada del mouse (hover)
         botonLacteos.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseEntered(java.awt.event.MouseEvent evt) {
@@ -190,7 +188,7 @@ public class Ventas extends JFrame {
         botonCereales.setBorder(new LineBorder(new Color(7, 54, 127), 2)); // Borde azul oscuro de 2 píxeles
         botonCereales.setFocusPainted(false); // No mostrar el efecto de foco al presionar
         botonCereales.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        botonCereales.setBounds(0, 458, 175, 44);
+        botonCereales.setBounds(0, 446, 175, 44);
         // Evento de entrada del mouse (hover)
         botonCereales.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseEntered(java.awt.event.MouseEvent evt) {
@@ -217,7 +215,7 @@ public class Ventas extends JFrame {
         botonDulces.setBorder(new LineBorder(new Color(7, 54, 127), 2)); // Borde azul oscuro de 2 píxeles
         botonDulces.setFocusPainted(false); // No mostrar el efecto de foco al presionar
         botonDulces.setCursor(new Cursor(Cursor.HAND_CURSOR));
-        botonDulces.setBounds(174, 458, 175, 44);
+        botonDulces.setBounds(174, 446, 175, 44);
         // Evento de entrada del mouse (hover)
         botonDulces.addMouseListener((MouseListener) new MouseAdapter() {
             public void mouseEntered(MouseEvent evt) {
@@ -244,7 +242,7 @@ public class Ventas extends JFrame {
         botonLimpieza.setBorder(new LineBorder(new Color(7, 54, 127), 2)); // Borde azul oscuro de 2 píxeles
         botonLimpieza.setFocusPainted(false); // No mostrar el efecto de foco al presionar
         botonLimpieza.setCursor(new Cursor(Cursor.HAND_CURSOR));
-        botonLimpieza.setBounds(0, 501, 175, 44);
+        botonLimpieza.setBounds(0, 489, 175, 44);
         // Evento de entrada del mouse (hover)
         botonLimpieza.addMouseListener(new MouseAdapter() {
             public void mouseEntered(MouseEvent evt) {
@@ -271,7 +269,7 @@ public class Ventas extends JFrame {
         botonAseoPer.setBorder(new LineBorder(new Color(7, 54, 127), 2)); // Borde azul oscuro de 2 píxeles
         botonAseoPer.setFocusPainted(false); // No mostrar el efecto de foco al presionar
         botonAseoPer.setCursor(new Cursor(Cursor.HAND_CURSOR));
-        botonAseoPer.setBounds(174, 501, 175, 44);
+        botonAseoPer.setBounds(174, 489, 175, 44);
         // Evento de entrada del mouse (hover)
         botonAseoPer.addMouseListener(new MouseAdapter() {
             public void mouseEntered(MouseEvent evt) {
@@ -293,7 +291,7 @@ public class Ventas extends JFrame {
         JLabel lblNewLabel_3 = new JLabel("Cantidad/Kg:");
         lblNewLabel_3.setForeground(Color.WHITE);
         lblNewLabel_3.setFont(new Font("Roboto Medium", Font.BOLD, 24));
-        lblNewLabel_3.setBounds(10, 582, 157, 30);
+        lblNewLabel_3.setBounds(10, 547, 157, 30);
         panel.add(lblNewLabel_3);
         
         cantidad = new JTextField();
@@ -301,7 +299,7 @@ public class Ventas extends JFrame {
         cantidad.setFont(new Font("Roboto Light", Font.BOLD, 18));
         cantidad.setColumns(10);
         cantidad.setBackground(Color.WHITE);
-        cantidad.setBounds(174, 578, 169, 44);
+        cantidad.setBounds(174, 543, 169, 44);
         panel.add(cantidad);
         
 
@@ -314,7 +312,7 @@ public class Ventas extends JFrame {
         		dispose();
         	}
         });
-        btnCerrarSesion.setBounds(66, 708, 192, 44);
+        btnCerrarSesion.setBounds(72, 661, 192, 44);
 
         panel.add(btnCerrarSesion);
         btnCerrarSesion.setForeground(Color.WHITE);
@@ -380,11 +378,11 @@ public class Ventas extends JFrame {
         btnRealizarVenta.setForeground(Color.WHITE);
         btnRealizarVenta.setFont(new Font("Roboto Black", Font.BOLD, 24));
         btnRealizarVenta.setBackground(new Color(51, 102, 255));
-        btnRealizarVenta.setBounds(877, 730, 230, 49);
+        btnRealizarVenta.setBounds(839, 663, 230, 49);
         contentPane.add(btnRealizarVenta);
         
         JScrollPane pedidos = new JScrollPane();
-        pedidos.setBounds(387, 357, 678, 346);
+        pedidos.setBounds(387, 352, 678, 301);
         contentPane.add(pedidos);
         
         
@@ -433,7 +431,7 @@ public class Ventas extends JFrame {
         btnAgregarProducto.setForeground(Color.WHITE);
         btnAgregarProducto.setFont(new Font("Roboto Black", Font.BOLD, 21));
         btnAgregarProducto.setBackground(new Color(51, 102, 255));
-        btnAgregarProducto.setBounds(52, 637, 230, 49);
+        btnAgregarProducto.setBounds(52, 602, 230, 49);
         panel.add(btnAgregarProducto);
         
         JLabel lblNewLabel = new JLabel("");
@@ -467,7 +465,7 @@ public class Ventas extends JFrame {
         btnEliminarDelCarrito.setForeground(Color.WHITE);
         btnEliminarDelCarrito.setFont(new Font("Dialog", Font.BOLD, 24));
         btnEliminarDelCarrito.setBackground(new Color(245, 28, 16));
-        btnEliminarDelCarrito.setBounds(387, 730, 317, 49);
+        btnEliminarDelCarrito.setBounds(384, 663, 317, 49);
         contentPane.add(btnEliminarDelCarrito);
         
         JLabel lblNewLabel_3_1_1 = new JLabel("Carrito:");

@@ -4,9 +4,11 @@ package Modelo;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 
 import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
 
 import conexionBase.conexionBD;
 
@@ -19,7 +21,7 @@ public class VentasFactura {
 	}
 	
 	public int RealizarVenta() {
-		String consulta= "INSERT INTO factura (metodo_pago, persona_id_persona, total, fecha) values (1, 1, 0.0,now())";
+		String consulta= "INSERT INTO factura (metodo_pago, persona_id_persona, total, fecha) values (1, 1, 0.0,CONVERT_TZ(NOW(), @@global.time_zone, 'America/La_Paz'))";
 		conexionBD conec= new conexionBD();
 		Connection conn= conec.conexion();
 		PreparedStatement ps= null;
@@ -70,5 +72,54 @@ public class VentasFactura {
 		
 		return facturaID;
 	}
+	public DefaultTableModel carritoFactura(String[] columnas) {
+	    DefaultTableModel model = new DefaultTableModel(null, columnas);
+
+	    if (Cantidad.size() != productos.size()) {
+	        JOptionPane.showMessageDialog(null, "Las listas de productos y cantidades no coinciden en tamaño.");
+	        return model;
+	    }
+
+	    String id_factura = String.valueOf(RealizarVenta());
+	    System.out.println("factura: " + id_factura);
+
+	    String consulta = "SELECT productos.nombre, producto_factura.cantidad, productos.precio_venta, producto_factura.subtotal " +
+	                      "FROM productos, producto_factura " +
+	                      "WHERE factura_id_factura = ? AND producto_factura.productos_id_producto = productos.id_producto;";
+
+	    conexionBD conec = new conexionBD();
+	    Connection conn = conec.conexion();
+	    PreparedStatement ps = null;
+	    ResultSet rs = null;
+
+	    try {
+	        ps = conn.prepareStatement(consulta);
+	        ps.setString(1, id_factura);
+	        rs = ps.executeQuery();
+
+	        while (rs.next()) {
+	            String[] tabla = new String[4];
+	            tabla[0] = rs.getString("productos.nombre");
+	            tabla[1] = rs.getString("producto_factura.cantidad");
+	            tabla[2] = rs.getString("productos.precio_venta");
+	            tabla[3] = rs.getString("producto_factura.subtotal");
+
+	            model.addRow(tabla);
+	        }
+	    } catch (SQLException e) {
+	        JOptionPane.showMessageDialog(null, "No se pudo cargar la tabla: " + e.getMessage());
+	    } finally {
+	        try {
+	            if (rs != null) rs.close();
+	            if (ps != null) ps.close();
+	            if (conn != null) conn.close();
+	        } catch (SQLException e) {
+	            JOptionPane.showMessageDialog(null, "Error cerrando recursos: " + e.getMessage());
+	        }
+	    }
+
+	    return model;
+	}
+
 
 }

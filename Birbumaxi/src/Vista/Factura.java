@@ -23,12 +23,15 @@ import javax.swing.table.DefaultTableModel;
 
 import Modelo.ClienteFactura;
 import Modelo.FacturaEnPDF;
+import Modelo.VentasFactura;
+import Modelo.carrito;
 import conexionBase.conexionBD;
 
 import java.awt.event.ActionListener;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.util.ArrayList;
 import java.awt.event.ActionEvent;
 
 public class Factura extends JFrame {
@@ -40,7 +43,7 @@ public class Factura extends JFrame {
     private JTextField correo;
     private JTable detalleFactura;
 
-    public Factura(int FacturaID) {
+    public Factura(int FacturaID, ArrayList<String> productos, ArrayList<Double>cantidad) {
         setType(Type.UTILITY);
         setResizable(false);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -61,6 +64,18 @@ public class Factura extends JFrame {
         sucursal.setFont(new Font("Roboto Medium", Font.BOLD, 14));
         contentPane.add(sucursal);
 
+        String[] datos= { "Nombre", "Cantidad", "Precio Unitario", "Subtotal" };
+        // Crear la tabla para el detalle de la factura
+        
+
+        
+        VentasFactura vf = new VentasFactura(cantidad, productos );
+        DefaultTableModel tablaFac = vf.carritoFactura(datos);
+        detalleFactura = new JTable(tablaFac);
+        JScrollPane scrollPane = new JScrollPane(detalleFactura);
+        scrollPane.setBounds(43, 341, 900, 232);
+        contentPane.add(scrollPane);
+        
         JLabel avenida = new JLabel("Av. Hernando Siles");
         avenida.setForeground(Color.WHITE);
         avenida.setFont(new Font("Roboto Medium", Font.BOLD, 14));
@@ -236,15 +251,6 @@ public class Factura extends JFrame {
         btnFacturar.setBounds(741, 589, 202, 46);
         contentPane.add(btnFacturar);
 
-        // Crear la tabla para el detalle de la factura
-        detalleFactura = new JTable();
-        detalleFactura.setModel(new DefaultTableModel(
-            new Object[][] {},
-            new String[] { "Nombre", "Cantidad", "Precio Unitario", "Subtotal" }
-        ));
-        JScrollPane scrollPane = new JScrollPane(detalleFactura);
-        scrollPane.setBounds(43, 341, 900, 232);
-        contentPane.add(scrollPane);
     }
 
     public static int validarNit(String v) {

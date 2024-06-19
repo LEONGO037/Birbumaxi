@@ -403,7 +403,7 @@ public class Pedidos extends JFrame {
                 }
 
                 // Actualizar la tabla pedidosRealizados con los datos actualizados
-                try {
+                /*try {
                     carrito carr = new carrito();
                     tabla2 = carr.carritos(columnasNombres, productos, cantidades);
                 } catch (NumberFormatException ex) {
@@ -412,7 +412,7 @@ public class Pedidos extends JFrame {
 
                 System.out.println(productoSeleccionado);
             }
-        });
+        });*/
 
        
 

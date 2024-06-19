@@ -41,6 +41,8 @@ public class Factura extends JFrame {
 
         setContentPane(contentPane);
         contentPane.setLayout(null);
+		setLocationRelativeTo(null);
+
 
         JLabel sucursal = new JLabel("Sucursal #1");
         sucursal.setBounds(10, 10, 101, 29);

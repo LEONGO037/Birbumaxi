@@ -355,8 +355,6 @@ public class Ventas extends JFrame {
         JButton btnBuscar = new JButton("Buscar");
         btnBuscar.addActionListener(new ActionListener() {
         	public void actionPerformed(ActionEvent e) {
-
-                
                 desplegarPorCategoria desp = new desplegarPorCategoria();
                 model=desp.datos(categoria, columnNames, busqueda.getText());
                 table.setModel(model);

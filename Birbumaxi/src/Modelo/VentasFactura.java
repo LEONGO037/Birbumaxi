@@ -20,8 +20,11 @@ public class VentasFactura {
 		this.productos=productos;
 	}
 	
+
 	public int RealizarVenta(String fechaa) {
 		String consulta= "INSERT INTO factura (metodo_pago, persona_id_persona, total, fecha) values (1, 1, 0.0," + fechaa + ")";
+
+
 		conexionBD conec= new conexionBD();
 		Connection conn= conec.conexion();
 		PreparedStatement ps= null;
@@ -80,8 +83,8 @@ public class VentasFactura {
 	        JOptionPane.showMessageDialog(null, "Las listas de productos y cantidades no coinciden en tamaño.");
 	        return model;
 	    }
+	    String id_factura = String.valueOf(RealizarVenta("CONVERT_TZ(NOW(), @@global.time_zone, 'America/La_Paz'))"));
 
-	    String id_factura = String.valueOf(RealizarVenta("CONVERT_TZ(NOW(), @@global.time_zone, 'America/La_Paz'"));
 	    System.out.println("factura: " + id_factura);
 
 	    String consulta = "SELECT productos.nombre, producto_factura.cantidad, productos.precio_venta, producto_factura.subtotal " +

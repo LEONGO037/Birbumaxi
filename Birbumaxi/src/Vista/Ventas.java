@@ -302,7 +302,14 @@ public class Ventas extends JFrame {
         cantidad.setBounds(174, 543, 169, 44);
         panel.add(cantidad);
         
-
+        cantidad.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				VentasFactura vents = new VentasFactura(cantidades, productos);
+				vents.CantidadesMod(Integer.parseInt(productoSeleccionado));
+			}
+		});
         
         JButton btnCerrarSesion = new JButton("Cerrar Sesion");
         btnCerrarSesion.addActionListener(new ActionListener() {
@@ -493,6 +500,7 @@ public class Ventas extends JFrame {
                             try {
                                 double cantidadDouble = Double.parseDouble(cantidadString);
                                 int index = productos.indexOf(productoSeleccionado);
+                                
                                 cantidades.set(index, cantidades.get(index) + cantidadDouble);
                                 actualizarStock(cantidadDouble, 1);
                             } catch (NumberFormatException ex) {
@@ -621,5 +629,42 @@ public class Ventas extends JFrame {
 		return posicion;
 	}
 
+	
+	public int posicion(int p) {
+		int posicion=0;
+		for(int i=0; i<productos.size();i++) {
+			if(String.valueOf(p).equals(productos.get(i))){
+				posicion=i;
+			}
+		}
+		return posicion;
+	}
+	
+	public void CantidadesMod(int p) {
+		int posicion=posicion(p);
+		String sql= "SELECT tipo from productos WHERE id_producto="+p+";";
+		conexionBD conec = new conexionBD();
+		PreparedStatement ps= null;
+		ResultSet rs= null;
+		String tipo="";
+		Connection conn = conec.conexion();
+		double valorAnt=0;
+		valorAnt=cantidades.get(posicion);
+		
+		try {
+			ps=conn.prepareStatement(sql);
+			rs=ps.executeQuery();
+			if(rs.next()) {
+				tipo=rs.getString("tipo");
+			}
+		}catch(Exception e) {
+			JOptionPane.showMessageDialog(null, e);
+		}
+		if(tipo.equals("1")) {
+			cantidades.set(posicion, (double) Math.round(valorAnt));
+		}else if(tipo.equals("2")) {
+			cantidades.set(posicion, valorAnt);
+		}
+	}
 
 }

@@ -27,7 +27,9 @@ public class SimularVentas {
         int facturaID = vf.RealizarVenta("'" + fchita + "'");
         simularCliente(facturaID);
         FacturaEnPDF fpdf = new FacturaEnPDF(facturaID);
-        fpdf.GenerarReporte(monto);
+        BigDecimal bd = new BigDecimal(Double.toString(monto));
+        bd = bd.setScale(2, RoundingMode.CEILING);
+        fpdf.GenerarReporte(bd.doubleValue());
     }
 	
 	public static void simularCliente (int facturaID) {

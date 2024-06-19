@@ -5,6 +5,8 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.net.MalformedURLException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -130,12 +132,14 @@ public class FacturaEnPDF extends ReportePapa{
             }
             
             double total = sumatotales(inv);
+            BigDecimal bd = new BigDecimal(Double.toString(total));
+            bd = bd.setScale(2, RoundingMode.FLOOR);
             
             addTableHeader(table, headerFont, "TOTAL");
             addTableCell(table, "");
             addTableCell(table, "");
             addTableCell(table, "");
-            addTableHeader(table, headerFont, "" + total);
+            addTableHeader(table, headerFont, "" + bd.doubleValue());
 
             document.add(table);
             
@@ -143,7 +147,10 @@ public class FacturaEnPDF extends ReportePapa{
             
             double cambio = monto - total;
             
-            Paragraph montos = new Paragraph("Monto pagado: " + monto + "             Cambio: " + cambio, fechayHora);
+            BigDecimal bd1 = new BigDecimal(Double.toString(cambio));
+            bd1 = bd1.setScale(2, RoundingMode.FLOOR);
+            
+            Paragraph montos = new Paragraph("Monto pagado: " + monto + "             Cambio: " + bd1.doubleValue(), fechayHora);
             document.add(montos);
             
             document.add(espaciador);

@@ -57,15 +57,16 @@ public class ReporteVentas extends ReportePapa{
 	
 	public ArrayList<DatosVentas> obtenerDatos (LocalDate inicio, LocalDate fin){
 		ArrayList<DatosVentas> inv = new ArrayList<>();
-		String consulta = "select persona.nombre, persona.NIT, DATE(factura.fecha) AS fechita, factura.total\r\n"
-				+ "from persona, factura\r\n"
-				+ "where persona.id_persona = factura.persona_id_persona\r\n"
-				+ "and DATE(factura.fecha) between ? and ?;";
+		String consulta = "select persona.nombre, persona.NIT, DATE(factura.fecha) AS fechita, factura.total "
+				+ "from persona, factura "
+				+ "where persona.id_persona = factura.persona_id_persona "
+				+ "and DATE(factura.fecha) >= ? and DATE(factura.fecha) <= ?;";
 		conexionBD conec= new conexionBD();
 		Connection conn= conec.conexion();
 		PreparedStatement ps= null;
 		ResultSet rs= null;
 		try {
+			
 			ps=conn.prepareStatement(consulta);
 			ps.setString(1, inicio.format(DateTimeFormatter.ISO_LOCAL_DATE));
 			ps.setString(2, fin.format(DateTimeFormatter.ISO_LOCAL_DATE));
@@ -79,13 +80,14 @@ public class ReporteVentas extends ReportePapa{
                 fechaLocal = fechaLocal.plusDays(1);
                 DateTimeFormatter formato = DateTimeFormatter.ofPattern("dd/MM/yyyy");
                 String fechaActualStr = fechaLocal.format(formato);
-                double total = rs.getInt("cantidad");
+                double total = rs.getInt("total");
                 DatosVentas ped = new DatosVentas(num, nombre, nit, fechaActualStr, total);
                 inv.add(ped);
 				num++;
 			}
+			System.out.println("Funciona sql");
 		}catch(Exception e) {
-			
+			 e.printStackTrace();
 		}
 		return inv;
 	}
@@ -137,9 +139,9 @@ public class ReporteVentas extends ReportePapa{
             Font headerFont = new Font(Font.FontFamily.HELVETICA, 12, Font.BOLD);
 
             addTableHeader(table, headerFont, "Número");
-            addTableHeader(table, headerFont, "Producto");
+            addTableHeader(table, headerFont, "NIT");
+            addTableHeader(table, headerFont, "Nombre");
             addTableHeader(table, headerFont, "Fecha");
-            addTableHeader(table, headerFont, "Cantidad");
             addTableHeader(table, headerFont, "Total");
             
             ArrayList<DatosVentas> inv = new ArrayList<>();

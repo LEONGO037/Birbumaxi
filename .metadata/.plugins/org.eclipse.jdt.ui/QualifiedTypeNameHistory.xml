@@ -6,4 +6,5 @@
     <fullyQualifiedTypeName name="Modelo.ReporteFinanzas"/>
     <fullyQualifiedTypeName name="Modelo.VentasFactura"/>
     <fullyQualifiedTypeName name="Vista.Ventas"/>
+    <fullyQualifiedTypeName name="java.util.ArrayList"/>
 </qualifiedTypeNameHistroy>

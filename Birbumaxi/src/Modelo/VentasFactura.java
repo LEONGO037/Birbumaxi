@@ -22,8 +22,11 @@ public class VentasFactura {
 	
 	public int RealizarVenta(String fechaa) {
 		String consulta= "INSERT INTO factura (metodo_pago, persona_id_persona, total, fecha) values (1, 1, 0.0," + fechaa + ")";
+<<<<<<< HEAD
 	public int RealizarVenta() {
 		String consulta= "INSERT INTO factura (metodo_pago, persona_id_persona, total, fecha) values (1, 1, 0.0,CONVERT_TZ(NOW(), @@global.time_zone, 'America/La_Paz'))";
+=======
+>>>>>>> c5656c01b17192263d20ab5111783b0fd1709cd7
 		conexionBD conec= new conexionBD();
 		Connection conn= conec.conexion();
 		PreparedStatement ps= null;
@@ -83,7 +86,7 @@ public class VentasFactura {
 	        return model;
 	    }
 
-	    String id_factura = String.valueOf(RealizarVenta());
+	    String id_factura = String.valueOf(RealizarVenta("CONVERT_TZ(NOW(), @@global.time_zone, 'America/La_Paz'"));
 	    System.out.println("factura: " + id_factura);
 
 	    String consulta = "SELECT productos.nombre, producto_factura.cantidad, productos.precio_venta, producto_factura.subtotal " +

@@ -48,4 +48,31 @@ public class verificacionCorreo {
 		}
 		return false;
 	}
+	public boolean verificadorTipo(String correo) {
+	    String consulta = "SELECT cargo FROM empleados WHERE correo=?";
+	    
+	    try (Connection conn = conexionBD.conexion();
+	         PreparedStatement ps = conn.prepareStatement(consulta)) {
+	        
+	        ps.setString(1, correo);
+	        ResultSet rs = ps.executeQuery();
+	        
+	        if (rs.next()) {
+	            String cargo = rs.getString("cargo");
+	            if (cargo.equals("2")) {
+	                return true;
+	            }
+	        }
+	        
+	    } catch (SQLException e) {
+	        e.printStackTrace();
+	        return false;
+	    }
+	    
+	    return false;
+	}
+
+
+	
+	
 }

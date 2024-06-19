@@ -1,20 +1,29 @@
 package Vista;
 
 import javax.swing.JPanel;
+import java.sql.*;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JComboBox;
 import javax.swing.JButton;
 import javax.swing.JTextField;
+
+import conexionBase.conexionBD;
+
 import java.awt.Color;
 import java.awt.Font;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 public class Panel2 extends JPanel {
 
     private static final long serialVersionUID = 1L;
-    private JTextField apellidoemp;
-    private JTextField salarioemp;
-    private JTextField idemp;
-    private JTextField nombremp;
+    public static final JTextField apellidoemp = new JTextField();
+    public static final JTextField salarioemp = new JTextField();
+    public static final JTextField idemp = new JTextField();
+    public static final JTextField nombremp = new JTextField();
+    public static String[] cargosOptions = { "Cajero", "Gerente" };
+    public static final JComboBox<String> cargos = new JComboBox<>(cargosOptions);
 
     /**
      * Create the panel.
@@ -65,15 +74,50 @@ public class Panel2 extends JPanel {
         lblSalario.setBounds(23, 262, 73, 29);
         add(lblSalario);
 
-        String[] cargosOptions = { "Gerente", "Cajero" };
-        JComboBox<String> cargos = new JComboBox<>(cargosOptions);
         cargos.setForeground(new Color(128, 128, 128));
         cargos.setFont(new Font("Roboto Medium", Font.PLAIN, 14));
         cargos.setBounds(106, 225, 175, 27);
         add(cargos);
+        
+        apellidoemp.setForeground(new Color(128, 128, 128));
+        apellidoemp.setFont(new Font("Roboto Medium", Font.PLAIN, 16));
+        apellidoemp.setBounds(106, 186, 175, 29);
+        add(apellidoemp);
+        apellidoemp.setColumns(10);
 
+        salarioemp.setForeground(new Color(128, 128, 128));
+        salarioemp.setFont(new Font("Roboto Medium", Font.PLAIN, 16));
+        salarioemp.setColumns(10);
+        salarioemp.setBounds(106, 264, 175, 29);
+        add(salarioemp);
+
+        idemp.setForeground(new Color(128, 128, 128));
+        idemp.setFont(new Font("Roboto Medium", Font.PLAIN, 16));
+        idemp.setColumns(10);
+        idemp.setBounds(106, 104, 175, 29);
+        add(idemp);
+
+
+        nombremp.setForeground(new Color(128, 128, 128));
+        nombremp.setFont(new Font("Roboto Medium", Font.PLAIN, 16));
+        nombremp.setColumns(10);
+        nombremp.setBounds(106, 145, 175, 29);
+        add(nombremp);
 
         JButton btnBuscar = new JButton("Buscar");
+        btnBuscar.addActionListener(new ActionListener() {
+        	public void actionPerformed(ActionEvent e) {
+        		if(idemp.getText().isEmpty() && !nombremp.getText().isEmpty()) {
+        			buscar(nombremp.getText());
+        		}else if(!idemp.getText().isEmpty() && nombremp.getText().isEmpty()) {
+        			buscar(idemp.getText());
+        		}else if(idemp.getText().isEmpty() && nombremp.getText().isEmpty()) {
+        			JOptionPane.showMessageDialog(null, "Debe ingresar el nombre o el id");
+        		}else if(!idemp.getText().isEmpty() && !nombremp.getText().isEmpty()) {
+        			buscar(idemp.getText());
+        		}
+        	}
+        });
         btnBuscar.setForeground(Color.WHITE);
         btnBuscar.setFont(new Font("Roboto Black", Font.BOLD, 24));
         btnBuscar.setBackground(new Color(51, 102, 255));
@@ -81,6 +125,16 @@ public class Panel2 extends JPanel {
         add(btnBuscar);
 
         JButton btnActualizarInformacin = new JButton("Actualizar Información");
+        btnActualizarInformacin.addActionListener(new ActionListener() {
+        	public void actionPerformed(ActionEvent e) {
+        		if(actualizar()) {
+        			JOptionPane.showMessageDialog(null, "DATOS ACTUALIZADOS CORRECTAMENTE!");
+        		}else {
+        			JOptionPane.showMessageDialog(null, "No se pudo actualizar los datos");
+        		}
+        	}
+        	
+        });
         btnActualizarInformacin.setForeground(Color.WHITE);
         btnActualizarInformacin.setFont(new Font("Roboto Medium", Font.ITALIC, 17));
         btnActualizarInformacin.setBackground(new Color(51, 102, 255));
@@ -88,38 +142,95 @@ public class Panel2 extends JPanel {
         add(btnActualizarInformacin);
 
         JButton btnDespedirEmpleado = new JButton("Despedir Empleado");
+        btnDespedirEmpleado.addActionListener(new ActionListener() {
+        	public void actionPerformed(ActionEvent e) {
+        		if(despedir(idemp.getText())) {
+        			JOptionPane.showMessageDialog(null, "EMPLEADO DESPEDIDO CORRECTAMENTE! :(");
+        		}else {
+        			JOptionPane.showMessageDialog(null, "No se pudo despedir al empleado");
+        		}
+        		
+        	}
+        });
         btnDespedirEmpleado.setForeground(Color.WHITE);
         btnDespedirEmpleado.setFont(new Font("Roboto Medium", Font.ITALIC, 17));
         btnDespedirEmpleado.setBackground(new Color(51, 102, 255));
         btnDespedirEmpleado.setBounds(324, 190, 221, 52);
         add(btnDespedirEmpleado);
 
-        apellidoemp = new JTextField();
-        apellidoemp.setForeground(new Color(128, 128, 128));
-        apellidoemp.setFont(new Font("Roboto Medium", Font.PLAIN, 16));
-        apellidoemp.setBounds(106, 186, 175, 29);
-        add(apellidoemp);
-        apellidoemp.setColumns(10);
 
-        salarioemp = new JTextField();
-        salarioemp.setForeground(new Color(128, 128, 128));
-        salarioemp.setFont(new Font("Roboto Medium", Font.PLAIN, 16));
-        salarioemp.setColumns(10);
-        salarioemp.setBounds(106, 264, 175, 29);
-        add(salarioemp);
-
-        idemp = new JTextField();
-        idemp.setForeground(new Color(128, 128, 128));
-        idemp.setFont(new Font("Roboto Medium", Font.PLAIN, 16));
-        idemp.setColumns(10);
-        idemp.setBounds(106, 104, 175, 29);
-        add(idemp);
-
-        nombremp = new JTextField();
-        nombremp.setForeground(new Color(128, 128, 128));
-        nombremp.setFont(new Font("Roboto Medium", Font.PLAIN, 16));
-        nombremp.setColumns(10);
-        nombremp.setBounds(106, 145, 175, 29);
-        add(nombremp);
     }
+    public static void buscar(String palabraClave) {
+    	String sql = "SELECT id_empleado, nombre, apellido, cargo, salario FROM empleados WHERE nombre LIKE '%" + palabraClave + "%' OR id_empleado LIKE '%" + palabraClave + "%';";
+    	conexionBD conec = new conexionBD();
+    	PreparedStatement ps= null;
+    	ResultSet rs= null;
+    	Connection conn= conec.conexion();
+    	try {
+    		ps=conn.prepareStatement(sql);
+    		rs=ps.executeQuery();
+    		if(rs.next()) {
+    			idemp.setText(rs.getString("id_empleado"));
+    			nombremp.setText(rs.getString("nombre"));
+    			apellidoemp.setText(rs.getString("apellido"));
+    			cargos.setSelectedIndex(Integer.parseInt(rs.getString("cargo"))-1);
+    			salarioemp.setText(rs.getString("salario"));
+    		}else {
+    			JOptionPane.showMessageDialog(null, "No se encontro al empleado");
+    		}
+    	}catch(Exception e) {
+    		System.out.println("algo salio mal");
+    	}
+    }
+    public boolean actualizar() {
+        String sql = "UPDATE empleados SET nombre=?, apellido=?, cargo=?, salario=? WHERE ID_empleado=?";
+        PreparedStatement ps = null;
+        conexionBD conec = new conexionBD();
+        Connection conn = conec.conexion();
+        
+        try {
+            ps = conn.prepareStatement(sql);
+            ps.setString(1, nombremp.getText()); 
+            ps.setString(2, apellidoemp.getText());
+            ps.setInt(3, cargos.getSelectedIndex() + 1); 
+            ps.setString(4, salarioemp.getText()); 
+            ps.setString(5, idemp.getText()); 
+
+            int i = ps.executeUpdate();
+            if (i > 0) {
+                return true; 
+            } else {
+                return false; 
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return false; 
+        }
+    }
+	public boolean despedir(String palabraClave) { 
+		String sql= "SELECT estado from empleados WHERE nombre LIKE '%"+palabraClave+"%' OR id_empleado LIKE '%"+palabraClave+"%';";
+		String sql2= "UPDATE empleados SET estado=false WHERE nombre ='"+palabraClave +"' OR id_empleado ="+palabraClave+";";
+		PreparedStatement ps=null;
+		ResultSet rs= null;
+		conexionBD conec= new conexionBD();
+		Connection conn=conec.conexion();
+		try {
+			ps=conn.prepareStatement(sql);
+			rs=ps.executeQuery();
+			if(rs.next()) {
+				ps=conn.prepareStatement(sql2);
+				int i=ps.executeUpdate();
+				if(i>0) {
+					return true;
+				}else {
+					return false;
+				}
+				
+			}
+		}catch(Exception e) {
+			return false;
+		}
+		return false;
+	}
+
 }

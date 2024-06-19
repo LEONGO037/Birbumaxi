@@ -161,27 +161,36 @@ public class Panel2 extends JPanel {
 
     }
     public static void buscar(String palabraClave) {
-    	String sql = "SELECT id_empleado, nombre, apellido, cargo, salario FROM empleados WHERE nombre LIKE '%" + palabraClave + "%' OR id_empleado LIKE '%" + palabraClave + "%';";
-    	conexionBD conec = new conexionBD();
-    	PreparedStatement ps= null;
-    	ResultSet rs= null;
-    	Connection conn= conec.conexion();
-    	try {
-    		ps=conn.prepareStatement(sql);
-    		rs=ps.executeQuery();
-    		if(rs.next()) {
-    			idemp.setText(rs.getString("id_empleado"));
-    			nombremp.setText(rs.getString("nombre"));
-    			apellidoemp.setText(rs.getString("apellido"));
-    			cargos.setSelectedIndex(Integer.parseInt(rs.getString("cargo"))-1);
-    			salarioemp.setText(rs.getString("salario"));
-    		}else {
-    			JOptionPane.showMessageDialog(null, "No se encontro al empleado");
-    		}
-    	}catch(Exception e) {
-    		System.out.println("algo salio mal");
-    	}
+        String sql = "SELECT id_empleado, nombre, apellido, cargo, salario FROM empleados WHERE nombre LIKE '%" + palabraClave + "%' OR id_empleado LIKE '%" + palabraClave + "%';";
+        conexionBD conec = new conexionBD();
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+        Connection conn = conec.conexion();
+        try {
+            ps = conn.prepareStatement(sql);
+            rs = ps.executeQuery();
+            if (rs.next()) {
+                idemp.setText(rs.getString("id_empleado"));
+                nombremp.setText(rs.getString("nombre"));
+                apellidoemp.setText(rs.getString("apellido"));
+                cargos.setSelectedIndex(Integer.parseInt(rs.getString("cargo")) - 1);
+                salarioemp.setText(rs.getString("salario"));
+            } else {
+                JOptionPane.showMessageDialog(null, "No se encontró al empleado");
+            }
+        } catch (Exception e) {
+            System.out.println("Algo salió mal");
+        } finally {
+            try {
+                if (rs != null) rs.close();
+                if (ps != null) ps.close();
+                if (conn != null) conn.close();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
     }
+
     public boolean actualizar() {
         String sql = "UPDATE empleados SET nombre=?, apellido=?, cargo=?, salario=? WHERE ID_empleado=?";
         PreparedStatement ps = null;
@@ -205,32 +214,49 @@ public class Panel2 extends JPanel {
         } catch (SQLException e) {
             e.printStackTrace();
             return false; 
+        } finally {
+            try {
+                if (ps != null) ps.close();
+                if (conn != null) conn.close();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
         }
     }
-	public boolean despedir(String palabraClave) { 
-		String sql= "SELECT estado from empleados WHERE nombre LIKE '%"+palabraClave+"%' OR id_empleado LIKE '%"+palabraClave+"%';";
-		String sql2= "UPDATE empleados SET estado=false WHERE nombre ='"+palabraClave +"' OR id_empleado ="+palabraClave+";";
-		PreparedStatement ps=null;
-		ResultSet rs= null;
-		conexionBD conec= new conexionBD();
-		Connection conn=conec.conexion();
-		try {
-			ps=conn.prepareStatement(sql);
-			rs=ps.executeQuery();
-			if(rs.next()) {
-				ps=conn.prepareStatement(sql2);
-				int i=ps.executeUpdate();
-				if(i>0) {
-					return true;
-				}else {
-					return false;
-				}
-				
-			}
-		}catch(Exception e) {
-			return false;
-		}
-		return false;
-	}
+
+    public boolean despedir(String palabraClave) { 
+        String sql = "SELECT estado FROM empleados WHERE nombre LIKE '%" + palabraClave + "%' OR id_empleado LIKE '%" + palabraClave + "%';";
+        String sql2 = "UPDATE empleados SET estado=false WHERE nombre ='" + palabraClave + "' OR id_empleado =" + palabraClave + ";";
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+        conexionBD conec = new conexionBD();
+        Connection conn = conec.conexion();
+        
+        try {
+            ps = conn.prepareStatement(sql);
+            rs = ps.executeQuery();
+            if (rs.next()) {
+                ps = conn.prepareStatement(sql2);
+                int i = ps.executeUpdate();
+                if (i > 0) {
+                    return true;
+                } else {
+                    return false;
+                }
+            }
+        } catch (Exception e) {
+            return false;
+        } finally {
+            try {
+                if (rs != null) rs.close();
+                if (ps != null) ps.close();
+                if (conn != null) conn.close();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+        return false;
+    }
+
 
 }

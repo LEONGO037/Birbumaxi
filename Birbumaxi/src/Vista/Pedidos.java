@@ -21,6 +21,7 @@ import java.awt.event.MouseListener;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.awt.event.ActionEvent;
 import java.awt.Font;
@@ -544,11 +545,6 @@ public class Pedidos extends JFrame {
  }
    
         
-
-	
-
-
-
     public static double stockCalculo() {
         double stock = 0;
         String consulta = "SELECT stock from productos WHERE id_producto=" + productoSeleccionado + ";";
@@ -564,11 +560,19 @@ public class Pedidos extends JFrame {
             }
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, "No se pudo cargar el stock");
+        } finally {
+            try {
+                if (rs != null) rs.close();
+                if (ps != null) ps.close();
+                if (conn != null) conn.close();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
         }
         return stock;
     }
 
-    
+
     public static void actualizarStock(double cantidad, int op) {
         String consulta = "SELECT stock from productos WHERE id_producto=" + productoSeleccionado + ";";
         double stock = 0.0;
@@ -585,7 +589,7 @@ public class Pedidos extends JFrame {
 
             double actual;
             if (op == 1) {
-                actual = stock + cantidad; // Sumar cantidad al stock existente
+                actual = stock + cantidad; 
             } else {
                 actual = stock - cantidad;
             }
@@ -601,8 +605,17 @@ public class Pedidos extends JFrame {
 
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, "No se pudo actualizar el stock");
+        } finally {
+            try {
+                if (rs != null) rs.close();
+                if (ps != null) ps.close();
+                if (conn != null) conn.close();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
         }
     }
+
 
     
     

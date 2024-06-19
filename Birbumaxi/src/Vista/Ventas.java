@@ -530,69 +530,78 @@ public class Ventas extends JFrame {
         lblNewLabel_3_1_1.setFont(new Font("Dialog", Font.BOLD, 27));
         lblNewLabel_3_1_1.setBounds(387, 312, 330, 30);
         contentPane.add(lblNewLabel_3_1_1);
-        
-
-       
-
-        
 
 	}
     public static double stockCalculo() {
-    	double stock=0;
-		String consulta= "SELECT stock from productos WHERE id_producto="+productoSeleccionado+";" ;
-		conexionBD conec= new conexionBD();
-		Connection conn= conec.conexion();
-		PreparedStatement ps= null;
-		ResultSet rs= null;
-		try {
-			ps=conn.prepareStatement(consulta);
-			rs=ps.executeQuery();
-			if(rs.next()) {
-				stock=Double.parseDouble(rs.getString(1));
-			}
-		}catch(Exception e) {
-			JOptionPane.showMessageDialog(null, "no se pudo cargar el stock");
-		}
-		
-    	return stock;
-
-
-	}
-    
-    public static void actualizarStock (double cantidad, int op) {
-    	String consulta= "SELECT stock from productos WHERE id_producto="+productoSeleccionado+";" ;
-    	double stock = 0.0;
-		conexionBD conec= new conexionBD();
-		Connection conn= conec.conexion();
-		PreparedStatement ps= null;
-		ResultSet rs= null;
-		try {
-			ps=conn.prepareStatement(consulta);
-			rs=ps.executeQuery();
-			if(rs.next()) {
-				stock=Double.parseDouble(rs.getString(1));
-			}
-			
-			double actual;
-			if(op == 1) {
-				actual = stock - cantidad;
-			} else {
-				actual = stock + cantidad;
-			}
-			
-			String act = "update productos set stock =" + actual + " where ID_producto = " + productoSeleccionado + ";";
-			ps = conn.prepareStatement(act);
-			int v = ps.executeUpdate();
-			if (v > 0) {
-				System.out.println("Actualizado");
-			} else {
-				System.out.println("No Actualizado");
-			}
-			
-		}catch(Exception e) {
-			JOptionPane.showMessageDialog(null, "no se pudo cargar el stock");
-		}
+        double stock = 0;
+        String consulta = "SELECT stock from productos WHERE id_producto=" + productoSeleccionado + ";";
+        conexionBD conec = new conexionBD();
+        Connection conn = conec.conexion();
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+        try {
+            ps = conn.prepareStatement(consulta);
+            rs = ps.executeQuery();
+            if (rs.next()) {
+                stock = rs.getDouble("stock");
+            }
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "No se pudo cargar el stock");
+        } finally {
+            try {
+                if (rs != null) rs.close();
+                if (ps != null) ps.close();
+                if (conn != null) conn.close();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+        return stock;
     }
+
+    public static void actualizarStock(double cantidad, int op) {
+        String consulta = "SELECT stock from productos WHERE id_producto=" + productoSeleccionado + ";";
+        double stock = 0.0;
+        conexionBD conec = new conexionBD();
+        Connection conn = conec.conexion();
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+        try {
+            ps = conn.prepareStatement(consulta);
+            rs = ps.executeQuery();
+            if (rs.next()) {
+                stock = rs.getDouble("stock");
+            }
+
+            double actual;
+            if (op == 1) {
+                actual = stock - cantidad; // Restar cantidad al stock existente
+            } else {
+                actual = stock + cantidad; // Sumar cantidad al stock existente
+            }
+
+            String act = "UPDATE productos SET stock = " + actual + " WHERE id_producto = " + productoSeleccionado + ";";
+            ps = conn.prepareStatement(act);
+            int v = ps.executeUpdate();
+            if (v > 0) {
+                System.out.println("Actualizado");
+            } else {
+                System.out.println("No Actualizado");
+            }
+
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "No se pudo actualizar el stock");
+        } finally {
+            try {
+                if (rs != null) rs.close();
+                if (ps != null) ps.close();
+                if (conn != null) conn.close();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
 	public int eliminar() {
 		int posicion=0;
 		for(int i=0; i<productos.size(); i++) {
@@ -638,12 +647,9 @@ public class Ventas extends JFrame {
 		}
 
 	}
-	// Método CantidadesMod
 	public boolean CantidadesMod(double cantidad, int Ingreso) {
-		System.out.println("hasta aca bien");
+	    System.out.println("hasta aca bien");
 	    
-	    
-
 	    String sql = "SELECT tipo FROM productos WHERE id_producto=" + productoSeleccionado + ";";
 	    conexionBD conec = new conexionBD();
 	    PreparedStatement ps = null;
@@ -651,64 +657,77 @@ public class Ventas extends JFrame {
 	    String tipo = "";
 	    Connection conn = conec.conexion();
 	    System.out.println("hasta aca crea la conexion");
+	    
 	    try {
-	    	System.out.println("entra al try");
+	        System.out.println("entra al try");
 	        ps = conn.prepareStatement(sql);
-	        
 	        rs = ps.executeQuery();
 	        System.out.println("hace el query");
+	        
 	        if (rs.next()) {
-	        	System.out.println("verifica");
+	            System.out.println("verifica");
 	            tipo = rs.getString("tipo");
 	            System.out.println("sale");
 	        }
-	    } catch (Exception e) {
-	    	 System.out.println("salta el catch");
-	        JOptionPane.showMessageDialog(null, "no se hace la consulta"+e);
-	        return false;
-	    }
-	    int posicion = sacarPosicion();
-	    System.out.println("la posicion es: "+posicion);
-	    System.out.println("entra a la seccion de if");
-	    if (tipo.equals("1")) {
-	    	 System.out.println("entra al tipo 1");
-	        if (cantidad % 1 != 0) {
-	        	System.out.println("no da la operacion");
-	            JOptionPane.showMessageDialog(null, "La cantidad debe ser un número entero para este tipo de producto.");
-	            System.out.println("se verifica y esta mal");
+	        
+	        int posicion = sacarPosicion();
+	        System.out.println("la posicion es: " + posicion);
+	        System.out.println("entra a la seccion de if");
+	        
+	        if (tipo.equals("1")) {
+	            System.out.println("entra al tipo 1");
+	            if (cantidad % 1 != 0) {
+	                System.out.println("no da la operacion");
+	                JOptionPane.showMessageDialog(null, "La cantidad debe ser un número entero para este tipo de producto.");
+	                System.out.println("se verifica y esta mal");
+	                return false;
+	            } else {
+	                System.out.println("entra al tipo 1 y verifica que es un entero");
+	                if (Ingreso == 0) {
+	                    System.out.println("entra a settear");
+	                    cantidades.add(posicion, cantidad);
+	                    System.out.println("se verifica");
+	                    return true;
+	                } else if (Ingreso == 1) {
+	                    System.out.println("entra a settear ingreso tipo 1");
+	                    cantidades.set(posicion, cantidades.get(posicion) + cantidad);
+	                    System.out.println("se verifica");
+	                    return true;
+	                }
+	            }
+	            System.out.println("sale del tipo 1");
+	        } else if (tipo.equals("2")) {
+	            System.out.println("entra al tipo 2");
+	            if (Ingreso == 0) {
+	                cantidades.add(posicion, cantidad);
+	                System.out.println("se verifica");
+	                return true;
+	            } else if (Ingreso == 1) {
+	                cantidades.set(posicion, cantidades.get(posicion) + cantidad);
+	                System.out.println("se verifica");
+	                return true;
+	            }
+	        } else {
+	            System.out.println("sale del metodo");
 	            return false;
-	        }else {
-	        	System.out.println("entra al tipo 1 y verifica que es un entero");
-	        	if (Ingreso == 0) {
-	        		System.out.println("entra a settear");
-		            cantidades.add(posicion, cantidad);
-		            System.out.println("se verifica");
-		            return true;
-		        } else if (Ingreso == 1) {
-		        	System.out.println("entra a settear ingreso tipo 1");
-		            cantidades.set(posicion, cantidades.get(posicion) + cantidad);
-		            System.out.println("se verifica");
-		            return true;
-		        }
-	        } 
-	        System.out.println("sale del tipo 1");
-	    } else if (tipo.equals("2")) {
-	    	 System.out.println("entra al tipo 2");
-	        if (Ingreso == 0) {
-	            cantidades.add(posicion, cantidad);
-	            System.out.println("se verifica");
-	            return true;
-	        } else if (Ingreso == 1) {
-	            cantidades.set(posicion, cantidades.get(posicion) + cantidad);
-	            System.out.println("se verifica");
-	            return true;
 	        }
-	    }else {
-	    	 System.out.println("sale del metodo");
-	    	 return false;
+	        System.out.println("no se verifica ninguno");
+	        return false;
+
+	    } catch (Exception e) {
+	        System.out.println("salta el catch");
+	        JOptionPane.showMessageDialog(null, "no se hace la consulta" + e);
+	        return false;
+
+	    } finally {
+	        try {
+	            if (rs != null) rs.close();
+	            if (ps != null) ps.close();
+	            if (conn != null) conn.close();
+	        } catch (SQLException e) {
+	            e.printStackTrace();
+	        }
 	    }
-	    System.out.println("no se verifica ninguno");
-	    return false;
 	}
 	public void imprimirdatos() {
 		for(int i=0; i<productos.size(); i++) {

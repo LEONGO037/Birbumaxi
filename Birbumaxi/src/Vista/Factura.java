@@ -269,24 +269,34 @@ public class Factura extends JFrame {
         return s;
 	}
     
-    public static String EncontrarPrecio (int id) {
-    	String consulta= "SELECT total from factura where id_factura = " + id + ";";
-		conexionBD conec= new conexionBD();
-		Connection conn= conec.conexion();
-		PreparedStatement ps= null;
-		ResultSet rs= null;
-		double num = 0;
-		try {
-			ps=conn.prepareStatement(consulta);
-			rs=ps.executeQuery();
-			while(rs.next()) {
-				num = rs.getDouble("total");
-			}
-		}catch(Exception e) {
-			e.printStackTrace();
-		}
-    	return "" + num;
+    public static String EncontrarPrecio(int id) {
+        String consulta = "SELECT total FROM factura WHERE id_factura = " + id + ";";
+        conexionBD conec = new conexionBD();
+        Connection conn = conec.conexion();
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+        double num = 0;
+
+        try {
+            ps = conn.prepareStatement(consulta);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                num = rs.getDouble("total");
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                if (rs != null) rs.close();
+                if (ps != null) ps.close();
+                if (conn != null) conn.close();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+        return String.valueOf(num);
     }
+
     
     public static double validard(String v) {
 		double s = 0.0;

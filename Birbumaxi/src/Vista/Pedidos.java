@@ -370,49 +370,51 @@ public class Pedidos extends JFrame {
 
         JButton btnPedirProducto = new JButton("Pedir Producto");
         btnPedirProducto.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                // Verificar si el producto ya está en la lista
-                if (productos.contains(productoSeleccionado)) {
-                    // Si el producto ya está en la lista, sumar la cantidad ingresada a la cantidad existente
-                    String cantidadString = cantidad.getText().trim();
-                    if (!cantidadString.isEmpty()) {
-                        try {
-                            double cantidadDouble = Double.parseDouble(cantidadString);
-                            int index = productos.indexOf(productoSeleccionado);
-                            cantidades.set(index, cantidades.get(index) + cantidadDouble);
-                            actualizarStock(cantidadDouble, 1); // Sumar al stock existente
-                        } catch (NumberFormatException ex) {
-                            JOptionPane.showMessageDialog(null, "Ingresa una cantidad válida.");
-                        }
-                    }
-                } else {
-                    // Si el producto no está en la lista, agregarlo con su cantidad
-                    String cantidadString = cantidad.getText().trim();
-                    if (!cantidadString.isEmpty() && Double.parseDouble(cantidad.getText()) > 0) {
-                        try {
-                            double cantidadDouble = Double.parseDouble(cantidadString);
-                            productos.add(productoSeleccionado);
-                            cantidades.add(cantidadDouble);
-                            actualizarStock(cantidadDouble, 1); // Sumar al stock existente
-                        } catch (NumberFormatException ex) {
-                            JOptionPane.showMessageDialog(null, "Ingresa una cantidad válida.");
-                        }
-                    } else {
-                        JOptionPane.showMessageDialog(null, "Ingresa una cantidad válida.");
-                    }
-                }
+        	// Manejo del evento para el botón "Pedir Producto"
 
-                // Actualizar la tabla pedidosRealizados con los datos actualizados
-                /*try {
-                    carrito carr = new carrito();
-                    tabla2 = carr.carritos(columnasNombres, cantidades, productos);
-                } catch (NumberFormatException ex) {
-                    JOptionPane.showMessageDialog(null, "Error al actualizar la tabla.");
-                }
+        	    public void actionPerformed(ActionEvent e) {
+        	        // Verificar si el producto ya está en la lista
+        	        String cantidadString = cantidad.getText().trim();
+        	        if (cantidadString.isEmpty()) {
+        	            JOptionPane.showMessageDialog(null, "Ingresa una cantidad válida.");
+        	            return;
+        	        }
 
-                System.out.println(productoSeleccionado);
-            }
-        });*/
+        	        double cantidadDouble;
+        	        try {
+        	            cantidadDouble = Double.parseDouble(cantidadString);
+        	            if (cantidadDouble <= 0) {
+        	                JOptionPane.showMessageDialog(null, "Ingresa una cantidad válida.");
+        	                return;
+        	            }
+        	        } catch (NumberFormatException ex) {
+        	            JOptionPane.showMessageDialog(null, "Ingresa una cantidad válida.");
+        	            return;
+        	        }
+
+        	        if (productos.contains(productoSeleccionado)) {
+        	            // Producto ya está en la lista
+        	            int index = productos.indexOf(productoSeleccionado);
+        	            cantidades.set(index, cantidades.get(index) + cantidadDouble);
+        	            actualizarStock(cantidadDouble, 1); // Sumar al stock existente
+        	        } else {
+        	            // Producto no está en la lista
+        	            productos.add(productoSeleccionado);
+        	            cantidades.add(cantidadDouble);
+        	            actualizarStock(cantidadDouble, 1); // Sumar al stock existente
+        	        }
+
+        	        // Actualizar la tabla pedidosRealizados con los datos actualizados
+        	        try {
+        	            carrito carr = new carrito();
+        	            tabla2 = carr.carritos(columnasNombres, cantidades, productos);
+        	        } catch (NumberFormatException ex) {
+        	            JOptionPane.showMessageDialog(null, "Error al actualizar la tabla.");
+        	        }
+        	    }
+        	});
+
+
 
        
 
@@ -539,9 +541,13 @@ public class Pedidos extends JFrame {
                 }
             }
         });
+ }
+   
         
 
-	}
+	
+
+
 
     public static double stockCalculo() {
         double stock = 0;
@@ -635,3 +641,4 @@ public class Pedidos extends JFrame {
 		return posicion;
 	}
 }
+

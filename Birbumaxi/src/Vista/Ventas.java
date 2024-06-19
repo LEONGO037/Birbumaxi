@@ -368,9 +368,10 @@ public class Ventas extends JFrame {
         JButton btnRealizarVenta = new JButton("Realizar Venta");
         btnRealizarVenta.addActionListener(new ActionListener() {
         	public void actionPerformed(ActionEvent e) {
+        		imprimirdatos();
         		VentasFactura v = new VentasFactura(cantidades, productos);
         		int facturaID = v.RealizarVenta();
-        		Factura factura = new Factura(facturaID);
+        		Factura factura = new Factura(facturaID, productos, cantidades);
         		factura.setVisible(true);
         		dispose();
         	}
@@ -709,6 +710,14 @@ public class Ventas extends JFrame {
 	    }
 	    System.out.println("no se verifica ninguno");
 	    return false;
+	}
+	public void imprimirdatos() {
+		for(int i=0; i<productos.size(); i++) {
+			System.out.println("productos: "+ productos.get(i));
+		}
+		for(int i=0; i<cantidades.size(); i++) {
+			System.out.println("cantidades: "+ cantidades.get(i));
+		}
 	}
 
 }

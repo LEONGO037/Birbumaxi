@@ -72,14 +72,14 @@ public class login extends JFrame {
                 String contrasena= new String(password.getPassword());
                 if(ver1.verificador(correo.getText(), contrasena)) {
                     JOptionPane.showMessageDialog(null, "ingreso permitido");
-                    if(correo.getText().contains("birbuemp.com")) {
-                    	 Ventas venta = new Ventas();
-                         venta.setVisible(true);
-                         dispose();
-                    }else if(correo.getText().contains("birbuadmin.com")) {
+                    if(ver1.verificadorTipo(correo.getText())) {
                     	MenuGerente ger = new MenuGerente();
                     	ger.setVisible(true);
                     	dispose();
+                    }else if(!ver1.verificadorTipo(correo.getText())) {
+                    	Ventas venta = new Ventas();
+                        venta.setVisible(true);
+                        dispose();
                     }
                     correo.setText("");
                     password.setText("");

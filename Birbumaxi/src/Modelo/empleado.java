@@ -63,34 +63,7 @@ public class empleado extends persona{
 		// TODO Auto-generated constructor stub
 	}
 	
-	public DefaultTableModel desplegarEmpleados(String[] nombresColumnas) {
-		
-		DefaultTableModel modelo = new DefaultTableModel(null, nombresColumnas);
-		conexionBD conec = new conexionBD();
-		PreparedStatement ps= null;
-		ResultSet rs=null;
-		Connection conn=conec.conexion();
-		String[] datos = new String[8];
-		try {
-			ps=conn.prepareStatement("SELECT * from empleados;");
-			rs=ps.executeQuery();
-			while(rs.next()) {
-				datos[0]= rs.getString("ID_empleado");
-				datos[1]=rs.getString("nombre");
-				datos[2]=rs.getString("apellido");
-				datos[3]= rs.getString("ci");
-				datos[4]=rs.getString("correo");
-				datos[5]=rs.getString("contrasenia");
-				datos[6]=rs.getString("cargo");
-				datos[7]=rs.getString("estado");
-			}
-			modelo.addRow(datos);
-		}catch(Exception e) {
-			JOptionPane.showMessageDialog(null, "NO SE PUDO CARGAR LA TABLA");
-		}
-		return modelo;
-		
-	}
+
 	public boolean despedir(String palabraClave) { //para buscar por id o por nombre
 		String sql= "SELECT estado from empleados WHERE nombre LIKE %'"+palabraClave+"'% OR id_empleado LIKE %'"+palabraClave+"'%;";
 		String sql2= "UPDATE empleados SET estado=false WHERE nombre ='"+palabraClave +"' OR id_empleado ="+palabraClave+";";
@@ -117,23 +90,35 @@ public class empleado extends persona{
 		return false;
 	}
 	public boolean contratar() {
-		String sql= "INSERT INTO empleados (estado, correo, contrasenia, cargo, nombre, apellido, ci ) VALUES (true,'"+correo+"', '"+contrasena+"', "+cargo+",'"+nombre+"','"+apellido+"','"+ci+"',"+salario+";"; 
-		PreparedStatement ps=null;
-		ResultSet rs= null;
-		conexionBD conec= new conexionBD();
-		Connection conn=conec.conexion();
-		try {
-			ps=conn.prepareStatement(sql);
-			int i=ps.executeUpdate();
-			if(i>0) {
-				return true;
-			}else {
-				return false;
-			}
-		}catch(Exception e) {
-			return false;
-		}
+		System.out.println(contrasena);
+		System.out.println(contrasena.length());
+	    String sql = "INSERT INTO empleados (estado, correo, contrasenia, cargo, nombre, apellido, ci, salario) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
+	    PreparedStatement ps = null;
+	    conexionBD conec = new conexionBD();
+	    Connection conn = conec.conexion();
+	    
+	    try {
+	        ps = conn.prepareStatement(sql);
+	        ps.setBoolean(1, true);
+	        ps.setString(2, correo); 
+	        ps.setString(3, contrasena); 
+	        ps.setInt(4, cargo); 
+	        ps.setString(5, nombre); 
+	        ps.setString(6, apellido);
+	        ps.setString(7, ci); 
+	        ps.setDouble(8, salario); 
+
+	        int i = ps.executeUpdate();
+	        if (i > 0) {
+	            return true; 
+	        } else {
+	            return false; 
+	        }
+	    } catch (SQLException e) {
+	        e.printStackTrace();
+	        return false; 
+	    }
 	}
-	
+
 	
 }

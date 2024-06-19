@@ -368,18 +368,59 @@ public class Pedidos extends JFrame {
         btnBuscar.setBounds(183, 283, 157, 44);
         panel.add(btnBuscar);
 
-        JButton btnAgregarProducto = new JButton("Pedir Producto");
-        btnAgregarProducto.addActionListener(new ActionListener() {
+        JButton btnPedirProducto = new JButton("Pedir Producto");
+        btnPedirProducto.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
+                // Verificar si el producto ya está en la lista
+                if (productos.contains(productoSeleccionado)) {
+                    // Si el producto ya está en la lista, sumar la cantidad ingresada a la cantidad existente
+                    String cantidadString = cantidad.getText().trim();
+                    if (!cantidadString.isEmpty()) {
+                        try {
+                            double cantidadDouble = Double.parseDouble(cantidadString);
+                            int index = productos.indexOf(productoSeleccionado);
+                            cantidades.set(index, cantidades.get(index) + cantidadDouble);
+                            actualizarStock(cantidadDouble, 1); // Sumar al stock existente
+                        } catch (NumberFormatException ex) {
+                            JOptionPane.showMessageDialog(null, "Ingresa una cantidad válida.");
+                        }
+                    }
+                } else {
+                    // Si el producto no está en la lista, agregarlo con su cantidad
+                    String cantidadString = cantidad.getText().trim();
+                    if (!cantidadString.isEmpty() && Double.parseDouble(cantidad.getText()) > 0) {
+                        try {
+                            double cantidadDouble = Double.parseDouble(cantidadString);
+                            productos.add(productoSeleccionado);
+                            cantidades.add(cantidadDouble);
+                            actualizarStock(cantidadDouble, 1); // Sumar al stock existente
+                        } catch (NumberFormatException ex) {
+                            JOptionPane.showMessageDialog(null, "Ingresa una cantidad válida.");
+                        }
+                    } else {
+                        JOptionPane.showMessageDialog(null, "Ingresa una cantidad válida.");
+                    }
+                }
+
+                // Actualizar la tabla pedidosRealizados con los datos actualizados
+                try {
+                    carrito carr = new carrito();
+                    tabla2 = carr.carritos(columnasNombres, productos, cantidades);
+                } catch (NumberFormatException ex) {
+                    JOptionPane.showMessageDialog(null, "Error al actualizar la tabla.");
+                }
+
+                System.out.println(productoSeleccionado);
             }
         });
+
        
 
-        btnAgregarProducto.setForeground(Color.WHITE);
-        btnAgregarProducto.setFont(new Font("Roboto Black", Font.BOLD, 21));
-        btnAgregarProducto.setBackground(new Color(51, 102, 255));
-        btnAgregarProducto.setBounds(52, 602, 230, 49);
-        panel.add(btnAgregarProducto);
+        btnPedirProducto.setForeground(Color.WHITE);
+        btnPedirProducto.setFont(new Font("Roboto Black", Font.BOLD, 21));
+        btnPedirProducto.setBackground(new Color(51, 102, 255));
+        btnPedirProducto.setBounds(52, 602, 230, 49);
+        panel.add(btnPedirProducto);
         
         JLabel lblNewLabel = new JLabel("");
         lblNewLabel.setIcon(new ImageIcon("C:\\Documentos\\imag\\logo330x200.png"));
@@ -404,8 +445,8 @@ public class Pedidos extends JFrame {
         contentPane.add(content);
 		content.setLayout(new BorderLayout(0, 0));
         
-        JButton botonFrutas_1 = new JButton("Pedir nuevo Producto");
-        botonFrutas_1.addActionListener(new ActionListener() {
+        JButton botonPedirNuevo = new JButton("Pedir nuevo Producto");
+        botonPedirNuevo.addActionListener(new ActionListener() {
         	public void actionPerformed(ActionEvent e) {
 				Panel5 mod = new Panel5();
 				mod.setSize(679, 320); // Ajuste del tamaño
@@ -416,16 +457,16 @@ public class Pedidos extends JFrame {
 				content.repaint();
         	}
         });
-        botonFrutas_1.setForeground(Color.WHITE);
-        botonFrutas_1.setFont(new Font("Dialog", Font.BOLD, 18));
-        botonFrutas_1.setFocusPainted(false);
-        botonFrutas_1.setBorder(new LineBorder(new Color(7, 54, 127), 2));
-        botonFrutas_1.setBackground(new Color(21, 101, 192));
-        botonFrutas_1.setBounds(387, 323, 350, 44);
-        contentPane.add(botonFrutas_1);
+        botonPedirNuevo.setForeground(Color.WHITE);
+        botonPedirNuevo.setFont(new Font("Dialog", Font.BOLD, 18));
+        botonPedirNuevo.setFocusPainted(false);
+        botonPedirNuevo.setBorder(new LineBorder(new Color(7, 54, 127), 2));
+        botonPedirNuevo.setBackground(new Color(21, 101, 192));
+        botonPedirNuevo.setBounds(387, 323, 350, 44);
+        contentPane.add(botonPedirNuevo);
         
-        JButton botonVerduras_1 = new JButton("Modificar Producto Existente");
-        botonVerduras_1.addActionListener(new ActionListener() {
+        JButton botonModificar = new JButton("Modificar Producto Existente");
+        botonModificar.addActionListener(new ActionListener() {
         	public void actionPerformed(ActionEvent e) {
 				Panel6 mod = new Panel6();
 				mod.setSize(679, 320); // Ajuste del tamaño
@@ -436,15 +477,15 @@ public class Pedidos extends JFrame {
 				content.repaint();
         	}
         });
-        botonVerduras_1.setForeground(Color.WHITE);
-        botonVerduras_1.setFont(new Font("Dialog", Font.BOLD, 18));
-        botonVerduras_1.setFocusPainted(false);
-        botonVerduras_1.setBorder(new LineBorder(new Color(7, 54, 127), 2));
-        botonVerduras_1.setBackground(new Color(21, 101, 192));
-        botonVerduras_1.setBounds(735, 323, 334, 44);
-        contentPane.add(botonVerduras_1);
+        botonModificar.setForeground(Color.WHITE);
+        botonModificar.setFont(new Font("Dialog", Font.BOLD, 18));
+        botonModificar.setFocusPainted(false);
+        botonModificar.setBorder(new LineBorder(new Color(7, 54, 127), 2));
+        botonModificar.setBackground(new Color(21, 101, 192));
+        botonModificar.setBounds(735, 323, 334, 44);
+        contentPane.add(botonModificar);
         
-        /*// Agregar la tabla al JScrollPane
+        // Agregar la tabla al JScrollPane
         scrollPane.setViewportView(table);
      // Agregar el listener a la tabla para manejar clics simples y dobles
         table.getSelectionModel().addListSelectionListener(e -> {
@@ -497,66 +538,68 @@ public class Pedidos extends JFrame {
                     System.out.println(productoSeleccionado);
                 }
             }
-        });*/
+        });
         
 
 	}
+
     public static double stockCalculo() {
-    	double stock=0;
-		String consulta= "SELECT stock from productos WHERE id_producto="+productoSeleccionado+";" ;
-		conexionBD conec= new conexionBD();
-		Connection conn= conec.conexion();
-		PreparedStatement ps= null;
-		ResultSet rs= null;
-		try {
-			ps=conn.prepareStatement(consulta);
-			rs=ps.executeQuery();
-			if(rs.next()) {
-				stock=Double.parseDouble(rs.getString(1));
-			}
-		}catch(Exception e) {
-			JOptionPane.showMessageDialog(null, "no se pudo cargar el stock");
-		}
-		
-    	return stock;
-
-
-	}
-    
-    public static void actualizarStock (double cantidad, int op) {
-    	String consulta= "SELECT stock from productos WHERE id_producto="+productoSeleccionado+";" ;
-    	double stock = 0.0;
-		conexionBD conec= new conexionBD();
-		Connection conn= conec.conexion();
-		PreparedStatement ps= null;
-		ResultSet rs= null;
-		try {
-			ps=conn.prepareStatement(consulta);
-			rs=ps.executeQuery();
-			if(rs.next()) {
-				stock=Double.parseDouble(rs.getString(1));
-			}
-			
-			double actual;
-			if(op == 1) {
-				actual = stock - cantidad;
-			} else {
-				actual = stock + cantidad;
-			}
-			
-			String act = "update productos set stock =" + actual + " where ID_producto = " + productoSeleccionado + ";";
-			ps = conn.prepareStatement(act);
-			int v = ps.executeUpdate();
-			if (v > 0) {
-				System.out.println("Actualizado");
-			} else {
-				System.out.println("No Actualizado");
-			}
-			
-		}catch(Exception e) {
-			JOptionPane.showMessageDialog(null, "no se pudo cargar el stock");
-		}
+        double stock = 0;
+        String consulta = "SELECT stock from productos WHERE id_producto=" + productoSeleccionado + ";";
+        conexionBD conec = new conexionBD();
+        Connection conn = conec.conexion();
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+        try {
+            ps = conn.prepareStatement(consulta);
+            rs = ps.executeQuery();
+            if (rs.next()) {
+                stock = Double.parseDouble(rs.getString(1));
+            }
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "No se pudo cargar el stock");
+        }
+        return stock;
     }
+
+    
+    public static void actualizarStock(double cantidad, int op) {
+        String consulta = "SELECT stock from productos WHERE id_producto=" + productoSeleccionado + ";";
+        double stock = 0.0;
+        conexionBD conec = new conexionBD();
+        Connection conn = conec.conexion();
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+        try {
+            ps = conn.prepareStatement(consulta);
+            rs = ps.executeQuery();
+            if (rs.next()) {
+                stock = Double.parseDouble(rs.getString(1));
+            }
+
+            double actual;
+            if (op == 1) {
+                actual = stock + cantidad; // Sumar cantidad al stock existente
+            } else {
+                actual = stock - cantidad;
+            }
+
+            String act = "update productos set stock =" + actual + " where ID_producto = " + productoSeleccionado + ";";
+            ps = conn.prepareStatement(act);
+            int v = ps.executeUpdate();
+            if (v > 0) {
+                System.out.println("Actualizado");
+            } else {
+                System.out.println("No Actualizado");
+            }
+
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "No se pudo actualizar el stock");
+        }
+    }
+
+    
+    
 	public int eliminar() {
 		int posicion=0;
 		for(int i=0; i<productos.size(); i++) {
@@ -570,13 +613,15 @@ public class Pedidos extends JFrame {
 		return posicion;
 
 	}
+
 	public void eliminarCantidad() {
 	    int posicion = eliminar();
 	    if (posicion != -1) {
-	    	actualizarStock(cantidades.get(posicion), 2);
+	        actualizarStock(cantidades.get(posicion), 2); // Restar del stock existente
 	        cantidades.remove(posicion);
 	    }
 	}
+
 
 	public int sacarPosicion() {
 		int posicion=0;

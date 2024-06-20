@@ -2,21 +2,34 @@ package Vista;
 
 import javax.swing.JPanel;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+
 import java.awt.Font;
 import java.awt.Color;
 import javax.swing.JTextField;
 import javax.swing.JButton;
 import javax.swing.border.LineBorder;
+
+import conexionBase.conexionBD;
+
 import javax.swing.JComboBox;
+import java.awt.event.ActionListener;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.awt.event.ActionEvent;
 
 public class Panel6 extends JPanel {
 
 	private static final long serialVersionUID = 1L;
-	private JTextField nombreproducto;
-	private JTextField precioCompra;
-	private JTextField precioVenta;
-	private JTextField proveedor;
-	private JTextField idProducto;
+	public static final JTextField nombreproducto = new JTextField();
+	public static final JTextField precioCompra = new JTextField();
+	public static final JTextField precioVenta = new JTextField();
+	public static final JTextField proveedor = new JTextField();
+	public static final JTextField idProducto = new JTextField();
+	public static final String[] productos = {"Frutas", "Verduras", "Carnes", "Lacteos", "Cereales", "Dulces", "Limpieza", "Aseo Personal"};
+	public static final JComboBox<String> comboBox = new JComboBox<>(productos);
 
 	/**
 	 * Create the panel.
@@ -31,7 +44,7 @@ public class Panel6 extends JPanel {
 		lblNombreDelProducto.setBounds(10, 109, 220, 29);
 		add(lblNombreDelProducto);
 		
-		nombreproducto = new JTextField();
+
 		nombreproducto.setFont(new Font("Roboto Medium", Font.PLAIN, 21));
 		nombreproducto.setColumns(10);
 		nombreproducto.setBounds(229, 110, 206, 30);
@@ -43,7 +56,7 @@ public class Panel6 extends JPanel {
 		lblPrecioDeCompra.setBounds(40, 148, 179, 29);
 		add(lblPrecioDeCompra);
 		
-		precioCompra = new JTextField();
+
 		precioCompra.setFont(new Font("Roboto Medium", Font.PLAIN, 21));
 		precioCompra.setColumns(10);
 		precioCompra.setBounds(229, 148, 206, 30);
@@ -55,7 +68,7 @@ public class Panel6 extends JPanel {
 		lblPrecioDeVenta.setBounds(61, 189, 158, 29);
 		add(lblPrecioDeVenta);
 		
-		precioVenta = new JTextField();
+
 		precioVenta.setFont(new Font("Roboto Medium", Font.PLAIN, 21));
 		precioVenta.setColumns(10);
 		precioVenta.setBounds(229, 189, 206, 30);
@@ -67,13 +80,22 @@ public class Panel6 extends JPanel {
 		lblProveedor.setBounds(106, 229, 113, 29);
 		add(lblProveedor);
 		
-		proveedor = new JTextField();
+
 		proveedor.setFont(new Font("Roboto Medium", Font.PLAIN, 21));
 		proveedor.setColumns(10);
 		proveedor.setBounds(229, 228, 206, 30);
 		add(proveedor);
 		
 		JButton btnPedirNuevoProducto = new JButton("Modificar Producto");
+		btnPedirNuevoProducto.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				if(actualizar()) {
+					JOptionPane.showMessageDialog(null, "Producto Actualizado Correctamente!");
+				}else {
+					JOptionPane.showMessageDialog(null, "xd");
+				}
+			}
+		});
 		btnPedirNuevoProducto.setForeground(Color.WHITE);
 		btnPedirNuevoProducto.setFont(new Font("Dialog", Font.BOLD, 18));
 		btnPedirNuevoProducto.setFocusPainted(false);
@@ -82,8 +104,7 @@ public class Panel6 extends JPanel {
 		btnPedirNuevoProducto.setBounds(214, 265, 245, 46);
 		add(btnPedirNuevoProducto);
 		
-		String[] productos = {"Frutas", "Verduras", "Lácteos", "Carnes", "Dulces", "Cereales", "Aseo Personal", "Limpieza"};
-		JComboBox<String> comboBox = new JComboBox<>(productos);
+
 		comboBox.setFont(new Font("Roboto Medium", Font.PLAIN, 21));
 		comboBox.setBounds(458, 179, 211, 40);
 		add(comboBox);
@@ -96,15 +117,16 @@ public class Panel6 extends JPanel {
 		
 		JPanel panel = new JPanel();
 		panel.setBackground(new Color(0, 128, 192));
-		panel.setBounds(0, 0, 679, 61);
+		panel.setBounds(0, 0, 698, 61);
 		add(panel);
+		panel.setLayout(null);
 		
 		JLabel lblPedidoDeNuevo = new JLabel("MODIFICACION DE PRODUCTO");
+		lblPedidoDeNuevo.setBounds(146, 11, 411, 35);
 		lblPedidoDeNuevo.setForeground(Color.WHITE);
-		lblPedidoDeNuevo.setFont(new Font("Roboto Black", Font.ITALIC, 48));
+		lblPedidoDeNuevo.setFont(new Font("Dialog", Font.ITALIC, 27));
 		panel.add(lblPedidoDeNuevo);
 		
-		idProducto = new JTextField();
 		idProducto.setFont(new Font("Roboto Medium", Font.PLAIN, 21));
 		idProducto.setColumns(10);
 		idProducto.setBounds(229, 72, 206, 30);
@@ -117,6 +139,11 @@ public class Panel6 extends JPanel {
 		add(lblIdDelProducto);
 		
 		JButton btnBuscar = new JButton("Buscar");
+		btnBuscar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				buscar(idProducto.getText());
+			}
+		});
 		btnBuscar.setForeground(Color.WHITE);
 		btnBuscar.setFont(new Font("Dialog", Font.BOLD, 18));
 		btnBuscar.setFocusPainted(false);
@@ -126,5 +153,82 @@ public class Panel6 extends JPanel {
 		add(btnBuscar);
 
 	}
+    public static void buscar(String palabraClave) {
+        String sql = "SELECT productos.id_producto, productos.nombre, productos.precio_compra, productos.precio_venta, productos.categoria, Pedidos.nombre_P FROM productos, Pedidos WHERE productos.id_producto =" + palabraClave + " AND productos.id_producto=Pedidos.id_producto;";
+        conexionBD conec = new conexionBD();
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+        Connection conn = conec.conexion();
+        try {
+            ps = conn.prepareStatement(sql);
+            rs = ps.executeQuery();
+            if (rs.next()) {
+                idProducto.setText(rs.getString("productos.id_producto"));
+                nombreproducto.setText(rs.getString("productos.nombre"));
+                precioCompra.setText(rs.getString("productos.precio_compra"));
+                precioVenta.setText(rs.getString("productos.precio_venta"));
+                proveedor.setText(rs.getString("Pedidos.nombre_P"));
+                comboBox.setSelectedIndex(Integer.parseInt(rs.getString("productos.categoria"))-1);
+            } else {
+                JOptionPane.showMessageDialog(null, "No se encontró al empleado");
+            }
+        } catch (Exception e) {
+            System.out.println("Algo salió mal");
+        } finally {
+            try {
+                if (rs != null) rs.close();
+                if (ps != null) ps.close();
+                if (conn != null) conn.close();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+    }
+    
+    public boolean actualizar() {
+        String sql = "UPDATE productos SET nombre=?, precio_compra=?, precio_venta=?, categoria=? WHERE ID_producto=?";
+        String sql2 = "UPDATE Pedidos SET nombre_P=? WHERE id_producto=?";
+        PreparedStatement ps = null;
+        PreparedStatement ps1 = null;
+        conexionBD conec = new conexionBD();
+        Connection conn = conec.conexion();
+
+        try {
+            ps = conn.prepareStatement(sql);
+            ps.setString(1, nombreproducto.getText());
+            ps.setString(2, precioCompra.getText());
+            ps.setString(3, precioVenta.getText());
+            ps.setInt(4, comboBox.getSelectedIndex() + 1);
+            ps.setInt(5, Integer.parseInt(idProducto.getText()));
+            int i = ps.executeUpdate();
+
+            if (i > 0) {
+                ps1 = conn.prepareStatement(sql2);
+                ps1.setString(1, proveedor.getText());
+                ps1.setInt(2, Integer.parseInt(idProducto.getText()));
+                int j = ps1.executeUpdate(); 
+
+                if (j > 0) {
+                    return true;
+                } else {
+                    return false;
+                }
+            } else {
+                return false;
+            }
+        } catch (SQLException e) {
+        	JOptionPane.showMessageDialog(null, "Debe llenar todos los espacios crj!");
+            return false;
+        } finally {
+            try {
+                if (ps != null) ps.close();
+                if (ps1 != null) ps1.close(); 
+                if (conn != null) conn.close();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
 
 }

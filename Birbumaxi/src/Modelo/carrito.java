@@ -20,10 +20,10 @@ public class carrito {
 	    }
 
 	    for (int i = 0; i < producto.size(); i++) {
-	        String consulta = "SELECT id_producto, nombre, stock, precio_venta, tipo FROM productos WHERE id_producto = ?";
+	        String consulta = "SELECT id_producto, nombre, precio_venta, tipo FROM productos WHERE id_producto = ?";
 	        conexionBD conec = new conexionBD();
 	        Connection conn = conec.conexion();
-	        String[] tabla = new String[5];
+	        String[] tabla = new String[4];
 	        PreparedStatement ps = null;
 	        ResultSet rs = null;
 
@@ -35,9 +35,8 @@ public class carrito {
 	            if (rs.next()) {
 	                tabla[0] = rs.getString("id_producto");
 	                tabla[1] = rs.getString("nombre");
-	                tabla[2] = rs.getString("stock");
-	                tabla[3] = rs.getString("precio_venta");
-	                tabla[4] = String.valueOf(cantidad.get(i));
+	                tabla[2] = rs.getString("precio_venta");
+	                tabla[3] = String.valueOf(cantidad.get(i));
 	                model.addRow(tabla);
 	            }
 	        } catch (SQLException e) {

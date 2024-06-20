@@ -442,7 +442,7 @@ public class Ventas extends JFrame {
                                     pedidosRealizados.setModel(tabla2);
                                     System.out.println("hasta aca bien");
                                     int index= productos.indexOf(productoSeleccionado);
-                                    actualizarStock(cantidades.get(index), 1);
+                                    actualizarStock(cantidades.get(index), 1, productoSeleccionado);
                                 }
                            }else{
                         	    productos.add(productoSeleccionado);
@@ -456,7 +456,7 @@ public class Ventas extends JFrame {
                                     pedidosRealizados.setModel(tabla2);
                                     System.out.println("hasta aca bien");
                                     int index= productos.indexOf(productoSeleccionado);
-                                    actualizarStock(cantidades.get(index), 1);
+                                    actualizarStock(cantidades.get(index), 1, productoSeleccionado);
                                 }
                            }
                      
@@ -559,8 +559,8 @@ public class Ventas extends JFrame {
         return stock;
     }
 
-    public static void actualizarStock(double cantidad, int op) {
-        String consulta = "SELECT stock from productos WHERE id_producto=" + productoSeleccionado + ";";
+    public static void actualizarStock(double cantidad, int op, String productoIDjijijja) {
+        String consulta = "SELECT stock from productos WHERE id_producto=" + productoIDjijijja + ";";
         double stock = 0.0;
         conexionBD conec = new conexionBD();
         Connection conn = conec.conexion();
@@ -580,7 +580,7 @@ public class Ventas extends JFrame {
                 actual = stock + cantidad; // Sumar cantidad al stock existente
             }
 
-            String act = "UPDATE productos SET stock = " + actual + " WHERE id_producto = " + productoSeleccionado + ";";
+            String act = "UPDATE productos SET stock = " + actual + " WHERE id_producto = " + productoIDjijijja + ";";
             ps = conn.prepareStatement(act);
             int v = ps.executeUpdate();
             if (v > 0) {
@@ -618,7 +618,7 @@ public class Ventas extends JFrame {
 	public void eliminarCantidad() {
 	    int posicion = eliminar();
 	    if (posicion != -1) {
-	    	actualizarStock(cantidades.get(posicion), 2);
+	    	actualizarStock(cantidades.get(posicion), 2, eliminarProd);
 	        cantidades.remove(posicion);
 	    }
 	}

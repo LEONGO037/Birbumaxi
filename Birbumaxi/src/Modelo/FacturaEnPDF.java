@@ -146,7 +146,7 @@ public class FacturaEnPDF extends ReportePapa{
             
             document.add(espaciador);
             
-            double cambio = monto - total;
+            double cambio = monto - bd.doubleValue();
             
             BigDecimal bd1 = new BigDecimal(Double.toString(cambio));
             bd1 = bd1.setScale(2, RoundingMode.FLOOR);

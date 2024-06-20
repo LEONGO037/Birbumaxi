@@ -9,7 +9,7 @@ public class desplegarPorCategoria {
 	public DefaultTableModel datos(int categoria, String[] columnas, String palabra) {
 		DefaultTableModel model = new DefaultTableModel(null, columnas);
 		
-		String consulta= "SELECT ID_producto, nombre, stock, precio_venta from productos WHERE categoria="+categoria+" AND ( id_producto LIKE '%"+ palabra+"%' OR nombre LIKE '%"+palabra+"%');" ;
+		String consulta= "SELECT ID_producto, nombre, precio_venta from productos WHERE categoria="+categoria+" AND ( id_producto LIKE '%"+ palabra+"%' OR nombre LIKE '%"+palabra+"%');" ;
 		conexionBD conec= new conexionBD();
 		Connection conn= conec.conexion();
 		String[] tabla = new String[4];
@@ -21,8 +21,7 @@ public class desplegarPorCategoria {
 			while(rs.next()) {
 				tabla[0]= rs.getString("id_producto");
 				tabla[1]= rs.getString("nombre");
-				tabla[2]= rs.getString("stock");
-				tabla[3]= rs.getString("precio_venta");
+				tabla[2]= rs.getString("precio_venta");
 				model.addRow(tabla);
 			}
 			return model;

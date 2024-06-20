@@ -79,6 +79,8 @@ public class Panel4 extends JPanel {
 						ve.GenerarReporte(inicio, fin);
 					}
 				}
+				textField.setText("");
+				textField_1.setText("");
 			}
 		});
 		btnGenerarReporte.setForeground(Color.WHITE);

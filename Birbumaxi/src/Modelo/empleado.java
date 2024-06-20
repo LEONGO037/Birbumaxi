@@ -1,7 +1,6 @@
 package Modelo;
 
 
-import java.sql.PreparedStatement;
 import java.sql.*;
 
 import javax.swing.JOptionPane;
@@ -86,7 +85,16 @@ public class empleado extends persona{
 			}
 		}catch(Exception e) {
 			return false;
-		}
+		}finally {
+	        try {
+	            if (rs != null) rs.close();
+	            if (ps != null) ps.close();
+	            if (conn != null) conn.close();
+	            System.out.println("conexiones cerradas");
+	        } catch (SQLException ex) {
+	            ex.printStackTrace();
+	        }
+	    }
 		return false;
 	}
 	public boolean contratar() {
@@ -117,6 +125,14 @@ public class empleado extends persona{
 	    } catch (SQLException e) {
 	        e.printStackTrace();
 	        return false; 
+	    }finally {
+	        try {
+	            if (ps != null) ps.close();
+	            if (conn != null) conn.close();
+	            System.out.println("conexiones cerradas");
+	        } catch (SQLException ex) {
+	            ex.printStackTrace();
+	        }
 	    }
 	}
 

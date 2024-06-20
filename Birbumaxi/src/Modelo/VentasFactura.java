@@ -72,7 +72,16 @@ public class VentasFactura {
 			
 		}catch(Exception e) {
 			e.printStackTrace();
-		}
+		}finally {
+	        try {
+	            if (rs != null) rs.close();
+	            if (ps != null) ps.close();
+	            if (conn != null) conn.close();
+	            System.out.println("conexiones cerradas");
+	        } catch (SQLException ex) {
+	            ex.printStackTrace();
+	        }
+	    }
 		
 		return facturaID;
 	}

@@ -5,6 +5,8 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.net.MalformedURLException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -53,6 +55,7 @@ public class ReporteFinanzas extends ReportePapa{
 		return super.horita();
 	}
 	
+	@Override
 	public void GenerarReporte() {
         String dest = "ReporteFinanciero.pdf";
         
@@ -104,10 +107,13 @@ public class ReporteFinanzas extends ReportePapa{
             
             double suma = SumaTotal(inv);
             
+            BigDecimal bd = new BigDecimal(Double.toString(suma));
+            bd = bd.setScale(2, RoundingMode.FLOOR);
+            
             addTableCell(table, "");
             addTableCell(table, "");
             addTableCell(table, "");
-            addTableCell(table, "" + suma);
+            addTableCell(table, "" + bd.doubleValue());
 
             document.add(table);
 

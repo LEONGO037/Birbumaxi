@@ -39,6 +39,10 @@ public class ReportePapa {
         table.addCell(cell);
     }
     
+    public void GenerarReporte() {
+    	
+    }
+    
     public ReportePapa() {
     	
 	}

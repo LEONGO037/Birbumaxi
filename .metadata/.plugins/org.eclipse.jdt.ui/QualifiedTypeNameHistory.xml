@@ -4,4 +4,5 @@
     <fullyQualifiedTypeName name="javax.mail.MessagingException"/>
     <fullyQualifiedTypeName name="javax.mail.NoSuchProviderException"/>
     <fullyQualifiedTypeName name="Modelo.EnviarEmailFactura"/>
+    <fullyQualifiedTypeName name="java.lang.Override"/>
 </qualifiedTypeNameHistroy>

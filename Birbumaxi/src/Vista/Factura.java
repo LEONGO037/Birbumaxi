@@ -69,8 +69,8 @@ public class Factura extends JFrame {
         
 
         
-        VentasFactura vf = new VentasFactura(cantidad, productos );
-        DefaultTableModel tablaFac = vf.carritoFactura(datos);
+        VentasFactura vf = new VentasFactura(cantidad, productos);
+        DefaultTableModel tablaFac = vf.carritoFactura(datos, FacturaID);
         detalleFactura = new JTable(tablaFac);
         JScrollPane scrollPane = new JScrollPane(detalleFactura);
         scrollPane.setBounds(43, 341, 900, 232);

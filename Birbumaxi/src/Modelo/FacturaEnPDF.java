@@ -69,7 +69,7 @@ public class FacturaEnPDF extends ReportePapa{
 	}
 	
 	public void GenerarReporte(double monto) {
-        String dest = "Factura.pdf";
+        String dest = "C:/Documentos/Factura.pdf";
         
         Document document = new Document();
 

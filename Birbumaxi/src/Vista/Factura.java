@@ -22,6 +22,7 @@ import javax.swing.border.LineBorder;
 import javax.swing.table.DefaultTableModel;
 
 import Modelo.ClienteFactura;
+import Modelo.EnviarEmailFactura;
 import Modelo.FacturaEnPDF;
 import Modelo.VentasFactura;
 import Modelo.carrito;
@@ -237,6 +238,8 @@ public class Factura extends JFrame {
         				cfa.agregarFactura(FacturaID, metodoPago.getSelectedIndex() + 1, idcliente);
         				FacturaEnPDF facPDF = new FacturaEnPDF (FacturaID);
         				facPDF.GenerarReporte(validard(montop.getText()));
+        				EnviarEmailFactura ev = new EnviarEmailFactura(cfa.getCorreo());
+        				ev.EnviarCorreo();
             			Ventas v = new Ventas();
             			v.setVisible(true);
             			dispose();

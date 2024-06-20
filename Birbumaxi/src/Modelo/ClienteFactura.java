@@ -168,4 +168,6 @@ public class ClienteFactura extends persona{
 		
 		return idPersona;
 	}
+	
+	
 }

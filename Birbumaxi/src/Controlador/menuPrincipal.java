@@ -4,6 +4,7 @@ package Controlador;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 
+import Modelo.EnviarEmailFactura;
 import Modelo.FacturaEnPDF;
 import Vista.Factura;
 import Vista.Ventas;

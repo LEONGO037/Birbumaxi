@@ -11,6 +11,7 @@ import java.net.MalformedURLException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 
 import com.itextpdf.text.BaseColor;
@@ -145,7 +146,7 @@ public class FacturaEnPDF extends ReportePapa{
             
             document.add(espaciador);
             
-            double cambio = monto - total;
+            double cambio = monto - bd.doubleValue();
             
             BigDecimal bd1 = new BigDecimal(Double.toString(cambio));
             bd1 = bd1.setScale(2, RoundingMode.FLOOR);
@@ -228,7 +229,16 @@ public class FacturaEnPDF extends ReportePapa{
 			}
 		}catch(Exception e) {
 			
-		}
+		}finally {
+	        try {
+	            if (rs != null) rs.close();
+	            if (ps != null) ps.close();
+	            if (conn != null) conn.close();
+	            System.out.println("conexiones cerradas");
+	        } catch (SQLException ex) {
+	            ex.printStackTrace();
+	        }
+	    }
 		return inv;
 	}
 	
@@ -251,7 +261,16 @@ public class FacturaEnPDF extends ReportePapa{
 			}
 		}catch(Exception e) {
 			
-		}
+		}finally {
+	        try {
+	            if (rs != null) rs.close();
+	            if (ps != null) ps.close();
+	            if (conn != null) conn.close();
+	            System.out.println("conexiones cerradas");
+	        } catch (SQLException ex) {
+	            ex.printStackTrace();
+	        }
+	    }
 		return nit;
 	}
 	
@@ -270,7 +289,16 @@ public class FacturaEnPDF extends ReportePapa{
 			}
 		}catch(Exception e) {
 			
-		}
+		}finally {
+	        try {
+	            if (rs != null) rs.close();
+	            if (ps != null) ps.close();
+	            if (conn != null) conn.close();
+	            System.out.println("conexiones cerradas");
+	        } catch (SQLException ex) {
+	            ex.printStackTrace();
+	        }
+	    }
 		return fecha;
 	}
 	
@@ -290,7 +318,16 @@ public class FacturaEnPDF extends ReportePapa{
 			}
 		}catch(Exception e) {
 			
-		}
+		}finally {
+	        try {
+	            if (rs != null) rs.close();
+	            if (ps != null) ps.close();
+	            if (conn != null) conn.close();
+	            System.out.println("conexiones cerradas");
+	        } catch (SQLException ex) {
+	            ex.printStackTrace();
+	        }
+	    }
 		return nom;
 	}
 }

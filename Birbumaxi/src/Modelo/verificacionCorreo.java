@@ -1,6 +1,5 @@
 package Modelo;
 
-import java.sql.Connection;
 import java.util.ArrayList;
 
 import javax.swing.JOptionPane;
@@ -45,7 +44,16 @@ public class verificacionCorreo {
 			
 		}catch(Exception e) {
 			return false;
-		}
+		}finally {
+	        try {
+	            if (rs != null) rs.close();
+	            if (ps != null) ps.close();
+	            if (conn != null) conn.close();
+	            System.out.println("conexiones cerradas");
+	        } catch (SQLException ex) {
+	            ex.printStackTrace();
+	        }
+	    }
 		return false;
 	}
 	public boolean verificadorTipo(String correo) {

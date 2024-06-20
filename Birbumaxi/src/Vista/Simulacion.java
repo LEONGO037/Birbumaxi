@@ -111,14 +111,5 @@ public class Simulacion extends JFrame {
         contentPane.add(lblNewLabel_1);
     }
 
-    public static void main(String[] args) {
-        EventQueue.invokeLater(() -> {
-            try {
-                Simulacion frame = new Simulacion();
-                frame.setVisible(true);
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-        });
-    }
+
 }

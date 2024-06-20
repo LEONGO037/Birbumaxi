@@ -21,6 +21,7 @@ import java.awt.Font;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 
 public class Panel1 extends JPanel {
 
@@ -105,7 +106,16 @@ public class Panel1 extends JPanel {
 			
 		}catch(Exception e) {
 			JOptionPane.showMessageDialog(null, "NO SE PUDO CARGAR LA TABLA");
-		}
+		}finally {
+	        try {
+	            if (rs != null) rs.close();
+	            if (ps != null) ps.close();
+	            if (conn != null) conn.close();
+	            System.out.println("conexiones cerradas");
+	        } catch (SQLException ex) {
+	            ex.printStackTrace();
+	        }
+	    }
 		return modelo;
 		
 	}

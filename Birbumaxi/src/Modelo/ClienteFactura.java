@@ -3,6 +3,7 @@ package Modelo;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 
 import conexionBase.conexionBD;
@@ -65,7 +66,15 @@ public class ClienteFactura extends persona{
 			}
 		}catch(Exception e) {
 			e.printStackTrace();
-		}
+		}finally {
+	        try {
+	            if (rs != null) rs.close();
+	            if (ps != null) ps.close();
+	            if (conn != null) conn.close();
+	        } catch (SQLException ex) {
+	            ex.printStackTrace();
+	        }
+	    }
 	}
 	
 	public void ingresarClienteNuevo () {
@@ -85,7 +94,15 @@ public class ClienteFactura extends persona{
 			}
 		}catch(Exception e) {
 			e.printStackTrace();
-		}
+		}finally {
+	        try {
+	            if (rs != null) rs.close();
+	            if (ps != null) ps.close();
+	            if (conn != null) conn.close();
+	        } catch (SQLException ex) {
+	            ex.printStackTrace();
+	        }
+	    }
 	}
 	
 	public boolean buscarCliente () {
@@ -104,7 +121,15 @@ public class ClienteFactura extends persona{
 			}
 		}catch(Exception e) {
 			e.printStackTrace();
-		}
+		}finally {
+	        try {
+	            if (rs != null) rs.close();
+	            if (ps != null) ps.close();
+	            if (conn != null) conn.close();
+	        } catch (SQLException ex) {
+	            ex.printStackTrace();
+	        }
+	    }
 		if(nits.contains(nit)) {
 			return true;
 		} else {
@@ -131,7 +156,15 @@ public class ClienteFactura extends persona{
 			}
 		}catch(Exception e) {
 			e.printStackTrace();
-		}
+		}finally {
+	        try {
+	            if (rs != null) rs.close();
+	            if (ps != null) ps.close();
+	            if (conn != null) conn.close();
+	        } catch (SQLException ex) {
+	            ex.printStackTrace();
+	        }
+	    }
 		
 		return idPersona;
 	}

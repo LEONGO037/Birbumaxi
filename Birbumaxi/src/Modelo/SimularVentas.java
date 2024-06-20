@@ -5,6 +5,7 @@ import java.math.RoundingMode;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.time.ZoneId;
@@ -186,7 +187,16 @@ public class SimularVentas {
 			}
 		} catch(Exception e) {
 			e.printStackTrace();
-		}
+		}finally {
+	        try {
+	            if (rs != null) rs.close();
+	            if (ps != null) ps.close();
+	            if (conn != null) conn.close();
+	            System.out.println("conexiones cerradas");
+	        } catch (SQLException ex) {
+	            ex.printStackTrace();
+	        }
+	    }
 	}
 	
 	private static ArrayList<VentasSimularProductos> obtenerDatos (){
@@ -212,7 +222,16 @@ public class SimularVentas {
 			}
 		}catch(Exception e) {
 			
-		}
+		}finally {
+	        try {
+	            if (rs != null) rs.close();
+	            if (ps != null) ps.close();
+	            if (conn != null) conn.close();
+	            System.out.println("conexiones cerradas");
+	        } catch (SQLException ex) {
+	            ex.printStackTrace();
+	        }
+	    }
 		return inv;
 	}
 	

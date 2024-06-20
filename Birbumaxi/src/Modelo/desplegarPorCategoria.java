@@ -29,7 +29,16 @@ public class desplegarPorCategoria {
 		}catch(Exception e) {
 			JOptionPane.showMessageDialog(null, "no se puedo cargar la tabla");
 
-		}
+		}finally {
+	        try {
+	            if (rs != null) rs.close();
+	            if (ps != null) ps.close();
+	            if (conn != null) conn.close();
+	            System.out.println("conexiones cerradas");
+	        } catch (SQLException ex) {
+	            ex.printStackTrace();
+	        }
+	    }
 		return model;
 	}
 	

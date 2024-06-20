@@ -72,6 +72,11 @@ public class Factura extends JFrame {
         VentasFactura vf = new VentasFactura(cantidad, productos);
         DefaultTableModel tablaFac = vf.carritoFactura(datos, FacturaID);
         detalleFactura = new JTable(tablaFac);
+        detalleFactura.setFont(new Font("Roboto Light", Font.BOLD, 18));
+        detalleFactura.setForeground(Color.BLACK);
+        detalleFactura.setBackground(Color.WHITE);
+        detalleFactura.setRowHeight(30);
+        detalleFactura.setFocusable(false); // Deshabilitar el enfoque para evitar la edición por teclado
         JScrollPane scrollPane = new JScrollPane(detalleFactura);
         scrollPane.setBounds(43, 341, 900, 232);
         contentPane.add(scrollPane);

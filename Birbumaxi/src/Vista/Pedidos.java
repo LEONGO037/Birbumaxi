@@ -223,6 +223,7 @@ public class Pedidos extends JFrame {
                 contentPane.add(lblBusquedaPorId);
                 lblBusquedaPorId.setForeground(Color.WHITE);
                 lblBusquedaPorId.setFont(new Font("Roboto Light", Font.ITALIC, 18));
+                busqueda.setEditable(false);
                 
                 busqueda.setBackground(new Color(255, 255, 255));
                 busqueda.setBounds(539, 48, 166, 30);

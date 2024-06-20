@@ -35,6 +35,7 @@ public class ReporteInventario extends ReportePapa{
 		super();
 	}
 	
+	@Override
 	public void GenerarReporte() {
         String dest = "ReporteInventario.pdf";
         

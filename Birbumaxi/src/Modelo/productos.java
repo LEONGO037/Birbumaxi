@@ -44,7 +44,7 @@ public class productos {
 	                int j = ps2.executeUpdate();
 
 	                if (j > 0) {
-	                    return true;
+	                    return paraElReporte(id, stock);
 	                } else {
 	                    return false;
 	                }
@@ -64,6 +64,39 @@ public class productos {
 	            if (ps != null) ps.close();
 	            if (ps1 != null) ps1.close();
 	            if (ps2 != null) ps2.close();
+	            if (conn != null) conn.close();
+	            System.out.println("Conexiones cerradas");
+	        } catch (SQLException ex) {
+	            ex.printStackTrace();
+	        }
+	    }
+	}
+	
+	public boolean paraElReporte (String id, double cantidad) {
+		String sql = "INSERT INTO pedidosReporte (id_producto, fecha, cantidad) VALUES (?, SYSDATE(), ?)";
+	    
+	    conexionBD conec = new conexionBD();
+	    Connection conn = conec.conexion();
+	    PreparedStatement ps = null;
+
+	    try {
+	    	ps = conn.prepareStatement(sql);
+	    	ps.setString(1, id);
+	    	ps.setDouble(2, cantidad);
+	    	int funciona = ps.executeUpdate();
+	    	if (funciona > 0) {
+	    		return true;
+	    	} else {
+	    		return false;
+	    	}
+	        
+	    } catch (Exception e) {
+	    	e.printStackTrace();
+	        //JOptionPane.showMessageDialog(null, "No se pudo ingresar el producto: " + e.getMessage());
+	        return false;
+	    } finally {
+	        try {
+	            if (ps != null) ps.close();
 	            if (conn != null) conn.close();
 	            System.out.println("Conexiones cerradas");
 	        } catch (SQLException ex) {

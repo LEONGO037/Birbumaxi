@@ -89,6 +89,11 @@ public class Panel6 extends JPanel {
 		JButton btnPedirNuevoProducto = new JButton("Modificar Producto");
 		btnPedirNuevoProducto.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				if(actualizar()) {
+					JOptionPane.showMessageDialog(null, "Producto Actualizado Correctamente!");
+				}else {
+					JOptionPane.showMessageDialog(null, "xd");
+				}
 			}
 		});
 		btnPedirNuevoProducto.setForeground(Color.WHITE);
@@ -149,7 +154,7 @@ public class Panel6 extends JPanel {
 
 	}
     public static void buscar(String palabraClave) {
-        String sql = "SELECT productos.id_producto, productos.nombre, productos.precio_compra, productos.precio_venta, productos.categoria, Pedidos.nombre_P FROM productos, Pedidos WHERE (productos.nombre LIKE '%" + palabraClave + "%' OR id_empleado LIKE '%" + palabraClave + "%') AND productos.id_producto=Pedidos.id_producto;";
+        String sql = "SELECT productos.id_producto, productos.nombre, productos.precio_compra, productos.precio_venta, productos.categoria, Pedidos.nombre_P FROM productos, Pedidos WHERE productos.id_producto =" + palabraClave + " AND productos.id_producto=Pedidos.id_producto;";
         conexionBD conec = new conexionBD();
         PreparedStatement ps = null;
         ResultSet rs = null;
@@ -179,38 +184,51 @@ public class Panel6 extends JPanel {
             }
         }
     }
-    /*
+    
     public boolean actualizar() {
-        String sql = "UPDATE empleados SET nombre=?, apellido=?, cargo=?, salario=? WHERE ID_empleado=?";
+        String sql = "UPDATE productos SET nombre=?, precio_compra=?, precio_venta=?, categoria=? WHERE ID_producto=?";
+        String sql2 = "UPDATE Pedidos SET nombre_P=? WHERE id_producto=?";
         PreparedStatement ps = null;
+        PreparedStatement ps1 = null;
         conexionBD conec = new conexionBD();
         Connection conn = conec.conexion();
-        
+
         try {
             ps = conn.prepareStatement(sql);
-            ps.setString(1, nombremp.getText()); 
-            ps.setString(2, apellidoemp.getText());
-            ps.setInt(3, cargos.getSelectedIndex() + 1); 
-            ps.setString(4, salarioemp.getText()); 
-            ps.setString(5, idemp.getText()); 
-
+            ps.setString(1, nombreproducto.getText());
+            ps.setString(2, precioCompra.getText());
+            ps.setString(3, precioVenta.getText());
+            ps.setInt(4, comboBox.getSelectedIndex() + 1);
+            ps.setInt(5, Integer.parseInt(idProducto.getText()));
             int i = ps.executeUpdate();
+
             if (i > 0) {
-                return true; 
+                ps1 = conn.prepareStatement(sql2);
+                ps1.setString(1, proveedor.getText());
+                ps1.setInt(2, Integer.parseInt(idProducto.getText()));
+                int j = ps1.executeUpdate(); 
+
+                if (j > 0) {
+                    return true;
+                } else {
+                    return false;
+                }
             } else {
-                return false; 
+                return false;
             }
         } catch (SQLException e) {
-            e.printStackTrace();
-            return false; 
+        	JOptionPane.showMessageDialog(null, "Debe llenar todos los espacios crj!");
+            return false;
         } finally {
             try {
                 if (ps != null) ps.close();
+                if (ps1 != null) ps1.close(); 
                 if (conn != null) conn.close();
             } catch (SQLException e) {
                 e.printStackTrace();
             }
         }
-    }*/
+    }
+
 
 }

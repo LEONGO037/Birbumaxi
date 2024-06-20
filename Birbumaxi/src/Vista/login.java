@@ -87,6 +87,8 @@ public class login extends JFrame {
                 }else {
                     JOptionPane.showMessageDialog(null, "ingreso denegado");
                 }
+                correo.setText("");
+                password.setText("");
             }
         });
         BotonIngresar.setFont(new Font("Arial Black", Font.PLAIN, 14));

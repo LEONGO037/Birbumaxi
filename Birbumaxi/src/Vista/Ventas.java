@@ -351,8 +351,6 @@ public class Ventas extends JFrame {
                 desplegarPorCategoria desp = new desplegarPorCategoria();
                 model=desp.datos(categoria, columnNames, busqueda.getText());
                 table.setModel(model);
-                
-                
         	}
         });
         btnBuscar.setForeground(Color.WHITE);
@@ -466,13 +464,13 @@ public class Ventas extends JFrame {
                 } else {
                     JOptionPane.showMessageDialog(null, "Ingresa una cantidad válida.");
                 }
+                busqueda.setText("");
+                cantidad.setText("");
+                desplegarPorCategoria desp = new desplegarPorCategoria();
+                model=desp.datos(categoria, columnNames, busqueda.getText());
+                table.setModel(model);
             }
         });
-
-
-
-
-
 
         btnAgregarProducto.setForeground(Color.WHITE);
         btnAgregarProducto.setFont(new Font("Roboto Black", Font.BOLD, 21));

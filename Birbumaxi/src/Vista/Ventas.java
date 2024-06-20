@@ -43,9 +43,9 @@ public class Ventas extends JFrame {
     private JTextField busqueda;
     public static String productoSeleccionado="";
     public static final ArrayList<String> productos= new ArrayList<>(); 
-    public String[] columnNames = {"ID Producto", "Nombre", "Stock", "Precio"};
+    public String[] columnNames = {"ID Producto", "Nombre", "Precio"};
     public DefaultTableModel model = new DefaultTableModel(null, columnNames);
-    public String[] columnasNombres = {"ID Producto", "Nombre", "Stock", "Precio", "Cantidad"};
+    public String[] columnasNombres = {"ID Producto", "Nombre", "Precio", "Cantidad"};
     public DefaultTableModel tabla2= new DefaultTableModel(null, columnasNombres);
     public static final ArrayList<Double> cantidades= new ArrayList<>();
     public static String eliminarProd="";
@@ -442,11 +442,11 @@ public class Ventas extends JFrame {
                                     pedidosRealizados.setModel(tabla2);
                                     System.out.println("hasta aca bien");
                                     int index= productos.indexOf(productoSeleccionado);
-                                    actualizarStock(cantidades.get(index), 1, productoSeleccionado);
+                                    
                                 }
                            }else{
-                        	    productos.add(productoSeleccionado);
                                 if(CantidadesMod(cantidadDouble, 0)) {
+                                	productos.add(productoSeleccionado);
                                 	System.out.println("hasta aca bien");
                                     // Llamar a la función para actualizar la tabla
                                     carrito carr = new carrito();
@@ -690,6 +690,7 @@ public class Ventas extends JFrame {
 	                    return true;
 	                } else if (Ingreso == 1) {
 	                    System.out.println("entra a settear ingreso tipo 1");
+	                    actualizarStock(cantidad, 1, productoSeleccionado);
 	                    cantidades.set(posicion, cantidades.get(posicion) + cantidad);
 	                    System.out.println("se verifica");
 	                    return true;
@@ -703,6 +704,7 @@ public class Ventas extends JFrame {
 	                System.out.println("se verifica");
 	                return true;
 	            } else if (Ingreso == 1) {
+	            	actualizarStock(cantidad, 1, productoSeleccionado);
 	                cantidades.set(posicion, cantidades.get(posicion) + cantidad);
 	                System.out.println("se verifica");
 	                return true;

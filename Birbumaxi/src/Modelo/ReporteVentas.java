@@ -5,6 +5,8 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.net.MalformedURLException;
 import java.sql.Connection;
 import java.sql.Date;
@@ -82,8 +84,10 @@ public class ReporteVentas extends ReportePapa{
                 fechaLocal = fechaLocal.plusDays(1);
                 DateTimeFormatter formato = DateTimeFormatter.ofPattern("dd/MM/yyyy");
                 String fechaActualStr = fechaLocal.format(formato);
-                double total = rs.getInt("total");
-                DatosVentas ped = new DatosVentas(num, nombre, nit, fechaActualStr, total);
+                double total = rs.getDouble("total");
+                BigDecimal bd = new BigDecimal(total).setScale(2, RoundingMode.HALF_UP);
+                double totalRedondeado = bd.doubleValue();
+                DatosVentas ped = new DatosVentas(num, nombre, nit, fechaActualStr, totalRedondeado);
                 inv.add(ped);
 				num++;
 			}
@@ -168,11 +172,14 @@ public class ReporteVentas extends ReportePapa{
              
             double suma = SumaTotal(inv);
             
+            BigDecimal bd = new BigDecimal(suma).setScale(2, RoundingMode.HALF_UP);
+            double totalRedondeado = bd.doubleValue();
+            
             addTableCell(table, "TOTAL");
             addTableCell(table, "");
             addTableCell(table, "");
             addTableCell(table, "");
-            addTableCell(table, "" + suma);
+            addTableCell(table, "" + totalRedondeado);
 
             document.add(table);
 

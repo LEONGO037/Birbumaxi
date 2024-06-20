@@ -26,7 +26,5 @@ public class menuPrincipal {
 		//v.setVisible(true);
 		//Factura fa = new Factura(4);
 		//fa.setVisible(true);
-		
 	}
-
 }

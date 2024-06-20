@@ -372,6 +372,8 @@ public class Ventas extends JFrame {
         		int facturaID = v.RealizarVenta("CONVERT_TZ(NOW(), @@global.time_zone, 'America/La_Paz')");
         		Factura factura = new Factura(facturaID, productos, cantidades);
         		factura.setVisible(true);
+        		cantidades.clear();
+        		productos.clear();
         		dispose();
         	}
         });

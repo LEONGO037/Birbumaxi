@@ -85,21 +85,20 @@ public class VentasFactura {
 		
 		return facturaID;
 	}
-	public DefaultTableModel carritoFactura(String[] columnas) {
+	public DefaultTableModel carritoFactura(String[] columnas, int id_factura) {
 	    DefaultTableModel model = new DefaultTableModel(null, columnas);
 
 	    if (Cantidad.size() != productos.size()) {
 	        JOptionPane.showMessageDialog(null, "Las listas de productos y cantidades no coinciden en tamaño.");
 	        return model;
 	    }
-	    String id_factura = String.valueOf(RealizarVenta("CONVERT_TZ(NOW(), @@global.time_zone, 'America/La_Paz'))"));
-
 	    System.out.println("factura: " + id_factura);
 
 	    String consulta = "SELECT productos.nombre, producto_factura.cantidad, productos.precio_venta, producto_factura.subtotal " +
 	                      "FROM productos, producto_factura " +
-	                      "WHERE factura_id_factura = ? AND producto_factura.productos_id_producto = productos.id_producto;";
+	                      "WHERE factura_id_factura = " + id_factura + " AND producto_factura.productos_id_producto = productos.id_producto;";
 
+	    
 	    conexionBD conec = new conexionBD();
 	    Connection conn = conec.conexion();
 	    PreparedStatement ps = null;
@@ -107,7 +106,6 @@ public class VentasFactura {
 
 	    try {
 	        ps = conn.prepareStatement(consulta);
-	        ps.setString(1, id_factura);
 	        rs = ps.executeQuery();
 
 	        while (rs.next()) {
@@ -118,9 +116,11 @@ public class VentasFactura {
 	            tabla[3] = rs.getString("producto_factura.subtotal");
 
 	            model.addRow(tabla);
+	            
+	            System.out.println("Aniade fila");
 	        }
 	    } catch (SQLException e) {
-	        JOptionPane.showMessageDialog(null, "No se pudo cargar la tabla: " + e.getMessage());
+	    	e.printStackTrace();
 	    } finally {
 	        try {
 	            if (rs != null) rs.close();

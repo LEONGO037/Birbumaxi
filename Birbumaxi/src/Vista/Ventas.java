@@ -351,8 +351,6 @@ public class Ventas extends JFrame {
                 desplegarPorCategoria desp = new desplegarPorCategoria();
                 model=desp.datos(categoria, columnNames, busqueda.getText());
                 table.setModel(model);
-                
-                
         	}
         });
         btnBuscar.setForeground(Color.WHITE);
@@ -368,7 +366,9 @@ public class Ventas extends JFrame {
         	public void actionPerformed(ActionEvent e) {
         		imprimirdatos();
         		VentasFactura v = new VentasFactura(cantidades, productos);
-
+        		for(int i = 0; i < productos.size(); i++) {
+        			actualizarStock(cantidades.get(i), productos.get(i));
+        		}
         		int facturaID = v.RealizarVenta("CONVERT_TZ(NOW(), @@global.time_zone, 'America/La_Paz')");
         		Factura factura = new Factura(facturaID, productos, cantidades);
         		factura.setVisible(true);
@@ -441,7 +441,6 @@ public class Ventas extends JFrame {
                                     System.out.println("hasta aca bien");
                                     pedidosRealizados.setModel(tabla2);
                                     System.out.println("hasta aca bien");
-                                    int index= productos.indexOf(productoSeleccionado);
                                     
                                 }
                            }else{
@@ -455,8 +454,6 @@ public class Ventas extends JFrame {
                                     System.out.println("hasta aca bien");
                                     pedidosRealizados.setModel(tabla2);
                                     System.out.println("hasta aca bien");
-                                    int index= productos.indexOf(productoSeleccionado);
-                                    actualizarStock(cantidades.get(index), 1, productoSeleccionado);
                                 }
                            }
                      
@@ -467,13 +464,13 @@ public class Ventas extends JFrame {
                 } else {
                     JOptionPane.showMessageDialog(null, "Ingresa una cantidad válida.");
                 }
+                busqueda.setText("");
+                cantidad.setText("");
+                desplegarPorCategoria desp = new desplegarPorCategoria();
+                model=desp.datos(categoria, columnNames, busqueda.getText());
+                table.setModel(model);
             }
         });
-
-
-
-
-
 
         btnAgregarProducto.setForeground(Color.WHITE);
         btnAgregarProducto.setFont(new Font("Roboto Black", Font.BOLD, 21));
@@ -559,8 +556,8 @@ public class Ventas extends JFrame {
         return stock;
     }
 
-    public static void actualizarStock(double cantidad, int op, String productoIDjijijja) {
-        String consulta = "SELECT stock from productos WHERE id_producto=" + productoIDjijijja + ";";
+    public static void actualizarStock(double cantidad, String idProducto) {
+        String consulta = "SELECT stock from productos WHERE id_producto=" + idProducto + ";";
         double stock = 0.0;
         conexionBD conec = new conexionBD();
         Connection conn = conec.conexion();
@@ -574,13 +571,9 @@ public class Ventas extends JFrame {
             }
 
             double actual;
-            if (op == 1) {
                 actual = stock - cantidad; // Restar cantidad al stock existente
-            } else {
-                actual = stock + cantidad; // Sumar cantidad al stock existente
-            }
 
-            String act = "UPDATE productos SET stock = " + actual + " WHERE id_producto = " + productoIDjijijja + ";";
+            String act = "UPDATE productos SET stock = " + actual + " WHERE id_producto = " + idProducto + ";";
             ps = conn.prepareStatement(act);
             int v = ps.executeUpdate();
             if (v > 0) {
@@ -618,7 +611,6 @@ public class Ventas extends JFrame {
 	public void eliminarCantidad() {
 	    int posicion = eliminar();
 	    if (posicion != -1) {
-	    	actualizarStock(cantidades.get(posicion), 2, eliminarProd);
 	        cantidades.remove(posicion);
 	    }
 	}
@@ -685,12 +677,11 @@ public class Ventas extends JFrame {
 	                System.out.println("entra al tipo 1 y verifica que es un entero");
 	                if (Ingreso == 0) {
 	                    System.out.println("entra a settear");
-	                    cantidades.add(posicion, cantidad);
+	                    cantidades.add(cantidad);
 	                    System.out.println("se verifica");
 	                    return true;
 	                } else if (Ingreso == 1) {
 	                    System.out.println("entra a settear ingreso tipo 1");
-	                    actualizarStock(cantidad, 1, productoSeleccionado);
 	                    cantidades.set(posicion, cantidades.get(posicion) + cantidad);
 	                    System.out.println("se verifica");
 	                    return true;
@@ -700,11 +691,10 @@ public class Ventas extends JFrame {
 	        } else if (tipo.equals("2")) {
 	            System.out.println("entra al tipo 2");
 	            if (Ingreso == 0) {
-	                cantidades.add(posicion, cantidad);
+	                cantidades.add(cantidad);
 	                System.out.println("se verifica");
 	                return true;
 	            } else if (Ingreso == 1) {
-	            	actualizarStock(cantidad, 1, productoSeleccionado);
 	                cantidades.set(posicion, cantidades.get(posicion) + cantidad);
 	                System.out.println("se verifica");
 	                return true;

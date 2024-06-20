@@ -3,6 +3,7 @@ package Modelo;
 import java.sql.*;
 
 import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
 
 import conexionBase.conexionBD;
 
@@ -99,7 +100,6 @@ public class productos {
 	        
 	    } catch (Exception e) {
 	    	e.printStackTrace();
-	        //JOptionPane.showMessageDialog(null, "No se pudo ingresar el producto: " + e.getMessage());
 	        return false;
 	    } finally {
 	        try {
@@ -111,5 +111,39 @@ public class productos {
 	        }
 	    }
 	}
+	public DefaultTableModel tabla(int categoria, String[] columnas) {
+	    String sql = "SELECT id_producto, nombre FROM productos WHERE categoria=?";
+	    
+	    DefaultTableModel model = new DefaultTableModel(null, columnas);
+	    conexionBD conec = new conexionBD();
+	    Connection conn = conec.conexion();
+	    PreparedStatement ps = null;
+	    ResultSet rs = null;
+	    String[] datos = new String[2];
+	    try {
+	        ps = conn.prepareStatement(sql);
+	        ps.setInt(1, categoria);
+	        rs = ps.executeQuery();
+	        while (rs.next()) {
+	            datos[0] = rs.getString("id_producto");
+	            datos[1] = rs.getString("nombre");
+	            model.addRow(datos);
+	        }
+	        return model;
+	    } catch (Exception e) {
+	        e.printStackTrace();
+	    } finally {
+	        try {
+	            if (rs != null) rs.close();
+	            if (ps != null) ps.close();
+	            if (conn != null) conn.close();
+	            System.out.println("Conexiones cerradas");
+	        } catch (SQLException ex) {
+	            ex.printStackTrace();
+	        }
+	    }
+	    return model;
+	}
+
 
 }

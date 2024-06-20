@@ -6,9 +6,9 @@ import java.sql.SQLException;
 
 public class conexionBD {
     public static String driver = "com.mysql.cj.jdbc.Driver";
-    public static final String url = "jdbc:mysql://viaduct.proxy.rlwy.net:22318/birbumaxi?useSSL=false&serverTimezone=UTC";
+    public static final String url = "jdbc:mysql://viaduct.proxy.rlwy.net:10633/birbumaxi?useSSL=false&serverTimezone=UTC";
     public static final String user = "root";
-    public static final String password = "ShWxSyPeOxPEXKXrVmJrCEkpSgYlxVvB";
+    public static final String password = "iEMZEvADfGxWysRTQfPGRwXfiPbEGuad";
 
     public static Connection conexion() {
         Connection conn = null;

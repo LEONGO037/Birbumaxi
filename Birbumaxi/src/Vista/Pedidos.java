@@ -335,6 +335,23 @@ public class Pedidos extends JFrame {
         table.setBackground(Color.WHITE);
         table.setRowHeight(30);
         table.setFocusable(false); // Deshabilitar el enfoque para evitar la edición por teclado
+        
+        // Agregar la tabla al JScrollPane
+        scrollPane.setViewportView(table);
+        table.getSelectionModel().addListSelectionListener(e -> {
+            if (!e.getValueIsAdjusting()) { // Verificar que el evento no es intermedio
+                // Obtener la fila seleccionada
+                int selectedRow = table.getSelectedRow();
+                if (selectedRow != -1) { // Si se ha seleccionado una fila válida
+                    // Obtener ID del producto de la fila seleccionada
+                    Object selectedId = table.getValueAt(selectedRow, 0); // ID del producto
+                    if (selectedId != null) {
+                        productoSeleccionado = selectedId.toString();
+                        System.out.println("Producto seleccionado: " + productoSeleccionado);
+                    }
+                }
+            }
+        });
 
         
         JLabel lblNewLabel_3_1 = new JLabel("Pedido de Producto:");
@@ -352,13 +369,9 @@ public class Pedidos extends JFrame {
         JButton btnBuscar = new JButton("Buscar");
         btnBuscar.addActionListener(new ActionListener() {
         	public void actionPerformed(ActionEvent e) {
-
-                
                 desplegarPorCategoria desp = new desplegarPorCategoria();
                 model=desp.datos(categoria, columnNames, busqueda.getText());
                 table.setModel(model);
-                
-                
         	}
         });
         btnBuscar.setForeground(Color.WHITE);
@@ -414,10 +427,6 @@ public class Pedidos extends JFrame {
         	        }
         	    }
         	});
-
-
-
-       
 
         btnPedirProducto.setForeground(Color.WHITE);
         btnPedirProducto.setFont(new Font("Roboto Black", Font.BOLD, 21));
